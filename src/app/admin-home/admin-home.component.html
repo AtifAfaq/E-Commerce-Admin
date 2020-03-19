@@ -1,43 +1,28 @@
-<div *ngIf="showNavBar" id="mySidebar" class="sidebar">
-    <a (click)="closeNavBar()" class="closebtn">&times;</a>
-    <a>Home</a>
-    <a>All Categories</a>
-    <a>All Users</a>
-    <a>Featured Products</a>
-    <a>All Orders</a>
-    <a>Chat with admin</a>
-    <a>Signout</a>
-</div>
-
-<div class="row mx-3" id="main">
-    <button (click)="openNavBar()" class=" openbtn">&#9776;</button>
-    <span class="sideby">
-        <h1>Home</h1>
-    </span>
-</div>
+<app-navbar></app-navbar>
 <div class="card-deck mx-3 mb-5">
     <div class="card " id="grad4">
         <div class="card-body ">
-            <p class="card-text"><b>Users</b></p><span class="float-right"><i class="fa fa-group"></i></span>
-            <i class="text-center fa fa-area-chart graph"></i>
+            <p class="card-text"><b>Users</b></p><span class="float-right"><i class="fa fa-group icon"></i></span>
+            <p class="text-show">4565</p>
         </div>
     </div>
     <div class="card " id="grad2">
         <div class="card-body ">
-            <p class="card-text"><b>Products</b></p><span class="float-right"><i class="fa fa-shopping-bag"></i></span>
-            <i class="text-center fa fa-bar-chart graph"></i>
+            <p class="card-text"><b>Products</b></p><span class="float-right"><i
+                    class="fa fa-shopping-bag icon"></i></span>
+            <p class="text-show">3200</p>
         </div>
     </div>
     <div class="card " id="grad3">
         <div class="card-body ">
-            <p class="card-text"><b>Categories</b></p><span class="float-right"><i class="fa fa-truck"></i></span>
-            <i class="text-center fa fa-line-chart graph"></i>
+            <p class="card-text"><b>Categories</b></p><span class="float-right"><i class="fa fa-truck icon"></i></span>
+            <p class="text-show">5800</p>
         </div>
     </div>
     <div class="card " id="grad1">
         <div class="card-body ">
-            <p class="card-text"><b>Reviews</b></p><span class="float-right"><i class="fa fa-suitcase"></i></span>
-            <i class="text-center fa fa-pie-chart graph"></i>
+            <p class="card-text"><b>Reviews</b></p><span class="float-right"><i class="fa fa-suitcase icon"></i></span>
+            <p class="text-show">6800</p>
         </div>
     </div>
 </div>

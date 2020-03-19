@@ -68,22 +68,31 @@
 
   #grad1 {
     height: 200px;
-    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255, 51, 0, 0.582)); /* Standard syntax (must be last) */
+    box-shadow: 10px 10px 5px grey;
+    background-image: linear-gradient(to right, rgba(255,0,0,0),rgb(61, 109, 255)); /* Standard syntax (must be last) */
   }
 
   #grad2 {
     height: 200px;
-    background-image: linear-gradient(to right, rgba(255,0,0,0),  rgb(255, 187, 0)); /* Standard syntax (must be last) */
+    box-shadow: 10px 10px 5px grey;
+    background-image: linear-gradient(to right, rgba(255,0,0,0),  rgba(251, 121, 147, 1)); /* Standard syntax (must be last) */
   }
   
   #grad3 {
     height: 200px;
-    background-image: linear-gradient(to right, rgba(255,0,0,0),  rgba(51, 255, 0)); /* Standard syntax (must be last) */
+    box-shadow: 10px 10px 5px grey;
+    background-image: linear-gradient(to right, rgba(255,0,0,0),  rgba(254, 158, 97, 1)); /* Standard syntax (must be last) */
   }
 
+  // #grad4 {
+  //   height: 200px;
+  //   box-shadow: 10px 10px 5px grey;
+  //   background-image: linear-gradient(to right, rgba(255,0,0,0),  rgb(174, 109, 228)); /* Standard syntax (must be last) */
+  // }
   #grad4 {
     height: 200px;
-    background-image: linear-gradient(to right, rgba(255,0,0,0),  rgb(0, 217, 255)); /* Standard syntax (must be last) */
+    box-shadow: 10px 10px 5px grey;
+    background-image: linear-gradient(135deg, rgb(197, 150, 235), rgb(151, 64, 221));
   }
 
   .card-text{
@@ -104,4 +113,17 @@ position: absolute !important;
 
   .sid{
     margin-right: 15px;
+  }
+
+  .card-deck{
+    margin-top: 120px;
+  }
+
+  .text-show{
+    margin-top: 40px;
+    font-size: xx-large;
+  }
+  .icon{
+    font-size: -webkit-xxx-large;
+    margin-top: 15px;
   }

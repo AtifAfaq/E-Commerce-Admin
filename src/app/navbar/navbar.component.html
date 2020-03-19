@@ -1,0 +1,43 @@
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark shadow fixed-top py-0">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <div *ngIf="showNavBar" id="mySidebar" class="sidebar">
+            <a (click)="closeNavBar()" class="closebtn">&times;</a>
+            <a routerLink="/home">Home</a>
+            <a routerLink="/allCategories">All Categories</a>
+            <a routerLink="/allUsers">All Users</a>
+            <a routerLink="/featuredProducts">Featured Products</a>
+            <a routerLink="/allOrders">All Orders</a>
+            <a routerLink="/chatWithAdmin">Chat with admin</a>
+            <a routerLink="/signOut">Signout</a>
+        </div>
+
+        <div class="row mx-3" id="main">
+            <button (click)="openNavBar()" class=" openbtn">&#9776;</button>
+            <span class="sideby">
+                <h5 class="heading-color" routerLink="/home">Home</h5>
+            </span>
+        </div>
+
+        <div class="form-inline my-2 ml-auto mr-5">
+            <input [(ngModel)]="searchQuery" class="form-control mr-sm-2" type="text" placeholder="Search"
+                aria-label="Search">
+            <button (click)="allProducts(searchQuery)" class="btn btn-outline-light my-2 my-sm-0">Search</button>
+        </div>
+
+
+
+        <ul class="navbar-nav">
+            <li class="nav-item mx-2">
+                <img src="../../assets/img_avatar.png" alt="Avatar" class="avatar">
+            </li>
+        </ul>
+
+    </div>
+</nav>
