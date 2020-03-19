@@ -17,8 +17,9 @@ const routes: Routes = [
   { path: 'featuredProducts', component: FeaturedProductsComponent },
   { path: 'allOrders', component: AllOrdersComponent },
   { path: 'chatWithAdmin', component: ChatWithAdminComponent },
-  { path: 'signOut', component: SignOutComponent }
+  { path: 'signOut', component: SignOutComponent },
 
+  { path: '', component: AdminLoginComponent }
 ];
 
 @NgModule({
