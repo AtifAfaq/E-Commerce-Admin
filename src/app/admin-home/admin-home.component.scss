@@ -1,125 +1,6 @@
-.sidebar {
-  height: 100%; /* 100% Full-height */
-  width: 250px; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0;
-  left: 0;
-  background-color: #111; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-}
-
-/* The sidebar links */
-.sidebar a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidebar a:hover {
-  color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner) */
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-/* The button used to open the sidebar */
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-}
-
-.openbtn:hover {
-  background-color: #444;
-}
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-  transition: margin-left 0.5s; /* If you want a transition effect */
-  padding: 20px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {
-    padding-top: 15px;
-  }
-  .sidebar a {
-    font-size: 18px;
-  }
-}
-
-.sideby {
-  position: absolute;
-  margin-left: 55px;
-}
-
-#grad1 {
-  height: 200px;
-  box-shadow: 10px 10px 5px grey;
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 0, 0, 0),
-    rgb(61, 109, 255)
-  ); /* Standard syntax (must be last) */
-}
-
-#grad2 {
-  height: 200px;
-  box-shadow: 10px 10px 5px grey;
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 0, 0, 0),
-    rgba(251, 121, 147, 1)
-  ); /* Standard syntax (must be last) */
-}
-
-#grad3 {
-  height: 200px;
-  box-shadow: 10px 10px 5px grey;
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 0, 0, 0),
-    rgba(254, 158, 97, 1)
-  ); /* Standard syntax (must be last) */
-}
-
-// #grad4 {
-//   height: 200px;
-//   box-shadow: 10px 10px 5px grey;
-//   background-image: linear-gradient(to right, rgba(255,0,0,0),  rgb(174, 109, 228)); /* Standard syntax (must be last) */
-// }
-#grad4 {
-  height: 200px;
-  box-shadow: 10px 10px 5px grey;
-  background-image: linear-gradient(135deg, rgb(197, 150, 235), rgb(151, 64, 221));
-}
 
 .card-text {
   position: absolute !important;
-}
-
-.graph {
-  display: block;
-  margin-top: 60px;
-  font-size: 120px;
-  color: black;
 }
 
 .twoside {
@@ -146,4 +27,14 @@
 
 .uniqueItem {
   background: linear-gradient(45deg, #ffc3c3, #ff9f9f);
+}
+.uniqueItem1 {
+  background: linear-gradient(45deg, #c3ffe8, #91ffd5);
+}
+
+.uniqueItem2 {
+  background: linear-gradient(45deg, #bfe0ff, #82c2ff);
+}
+.uniqueItem3 {
+  background: linear-gradient(45deg, #dfc3ff, #c796ff);
 }
