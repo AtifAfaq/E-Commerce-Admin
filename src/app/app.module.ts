@@ -13,6 +13,7 @@ import { FeaturedProductsComponent } from './featured-products/featured-products
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { ChatWithAdminComponent } from './chat-with-admin/chat-with-admin.component';
 import { SignOutComponent } from './sign-out/sign-out.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SignOutComponent } from './sign-out/sign-out.component';
     FeaturedProductsComponent,
     AllOrdersComponent,
     ChatWithAdminComponent,
-    SignOutComponent
+    SignOutComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

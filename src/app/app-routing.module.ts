@@ -7,7 +7,7 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { FeaturedProductsComponent } from './featured-products/featured-products.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { ChatWithAdminComponent } from './chat-with-admin/chat-with-admin.component';
-import { SignOutComponent } from './sign-out/sign-out.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'featuredProducts', component: FeaturedProductsComponent },
   { path: 'allOrders', component: AllOrdersComponent },
   { path: 'chatWithAdmin', component: ChatWithAdminComponent },
-
+  { path: 'profile', component: ProfileComponent },
   { path: '', component: AdminLoginComponent }
 ];
 
