@@ -15,6 +15,7 @@ import { ChatWithAdminComponent } from './chat-with-admin/chat-with-admin.compon
 import { SignOutComponent } from './sign-out/sign-out.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AllProductsComponent } from './all-products/all-products.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AllProductsComponent } from './all-products/all-products.component';
     ChatWithAdminComponent,
     SignOutComponent,
     ProfileComponent,
-    AllProductsComponent
+    AllProductsComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

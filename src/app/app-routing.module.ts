@@ -9,7 +9,7 @@ import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { ChatWithAdminComponent } from './chat-with-admin/chat-with-admin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AllProductsComponent } from './all-products/all-products.component';
-
+import { UserDetailComponent } from './user-detail/user-detail.component';
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
   { path: 'home', component: AdminHomeComponent },
@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'chatWithAdmin', component: ChatWithAdminComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'allProducts', component: AllProductsComponent },
+  { path: 'userDetail', component: UserDetailComponent },
   { path: '', component: AdminLoginComponent }
 ];
 
