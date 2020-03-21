@@ -1,110 +1,109 @@
 /* You can add global styles to this file, and also import other style files */
 .errorMsg {
-    color: #be0000;
-    margin-top: 0px;
-  }
-  
-  .primary {
-    color: #f57224 !important;
-  }
-  
-  .secondary {
-    color: #6abc07 !important;
-  }
-  
-  .bg-primary {
-    background-color: #f57224 !important;
-  }
-  
-  .bg-secondary {
-    background-color: #6abc07 !important;
-  }
-  
-  .container {
-    width: 100% !important;
-    height: 100% !important;
-    padding-left: 0% !important;
-    padding-right: 0% !important;
-  }
-  
-  .row {
-    width: 100% !important;
-    margin-left: 0px !important;
-  }
-  
-  .bold {
-    font-weight: bold !important;
-  }
-  
-  .gray {
-    color: #646464 !important;
-  }
-  
-  .bg-gray {
-    background-color: gray;
-  }
-  
-  .pointer {
-    cursor: pointer !important;
-  }
-  
-  .dark {
-    color: #4e5661 !important;
-  }
-  
-  .bg-dark {
-    background-color: #4e5661 !important;
-  }
-  
-  body {
-    font-family: "Karla", sans-serif;
-    background-color: #f1f1f1;
-  }
-  
-  .mainContent {
-    padding: 5.5em 2em; //top-bottom , left-right
-  }
-  
-  .productCard {
-    margin: 1em 0em;
-    padding: 10px;
-    background-color: #ffffff;
-    img {
-      width: 100%;
-      height: 300px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
-    .originalPrice {
-      font-size: 13px;
-    }
-    .rating {
-      font-size: 13px;
-      i {
-        margin-right: 2px;
-      }
-    }
-  }
-  
-  .productCard:hover {
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
-  }
-  
-  .spinnerContent {
-    background: rgba(0, 0, 0, 0.2);
+  color: #be0000;
+  margin-top: 0px;
+}
+
+.primary {
+  color: #f57224 !important;
+}
+
+.secondary {
+  color: #6abc07 !important;
+}
+
+.bg-primary {
+  background-color: #f57224 !important;
+}
+
+.bg-secondary {
+  background-color: #6abc07 !important;
+}
+
+.container {
+  width: 100% !important;
+  height: 100% !important;
+  padding-left: 0% !important;
+  padding-right: 0% !important;
+}
+
+.row {
+  width: 100% !important;
+  margin-left: 0px !important;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.gray {
+  color: #646464 !important;
+}
+
+.bg-gray {
+  background-color: gray;
+}
+
+.pointer {
+  cursor: pointer !important;
+}
+
+.dark {
+  color: #4e5661 !important;
+}
+
+.bg-dark {
+  background-color: #4e5661 !important;
+}
+
+body {
+  font-family: "Karla", sans-serif;
+  background-color: #f1f1f1;
+}
+
+.mainContent {
+  padding: 5.5em 2em; //top-bottom , left-right
+}
+
+.productCard {
+  margin: 1em 0em;
+  padding: 10px;
+  background-color: #ffffff;
+  img {
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0%;
-    padding: 20% 50%;
-    z-index: 9999999;
+    height: 300px;
+    object-fit: contain;
+    margin-bottom: 10px;
   }
-  .prodTitle {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .originalPrice {
+    font-size: 13px;
   }
-  .checkout {
-    margin-top: 100px;
+  .rating {
+    font-size: 13px;
+    i {
+      margin-right: 2px;
+    }
   }
-  
+}
+
+.productCard:hover {
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.spinnerContent {
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0%;
+  padding: 20% 50%;
+  z-index: 9999999;
+}
+.prodTitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.checkout {
+  margin-top: 100px;
+}

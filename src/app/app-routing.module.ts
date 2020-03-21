@@ -8,6 +8,7 @@ import { FeaturedProductsComponent } from './featured-products/featured-products
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { ChatWithAdminComponent } from './chat-with-admin/chat-with-admin.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AllProductsComponent } from './all-products/all-products.component';
 
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'allOrders', component: AllOrdersComponent },
   { path: 'chatWithAdmin', component: ChatWithAdminComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'allProducts', component: AllProductsComponent },
   { path: '', component: AdminLoginComponent }
 ];
 

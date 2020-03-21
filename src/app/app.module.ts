@@ -14,6 +14,7 @@ import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { ChatWithAdminComponent } from './chat-with-admin/chat-with-admin.component';
 import { SignOutComponent } from './sign-out/sign-out.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AllProductsComponent } from './all-products/all-products.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ProfileComponent } from './profile/profile.component';
     AllOrdersComponent,
     ChatWithAdminComponent,
     SignOutComponent,
-    ProfileComponent
+    ProfileComponent,
+    AllProductsComponent
   ],
   imports: [
     BrowserModule,
