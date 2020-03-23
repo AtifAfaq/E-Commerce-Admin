@@ -1,0 +1,462 @@
+<app-navbar></app-navbar>
+<div class="mainContent">
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Product Detail</h4>
+            <div class="productImgs bg-white">
+                <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
+                    <!--Slides-->
+                    <div class="carousel-inner" role="listbox">
+                        <div *ngFor="let item of product.productUrls; index as i" class="carousel-item"
+                            [class.active]="i==0">
+
+                            <img class=" d-block w-100" [src]="item">
+
+                        </div>
+
+                    </div>
+                    <!--/.Slides-->
+                    <!--Controls-->
+                    <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    <!--/.Controls-->
+                    <ol class="carousel-indicators text-center">
+                        <li *ngFor="let item of product.productUrls; index as i " data-target="#carousel-thumb"
+                            [attr.data-slide-to]="i" [class.active]="i==0"> <img class="d-block w-100" [src]="item"
+                                class="img-fluid"></li>
+
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="productDetail bg-white p-3">
+                <p class="prodTitle mb-2">{{product.productName}}
+                    <span class="wishList">
+                        <i class="far fa-heart gray mx-2"></i>
+                        <i class="fa fa-share-alt gray mx-2"></i>
+                    </span>
+                </p>
+                <p>Brand: <span class="primary"> {{product.brand}}</span></p>
+                <h4 class="prodPrice primary mt-0">{{product.discountedPrice}}</h4>
+                <p class="originalPrice gray mb-1"><del>{{product.originalPrice}}</del> 35%</p>
+                <p class="rating">
+                    <i class="fa fa-star" [class.text-warning]="product.avgRating>=1"
+                        [class.gray]="!product.avgRating"></i>
+                    <i class="fa fa-star" [class.text-warning]="product.avgRating>=2"
+                        [class.gray]="!product.avgRating || product.avgRating<2"></i>
+                    <i class="fa fa-star" [class.text-warning]="product.avgRating>=3"
+                        [class.gray]="!product.avgRating || product.avgRating<3"></i>
+                    <i class="fa fa-star" [class.text-warning]="product.avgRating>=4"
+                        [class.gray]="!product.avgRating || product.avgRating<4"></i>
+                    <i class="fa fa-star" [class.text-warning]="product.avgRating>=5"
+                        [class.gray]="!product.avgRating || product.avgRating<5"></i> ({{product.totalReview}})
+                </p>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-append">
+                        <button (click)=decreaseValue() class="btn btn-primary" type="button">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <input [(ngModel)]="productQty" type="number" readonly class="form-control text-center"
+                        placeholder="0">
+                    <div class="input-group-append">
+                        <button (click)=increaseValue() class="btn btn-primary" type="button">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="btn btn-success w-100" (click)="AddCart(product)">Add to Cart</button>
+                <button class="btn btn-primary w-100 mt-3 mb-4">Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Delivery Details -->
+        <div class="col-md-4">
+            <div class="deliveryDetails bg-white p-3">
+                <p class="bold"> Delivery Options <span class="wishList"><i class="fa fa-info-circle"></i></span></p>
+                <div> <i class="iconCenter fas fa-truck"></i>
+                    <p class="deliveryDetail">Home Delivery {{product.deliveryTime}}</p>
+                    <p class="rupees">${{product.deliveryFee}}</p>
+                </div>
+                <div><i class="far fa-money-bill-alt"></i>
+                    <p class="cashText">Cash on Delivery Available </p>
+                </div>
+                <hr>
+                <div class="deliveryDetails bg-white mt-0">
+                    <p class="bold"> Return & Warranty <span class="wishList"><i class="fa fa-info-circle"></i></span>
+                    </p>
+                </div>
+                <div><i class="iconCenter fas fa-undo"></i>
+                    <p class="deliveryDetail mb-0">7 Days Returns </p>
+                    <p class="textSet gray mt-0 p-0 "> Change of mind is not applicable</p>
+                </div>
+                <div><i class="fas fa-cogs"></i>
+                    <p class="warranty mb-0">Warranty not available</p>
+                </div>
+                <hr>
+                <div>
+                    <p class="chat mb-0"><b class="color">Sold by</b> Gattelo</p><span class="wishList blue"><i
+                            class=" fas fa-comments"> Chat Now</i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Section -->
+    <div class="reviewsSection my-4">
+        <div class="row">
+            <div class="col-md-5 bg-white  ">
+                <div class="row">
+                    <div class="detailSets">
+                        <p class="mt-3"><b>Product details of Titan Karishma Silver Dial Analog Watch For Men</b> </p>
+                        <hr />
+                        <div class="detailList">
+                            <p>{{product.productDes}}</p>
+
+                        </div>
+                        <hr />
+                        <p class="headerBar mt-3"><b>Specifications of Titan Karishma Silver Dial Analog Watch For Men
+                            </b></p>
+
+                        <ul *ngFor="let item of product.productSpecs " class="mixedDetail col-md-6">
+                            <li class="mb-0">{{item}}</li>
+
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- 
+            Average product rating -->
+
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="rating-block">
+                            <h4>Average product rating</h4>
+                            <h2 class="bold padding-bottom-7">{{product.avgRating}} <small>/ 5</small></h2>
+                            <button [class.btn-warning]="product.avgRating>=1" type="button"
+                                [class.btn-grey]="!product.avgRating" class="btn btn-xs mr-1" aria-label="Left Align">
+                                <i class="fa fa-star text-white"></i>
+                            </button>
+                            <button [class.btn-warning]="product.avgRating>=2" type="button"
+                                [class.btn-grey]="product.avgRating<2" class="btn btn-xs mr-1" aria-label="Left Align">
+                                <i class="fa fa-star text-white"></i>
+                            </button>
+                            <button [class.btn-warning]="product.avgRating>=3" type="button"
+                                [class.btn-grey]="product.avgRating<3" class="btn btn-xs mr-1" aria-label="Left Align">
+                                <i class="fa fa-star text-white"></i>
+                            </button>
+                            <button [class.btn-warning]="product.avgRating>=4" type="button"
+                                [class.btn-grey]="product.avgRating<4" class="btn btn-xs mr-1" aria-label="Left Align">
+                                <i class="fa fa-star text-white"></i>
+                            </button>
+                            <button [class.btn-warning]="product.avgRating>=5" type="button"
+                                [class.btn-grey]="product.avgRating<5" class="btn btn-xs mr-1" aria-label="Left Align">
+                                <i class="fa fa-star text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Rating breakdown -->
+                    <div class="col-sm-6">
+                        <h4>Rating breakdown</h4>
+                        <div class="pull-left">
+                            <div class="pull-left" style="width:35px; line-height:1;">
+                                <div style="height:9px; margin:5px 0;">5 <span><i
+                                            class="fa fa-star text-success"></i></span>
+                                </div>
+                            </div>
+                            <div class="pull-left" style="width:180px;">
+                                <div class="progress" style="height:9px; margin:8px 0;">
+                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="5"
+                                        aria-valuemin="0" aria-valuemax="5" style="width: 1000%">
+                                        <span class="sr-only">80% Complete (danger)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right" style="margin-left:10px;">{{rate5}}</div>
+                        </div>
+                        <div class="pull-left">
+                            <div class="pull-left" style="width:35px; line-height:1;">
+                                <div style="height:9px; margin:5px 0;">4 <span><i class="fa fa-star primary"></i></span>
+                                </div>
+                            </div>
+                            <div class="pull-left" style="width:180px;">
+                                <div class="progress" style="height:9px; margin:8px 0;">
+                                    <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="4"
+                                        aria-valuemin="0" aria-valuemax="5" style="width: 80%">
+                                        <span class="sr-only">80% Complete (danger)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right" style="margin-left:10px;">{{rate4}}</div>
+                        </div>
+                        <div class="pull-left">
+                            <div class="pull-left" style="width:35px; line-height:1;">
+                                <div style="height:9px; margin:5px 0;">3 <span><i
+                                            class="fa fa-star text-info"></i></span>
+                                </div>
+                            </div>
+                            <div class="pull-left" style="width:180px;">
+                                <div class="progress" style="height:9px; margin:8px 0;">
+                                    <div class="progress-bar bg-info" role="progressbar" aria-valuenow="3"
+                                        aria-valuemin="0" aria-valuemax="5" style="width: 60%">
+                                        <span class="sr-only">80% Complete (danger)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right" style="margin-left:10px;">{{rate3}}</div>
+                        </div>
+                        <div class="pull-left">
+                            <div class="pull-left" style="width:35px; line-height:1;">
+                                <div style="height:9px; margin:5px 0;">2 <span><i
+                                            class="fa fa-star text-warning"></i></span>
+                                </div>
+                            </div>
+                            <div class="pull-left" style="width:180px;">
+                                <div class="progress" style="height:9px; margin:8px 0;">
+                                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="2"
+                                        aria-valuemin="0" aria-valuemax="5" style="width: 40%">
+                                        <span class="sr-only">80% Complete (danger)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right" style="margin-left:10px;">{{rate2}}</div>
+                        </div>
+                        <div class="pull-left">
+                            <div class="pull-left" style="width:35px; line-height:1;">
+                                <div style="height:9px; margin:5px 0;">1 <span><i
+                                            class="fa fa-star text-danger"></i></span>
+                                </div>
+                            </div>
+                            <div class="pull-left" style="width:180px;">
+                                <div class="progress" style="height:9px; margin:8px 0;">
+                                    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="1"
+                                        aria-valuemin="0" aria-valuemax="5" style="width: 20%">
+                                        <span class="sr-only">80% Complete (danger)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right" style="margin-left:10px;">{{rate1}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REviews  -->
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <hr />
+                        <div class="review-block">
+                            <div class="row" *ngFor="let review of myReview">
+                                <div class="col-sm-3">
+                                    <img [src]="review.profileUrl || 'http://dummyimage.com/60x60/666/ffffff&text=No+Image'"
+                                        class="img-rounded">
+                                    <div class="review-block-name text-primary">{{review.firstName}} {{review.lastName}}
+                                    </div>
+                                    <div class="review-block-date">{{review.timestamp | date :'medium'}}<br /></div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="review-block-rate">
+                                        <button [class.btn-warning]="review.rating>=1" type="button"
+                                            [class.btn-grey]="!review.rating" class="btn btn-xs mr-1"
+                                            aria-label="Left Align"> <i class="fa fa-star text-white"></i>
+                                        </button>
+                                        <button [class.btn-warning]="review.rating>=2" type="button"
+                                            [class.btn-grey]="!review.rating || review.rating<2" class="btn btn-xs mr-1"
+                                            aria-label="Left Align">
+                                            <i class="fa fa-star text-white"></i>
+                                        </button>
+                                        <button [class.btn-warning]="review.rating>=3" type="button"
+                                            [class.btn-grey]="!review.rating || review.rating<3" class="btn btn-xs mr-1"
+                                            aria-label="Left Align">
+                                            <i class="fa fa-star text-white"></i>
+                                        </button>
+                                        <button [class.btn-warning]="review.rating>=4" type="button"
+                                            [class.btn-grey]="!review.rating || review.rating<4" class="btn btn-xs mr-1"
+                                            aria-label="Left Align">
+                                            <i class="fa fa-star text-white"></i>
+                                        </button>
+                                        <button [class.btn-warning]="review.rating>=5" type="button"
+                                            [class.btn-grey]="!review.rating || review.rating<5" class="btn btn-xs mr-1"
+                                            aria-label="Left Align">
+                                            <i class="fa fa-star text-white"></i>
+                                        </button>
+                                    </div>
+                                    <div class="review-block-title"></div>
+                                    <div class="review-block-description">{{review.comment}}</div>
+                                </div>
+                                <hr class="w-100" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="similarProducts">
+        <h4>People also viewed these products</h4>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="productCard">
+                    <img src="/assets/images/prod4.jpg">
+                    <p class="prodTitle mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit amet
+                        consectetur.
+                    </p>
+                    <h4 class="prodPrice primary mt-0">$89.00</h4>
+                    <p class="originalPrice gray mb-1"><del>$120.00</del> 35%</p>
+                    <p class="rating">
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star gray"></i> (11)
+                    </p>
+                    <button class="btn btn-success w-100">Add to Cart</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="productCard">
+                    <img src="/assets/images/prod5.jpg">
+                    <p class="prodTitle mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit amet
+                        consectetur.
+                    </p>
+                    <h4 class="prodPrice primary mt-0">$89.00</h4>
+                    <p class="originalPrice gray mb-1"><del>$120.00</del> 35%</p>
+                    <p class="rating">
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star gray"></i> (11)
+                    </p>
+                    <button class="btn btn-success w-100">Add to Cart</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="productCard">
+                    <img src="/assets/images/prod6.jpg">
+                    <p class="prodTitle mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit amet
+                        consectetur.
+                    </p>
+                    <h4 class="prodPrice primary mt-0">$89.00</h4>
+                    <p class="originalPrice gray mb-1"><del>$120.00</del> 35%</p>
+                    <p class="rating">
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star gray"></i> (11)
+                    </p>
+                    <button class="btn btn-success w-100">Add to Cart</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="productCard">
+                    <img src="/assets/images/prod7.jpg">
+                    <p class="prodTitle mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit amet
+                        consectetur.
+                    </p>
+                    <h4 class="prodPrice primary mt-0">$89.00</h4>
+                    <p class="originalPrice gray mb-1"><del>$120.00</del> 35%</p>
+                    <p class="rating">
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star gray"></i> (11)
+                    </p>
+                    <button class="btn btn-success w-100">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="productCard">
+                    <img src="/assets/images/prod8.jpg">
+                    <p class="prodTitle mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit amet
+                        consectetur.
+                    </p>
+                    <h4 class="prodPrice primary mt-0">$89.00</h4>
+                    <p class="originalPrice gray mb-1"><del>$120.00</del> 35%</p>
+                    <p class="rating">
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star gray"></i> (11)
+                    </p>
+                    <button class="btn btn-success w-100">Add to Cart</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="productCard">
+                    <img src="/assets/images/prod9.jpg">
+                    <p class="prodTitle mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit amet
+                        consectetur.
+                    </p>
+                    <h4 class="prodPrice primary mt-0">$89.00</h4>
+                    <p class="originalPrice gray mb-1"><del>$120.00</del> 35%</p>
+                    <p class="rating">
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star gray"></i> (11)
+                    </p>
+                    <button class="btn btn-success w-100">Add to Cart</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="productCard">
+                    <img src="/assets/images/prod10.jpg">
+                    <p class="prodTitle mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit amet
+                        consectetur.
+                    </p>
+                    <h4 class="prodPrice primary mt-0">$89.00</h4>
+                    <p class="originalPrice gray mb-1"><del>$120.00</del> 35%</p>
+                    <p class="rating">
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star gray"></i> (11)
+                    </p>
+                    <button class="btn btn-success w-100">Add to Cart</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="productCard">
+                    <img src="/assets/images/prod1.jpg">
+                    <p class="prodTitle mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit amet
+                        consectetur.
+                    </p>
+                    <h4 class="prodPrice primary mt-0">$89.00</h4>
+                    <p class="originalPrice gray mb-1"><del>$120.00</del> 35%</p>
+                    <p class="rating">
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star gray"></i> (11)
+                    </p>
+                    <button class="btn btn-success w-100">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

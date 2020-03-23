@@ -1,21 +1,30 @@
 <app-navbar></app-navbar>
-<div class="container">
-    <div class="row mt-5 pt-5 ">
-        <table>
-            <tr class="text-center">
-                <th>Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Country</th>
+<div class="top ">
+    <table class="text-center table table-striped bg-white mt-5 pt-5">
+        <thead>
+            <tr>
+                <th class="text-center">Order ID</th>
+                <th class="text-center">Date & Time</th>
+                <th class="text-center">Product Qty</th>
+                <th class="text-center">Buyer Name</th>
+                <th class="text-center">Address</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Total Bill</th>
+                <th class="text-center">Details</th>
             </tr>
-            <tr class="text-center">
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">1</td>
+                <td class="text-center">{{item.timestamp | date: 'mediumDate'}}</td>
+                <td class="text-center">1</td>
+                <td class="text-center">{{item.firstName}} {{item.lastName}}</td>
+                <td class="text-center">{{item.address}}</td>
+                <td class="text-center">{{item.email}}</td>
+                <td class="text-center">{{item.totalBill}}</td>
+                <td routerLink="/orderDetail" class="text-center"><button class="btn btn-primary">Details</button></td>
             </tr>
-        </table>
-    </div>
+
+        </tbody>
+    </table>
 </div>

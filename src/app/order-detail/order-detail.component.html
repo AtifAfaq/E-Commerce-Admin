@@ -1,0 +1,56 @@
+<div class="mainContent">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="float-right">
+                <p> Order Total: {{totalBill}} </p>
+                <p> Shipment Charges: {{shipmentCharges}} </p>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class=" text-center">Quantity</th>
+                        <th class=" text-center">Price</th>
+                        <th class=" text-center">Order Amount</th>
+                        <th class=" text-center">Delivery Address</th>
+                        <th class=" text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let p of orderProducts ; index as i">
+                    <tr>
+                        <td>
+                            <div class="media">
+                                <a class="thumbnail pull-left"> <img class="media-object" [src]="p.productUrls[0]"
+                                        style="width: 72px; height: 72px;"> </a>
+                                <div class="media-body pl-3">
+                                    <h4 class="media-heading"><a>{{p.productName}}</a></h4>
+                                    <h5 class="media-heading"> by <a>{{p.brand}}</a></h5>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            {{p.productQty}}
+                        </td>
+                        <td class="text-center"><strong>${{p.discountedPrice}}</strong></td>
+                        <td class="text-center">${{GrandTotal(p)}}</td>
+                        <td class="text-center">${{order.address}}</td>
+                        <td *ngIf="p.status=='pending'" class="text-center">
+                            <button (click)="acceptOrder(p, i, 'accepted')" class="btn btn-success m-3">Accept
+                                it</button>
+                            <button (click)="acceptOrder(p, i, 'cancelled')" class="btn btn-danger">Cancel</button>
+                        </td>
+                        <td *ngIf="p.status!='pending'" class="text-center">
+                            <p *ngIf="p.status=='accepted'" class="text-success">Accepted</p>
+                            <p *ngIf="p.status=='shipped'" class="text-success">Shipped</p>
+                            <p *ngIf="p.status=='cancelled'" class="text-danger">Cancelled</p>
+                            <p *ngIf="p.status=='delivered'" class="text-success">Delivered</p>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

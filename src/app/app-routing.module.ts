@@ -10,6 +10,9 @@ import { ChatWithAdminComponent } from './chat-with-admin/chat-with-admin.compon
 import { ProfileComponent } from './profile/profile.component';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
   { path: 'home', component: AdminHomeComponent },
@@ -21,6 +24,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'allProducts', component: AllProductsComponent },
   { path: 'userDetail', component: UserDetailComponent },
+  { path: 'orderDetail', component: OrderDetailComponent },
+  { path: 'productDetail', component: ProductDetailComponent },
+
   { path: '', component: AdminLoginComponent }
 ];
 

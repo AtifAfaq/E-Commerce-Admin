@@ -16,6 +16,8 @@ import { SignOutComponent } from './sign-out/sign-out.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     SignOutComponent,
     ProfileComponent,
     AllProductsComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    OrderDetailComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
