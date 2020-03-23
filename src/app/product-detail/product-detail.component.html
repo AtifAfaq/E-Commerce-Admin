@@ -7,12 +7,12 @@
                 <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
                     <!--Slides-->
                     <div class="carousel-inner" role="listbox">
-                        <div *ngFor="let item of product.productUrls; index as i" class="carousel-item"
+                        <!-- <div *ngFor="let item of product.productUrls; index as i" class="carousel-item"
                             [class.active]="i==0">
 
                             <img class=" d-block w-100" [src]="item">
 
-                        </div>
+                        </div> -->
 
                     </div>
                     <!--/.Slides-->
@@ -26,28 +26,35 @@
                         <span class="sr-only">Next</span>
                     </a>
                     <!--/.Controls-->
-                    <ol class="carousel-indicators text-center">
+                    <!-- <ol class="carousel-indicators text-center">
                         <li *ngFor="let item of product.productUrls; index as i " data-target="#carousel-thumb"
                             [attr.data-slide-to]="i" [class.active]="i==0"> <img class="d-block w-100" [src]="item"
                                 class="img-fluid"></li>
 
-                    </ol>
+                    </ol> -->
                 </div>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="productDetail bg-white p-3">
-                <p class="prodTitle mb-2">{{product.productName}}
+                <p class="prodTitle mb-2">
+                    <!-- {{product.productName}} -->
                     <span class="wishList">
                         <i class="far fa-heart gray mx-2"></i>
                         <i class="fa fa-share-alt gray mx-2"></i>
                     </span>
                 </p>
-                <p>Brand: <span class="primary"> {{product.brand}}</span></p>
-                <h4 class="prodPrice primary mt-0">{{product.discountedPrice}}</h4>
-                <p class="originalPrice gray mb-1"><del>{{product.originalPrice}}</del> 35%</p>
-                <p class="rating">
+                <p>Brand: <span class="primary">
+                        <!-- {{product.brand}} -->
+                    </span></p>
+                <h4 class="prodPrice primary mt-0">
+                    <!-- {{product.discountedPrice}} -->
+                </h4>
+                <p class="originalPrice gray mb-1"><del>
+                        <!-- {{product.originalPrice}} -->
+                    </del> 35%</p>
+                <!-- <p class="rating">
                     <i class="fa fa-star" [class.text-warning]="product.avgRating>=1"
                         [class.gray]="!product.avgRating"></i>
                     <i class="fa fa-star" [class.text-warning]="product.avgRating>=2"
@@ -58,7 +65,7 @@
                         [class.gray]="!product.avgRating || product.avgRating<4"></i>
                     <i class="fa fa-star" [class.text-warning]="product.avgRating>=5"
                         [class.gray]="!product.avgRating || product.avgRating<5"></i> ({{product.totalReview}})
-                </p>
+                </p> -->
 
                 <div class="input-group mb-3">
                     <div class="input-group-append">
@@ -85,8 +92,12 @@
             <div class="deliveryDetails bg-white p-3">
                 <p class="bold"> Delivery Options <span class="wishList"><i class="fa fa-info-circle"></i></span></p>
                 <div> <i class="iconCenter fas fa-truck"></i>
-                    <p class="deliveryDetail">Home Delivery {{product.deliveryTime}}</p>
-                    <p class="rupees">${{product.deliveryFee}}</p>
+                    <p class="deliveryDetail">Home Delivery
+                        <!-- {{product.deliveryTime}} -->
+                    </p>
+                    <p class="rupees">$
+                        <!-- {{product.deliveryFee}} -->
+                    </p>
                 </div>
                 <div><i class="far fa-money-bill-alt"></i>
                     <p class="cashText">Cash on Delivery Available </p>
@@ -121,17 +132,19 @@
                         <p class="mt-3"><b>Product details of Titan Karishma Silver Dial Analog Watch For Men</b> </p>
                         <hr />
                         <div class="detailList">
-                            <p>{{product.productDes}}</p>
+                            <p>
+                                <!-- {{product.productDes}} -->
+                            </p>
 
                         </div>
                         <hr />
                         <p class="headerBar mt-3"><b>Specifications of Titan Karishma Silver Dial Analog Watch For Men
                             </b></p>
 
-                        <ul *ngFor="let item of product.productSpecs " class="mixedDetail col-md-6">
+                        <!-- <ul *ngFor="let item of product.productSpecs " class="mixedDetail col-md-6">
                             <li class="mb-0">{{item}}</li>
 
-                        </ul>
+                        </ul> -->
 
 
                     </div>
@@ -143,9 +156,11 @@
             <div class="col-md-7">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="rating-block">
+                        <!-- <div class="rating-block">
                             <h4>Average product rating</h4>
-                            <h2 class="bold padding-bottom-7">{{product.avgRating}} <small>/ 5</small></h2>
+                            <h2 class="bold padding-bottom-7">
+                                {{product.avgRating}} 
+                                <small>/ 5</small></h2>
                             <button [class.btn-warning]="product.avgRating>=1" type="button"
                                 [class.btn-grey]="!product.avgRating" class="btn btn-xs mr-1" aria-label="Left Align">
                                 <i class="fa fa-star text-white"></i>
@@ -166,7 +181,7 @@
                                 [class.btn-grey]="product.avgRating<5" class="btn btn-xs mr-1" aria-label="Left Align">
                                 <i class="fa fa-star text-white"></i>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Rating breakdown -->
@@ -262,13 +277,16 @@
                         <div class="review-block">
                             <div class="row" *ngFor="let review of myReview">
                                 <div class="col-sm-3">
-                                    <img [src]="review.profileUrl || 'http://dummyimage.com/60x60/666/ffffff&text=No+Image'"
-                                        class="img-rounded">
-                                    <div class="review-block-name text-primary">{{review.firstName}} {{review.lastName}}
+                                    <!-- <img [src]="review.profileUrl || 'http://dummyimage.com/60x60/666/ffffff&text=No+Image'"
+                                        class="img-rounded"> -->
+                                    <div class="review-block-name text-primary">
+                                        <!-- {{review.firstName}} {{review.lastName}} -->
                                     </div>
-                                    <div class="review-block-date">{{review.timestamp | date :'medium'}}<br /></div>
+                                    <div class="review-block-date">
+                                        <!-- {{review.timestamp | date :'medium'}} -->
+                                        <br /></div>
                                 </div>
-                                <div class="col-sm-9">
+                                <!-- <div class="col-sm-9">
                                     <div class="review-block-rate">
                                         <button [class.btn-warning]="review.rating>=1" type="button"
                                             [class.btn-grey]="!review.rating" class="btn btn-xs mr-1"
@@ -297,7 +315,7 @@
                                     </div>
                                     <div class="review-block-title"></div>
                                     <div class="review-block-description">{{review.comment}}</div>
-                                </div>
+                                </div> -->
                                 <hr class="w-100" />
                             </div>
                         </div>

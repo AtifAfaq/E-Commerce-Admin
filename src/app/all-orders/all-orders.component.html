@@ -1,30 +1,50 @@
 <app-navbar></app-navbar>
-<div class="top ">
-    <table class="text-center table table-striped bg-white mt-5 pt-5">
-        <thead>
-            <tr>
-                <th class="text-center">Order ID</th>
-                <th class="text-center">Date & Time</th>
-                <th class="text-center">Product Qty</th>
-                <th class="text-center">Buyer Name</th>
-                <th class="text-center">Address</th>
-                <th class="text-center">Email</th>
-                <th class="text-center">Total Bill</th>
-                <th class="text-center">Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="text-center">1</td>
-                <td class="text-center">{{item.timestamp | date: 'mediumDate'}}</td>
-                <td class="text-center">1</td>
-                <td class="text-center">{{item.firstName}} {{item.lastName}}</td>
-                <td class="text-center">{{item.address}}</td>
-                <td class="text-center">{{item.email}}</td>
-                <td class="text-center">{{item.totalBill}}</td>
-                <td routerLink="/orderDetail" class="text-center"><button class="btn btn-primary">Details</button></td>
-            </tr>
+<div class="checkout row">
+    <div class=" col-md-10 offset-md-1">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                </span>
+            </div>
+            <input [(ngModel)]="searchTxt" type="text" class="form-control" placeholder="Search here...">
+        </div>
+        <table class="table table-striped text-center bg-white table-bordered">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date & Time</th>
+                    <th>Address</th>
+                    <th>Delivery Fee</th>
+                    <th>Grand Total
+                        <i *ngIf="icon == false" (click)="assending()" class="fas fa-sort-up pointer"></i>
+                        <i *ngIf="icon == true" (click)="decending()" class="fas fa-sort-down pointer"></i>
+                    </th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        </tbody>
-    </table>
+                <tr>
+                    <!-- *ngFor="let o of myProducts | search: searchTxt; index as i" -->
+                    <td>
+                        <!-- {{o.timestamp}} -->
+                    </td>
+                    <td>
+                        <!-- {{o.timestamp | date: 'short'}} -->
+                    </td>
+                    <td>
+                        <!-- {{o.address}} -->
+                    </td>
+                    <td>
+                        <!-- ${{o.shipmentCharges}} -->
+                    </td>
+                    <td>
+                        <!-- ${{o.totalBill}} -->
+                    </td>
+                    <td><button class="btn btn-primary" (click)="orderDetails(o)">Details</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
