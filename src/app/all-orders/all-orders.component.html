@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
-<div class="checkout row">
-    <div class=" col-md-10 offset-md-1">
+<div class="checkout row justify-content-center">
+    <div class="col-md-11">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">
@@ -13,12 +13,13 @@
             <thead>
                 <tr>
                     <th>Order ID</th>
+                    <th>Seller</th>
+                    <th>Buyer</th>
                     <th>Date & Time</th>
-                    <th>Address</th>
                     <th>Delivery Fee</th>
                     <th>Grand Total
-                        <i *ngIf="icon == false" (click)="assending()" class="fas fa-sort-up pointer"></i>
-                        <i *ngIf="icon == true" (click)="decending()" class="fas fa-sort-down pointer"></i>
+                        <i *ngIf="!icon" class="fas fa-sort-up pointer"></i>
+                        <i *ngIf="icon == true" class="fas fa-sort-down pointer"></i>
                     </th>
                     <th>Details</th>
                 </tr>
@@ -26,23 +27,13 @@
             <tbody>
 
                 <tr>
-                    <!-- *ngFor="let o of myProducts | search: searchTxt; index as i" -->
-                    <td>
-                        <!-- {{o.timestamp}} -->
-                    </td>
-                    <td>
-                        <!-- {{o.timestamp | date: 'short'}} -->
-                    </td>
-                    <td>
-                        <!-- {{o.address}} -->
-                    </td>
-                    <td>
-                        <!-- ${{o.shipmentCharges}} -->
-                    </td>
-                    <td>
-                        <!-- ${{o.totalBill}} -->
-                    </td>
-                    <td><button class="btn btn-primary" (click)="orderDetails(o)">Details</button></td>
+                    <td>1234567890</td>
+                    <td>John Doe</td>
+                    <td>Sammy Doe</td>
+                    <td>Mar 24, 2020 at 10:20 AM</td>
+                    <td>$23</td>
+                    <td>$58</td>
+                    <td><button class="btn btn-primary" routerLink="/orderDetail">Details</button></td>
                 </tr>
             </tbody>
         </table>

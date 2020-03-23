@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container">
     <div class="row mt-5 pt-5 ">
-        <h1>Customer Detail</h1>
+        <h4><i class="fa fa-users"></i> All Users (34)</h4>
         <div class="input-group mb-3 ml-auto w-50">
             <input [(ngModel)]="searchTxt" type="text" class="form-control " placeholder="Search here...">
             <div class="input-group-prepend">
@@ -9,9 +9,8 @@
                     <i class="fa fa-search"></i>
                 </span>
             </div>
-
         </div>
-        <table>
+        <table class="table table-bordered table-hover bg-white">
             <tr class="text-center">
                 <th>#</th>
                 <th>Name</th>
@@ -29,9 +28,9 @@
                 <td>Paris</td>
                 <td>France</td>
                 <td class="text-center">
-                    <i class="fa fa-eye mx-2" routerLink="/userDetail" aria-hidden="true"></i>
-                    <i class="fa fa-ban  mx-2" aria-hidden="true"> </i>
-                    <i class="fa fa-unlock  mx-2" aria-hidden="true"></i>
+                    <i class="fa fa-eye text-primary mx-2" routerLink="/userDetail" aria-hidden="true"></i>
+                    <i class="fa fa-ban text-danger mx-2" aria-hidden="true"> </i>
+                    <i class="fa fa-unlock text-success mx-2" aria-hidden="true"></i>
                 </td>
             </tr>
             <tr class="text-center">
@@ -42,9 +41,9 @@
                 <td>Paris</td>
                 <td>France</td>
                 <td class="text-center">
-                    <i class="fa fa-eye mx-2" routerLink="/userDetail" aria-hidden="true"></i>
-                    <i class="fa fa-ban  mx-2" aria-hidden="true"> </i>
-                    <i class="fa fa-unlock  mx-2" aria-hidden="true"></i>
+                    <i class="fa fa-eye text-primary mx-2" routerLink="/userDetail" aria-hidden="true"></i>
+                    <i class="fa fa-ban text-danger mx-2" aria-hidden="true"> </i>
+                    <i class="fa fa-unlock text-success mx-2" aria-hidden="true"></i>
                 </td>
             </tr>
             <tr class="text-center">
@@ -55,11 +54,30 @@
                 <td>Paris</td>
                 <td>France</td>
                 <td class="text-center">
-                    <i class="fa fa-eye mx-2" routerLink="/userDetail" aria-hidden="true"></i>
-                    <i class="fa fa-ban  mx-2" aria-hidden="true"> </i>
-                    <i class="fa fa-unlock  mx-2" aria-hidden="true"></i>
+                    <i class="fa fa-eye text-primary mx-2" routerLink="/userDetail" aria-hidden="true"></i>
+                    <i class="fa fa-ban text-danger mx-2" aria-hidden="true"> </i>
+                    <i class="fa fa-unlock text-success mx-2" aria-hidden="true"></i>
                 </td>
             </tr>
         </table>
+
+
+        <div class="w-100">
+            <p class="float-left">Showing 10 of 34</p>
+            <ul class="pagination float-right">
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link">1</a></li>
+                <li class="page-item">
+                    <a class="page-link">2</a>
+                </li>
+                <li class="page-item"><a class="page-link">3</a></li>
+                <li class="page-item">
+                    <a class="page-link">Next</a>
+                </li>
+            </ul>
+        </div>
+
     </div>
 </div>
