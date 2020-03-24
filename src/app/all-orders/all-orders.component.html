@@ -1,41 +1,197 @@
 <app-navbar></app-navbar>
-<div class="checkout row justify-content-center">
-    <div class="col-md-11">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">
-                    <i class="fa fa-search"></i>
-                </span>
-            </div>
-            <input [(ngModel)]="searchTxt" type="text" class="form-control" placeholder="Search here...">
-        </div>
-        <table class="table table-striped text-center bg-white table-bordered">
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Seller</th>
-                    <th>Buyer</th>
-                    <th>Date & Time</th>
-                    <th>Delivery Fee</th>
-                    <th>Grand Total
-                        <i *ngIf="!icon" class="fas fa-sort-up pointer"></i>
-                        <i *ngIf="icon == true" class="fas fa-sort-down pointer"></i>
-                    </th>
-                    <th>Details</th>
-                </tr>
-            </thead>
-            <tbody>
 
-                <tr>
-                    <td>1234567890</td>
-                    <td>John Doe</td>
-                    <td>Sammy Doe</td>
-                    <td>Mar 24, 2020 at 10:20 AM</td>
-                    <td>$23</td>
-                    <td>$58</td>
-                    <td><button class="btn btn-primary" routerLink="/orderDetail">Details</button></td>
-                </tr>
-            </tbody>
-        </table>
+
+<div class="mainContent">
+    <ul class="nav nav-tabs mt-2">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#home">Pending ({{pendingArray.length}})</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu1">Accepted ({{acceptedArray.length}})</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu2">Shipped ({{shippedArray.length}})</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu3">Delivered ({{deliveredArray.length}})</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu4">Cancelled ({{cancelledArray.length}})</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane mx-5 my-5  active" id="home">
+            <h2 class="text-center my-4">Pending Orders</h2>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+                <input [(ngModel)]="searchTxt" type="text" class="form-control" placeholder="Search here...">
+            </div>
+
+            <table class="text-center table table-striped bg-white">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Seller</th>
+                        <th>Buyer</th>
+                        <th>Date & Time</th>
+                        <th>Product Qty</th>
+                        <th>Delivery Fee</th>
+                        <th>Grand Total
+                            <i *ngIf="!icon" (click)="icon=!icon" class="fas fa-sort-up pointer"></i>
+                            <i *ngIf="icon == true" (click)="icon=!icon" class="fas fa-sort-down pointer"></i>
+                        </th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12345678</td>
+                        <td class="btn btn-link" routerLink="/userDetail">Darren Sammy</td>
+                        <td>John Doe</td>
+                        <td>March 26, 2019</td>
+                        <td>19</td>
+                        <td>1500</td>
+                        <td>26900</td>
+                        <td><button (click)="orderDetail(item, 'pending')" class="btn btn-primary">Details</button></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tab-pane mx-5 my-5   fade" id="menu1">
+            <h2 class="text-center my-4">Accepted Orders</h2>
+            <table class="table table-striped bg-white">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date & Time</th>
+                        <th>Product Qty</th>
+                        <th>Buyer Name</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Total Bill</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of acceptedArray">
+                        <td>{{item.timestamp}}</td>
+                        <td>{{item.timestamp | date: 'mediumDate'}}</td>
+                        <td>{{item.myArray.length}}</td>
+                        <td>{{item.firstName}} {{item.lastName}}</td>
+                        <td>{{item.address}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.totalBill}}</td>
+                        <td><button (click)="orderDetail(item , 'accepted')" class="btn btn-primary">Details</button>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tab-pane mx-5 my-5   fade" id="menu2">
+            <h2 class="text-center my-4">Shipped Orders</h2>
+            <table class="table table-striped bg-white">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date & Time</th>
+                        <th>Product Qty</th>
+                        <th>Buyer Name</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Total Bill</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of shippedArray">
+                        <td>{{item.timestamp}}</td>
+                        <td>{{item.timestamp | date: 'mediumDate'}}</td>
+                        <td>{{item.myArray.length}}</td>
+                        <td>{{item.firstName}} {{item.lastName}}</td>
+                        <td>{{item.address}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.totalBill}}</td>
+                        <td><button (click)="orderDetail(item , 'shipped')" class="btn btn-primary">Details</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tab-pane mx-5 my-5   fade" id="menu3">
+            <h2 class="text-center my-4">Delivered Orders</h2>
+            <table class="table table-striped bg-white">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date & Time</th>
+                        <th>Product Qty</th>
+                        <th>Buyer Name</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Total Bill</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of deliveredArray">
+                        <td>{{item.timestamp}}</td>
+                        <td>{{item.timestamp | date: 'mediumDate'}}</td>
+                        <td>{{item.myArray.length}}</td>
+                        <td>{{item.firstName}} {{item.lastName}}</td>
+                        <td>{{item.address}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.totalBill}}</td>
+                        <td><button (click)="orderDetail(item , 'delivered')" class="btn btn-primary">Details</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane mx-5 my-5  " id="menu4">
+            <h2 class="text-center my-4">Cancelled Orders</h2>
+            <table class="table table-striped bg-white">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date & Time</th>
+                        <th>Products</th>
+                        <th>Product Qty</th>
+                        <th>Buyer Name</th>
+                        <th>Country</th>
+                        <th>Total</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cancelledArray">
+                        <td>{{item.timestamp}}</td>
+                        <td>{{item.timestamp | date: 'mediumDate'}}</td>
+                        <td>{{item.myArray.length}}</td>
+                        <td>{{item.firstName}} {{item.lastName}}</td>
+                        <td>{{item.address}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.totalBill}}</td>
+                        <td><button (click)="orderDetail(item ,'cancelled')" class="btn btn-primary">Details</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
+
 </div>
