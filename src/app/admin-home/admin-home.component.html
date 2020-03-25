@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
 
 <div class="row mt-5 p-5">
+    <h2 class="col-md-12">Dashboard</h2>
     <div class="col-md-3 mt-5">
         <div routerLink="/allUsers" class="shadow uniqueItem rounded card-body">
             <p class="card-text mb-0"><b>Users</b></p><span class="float-right"><i class="fa fa-group icon"></i></span>
@@ -33,16 +34,25 @@
 
     <div class="col-md-6 mt-5 ">
         <div class="card">
-            <div class="card-body ">
-                <p class="card-text"><b>Summary</b></p>
-
+            <div class="dash-card rounded">
+                <p class="dash-text"><b>Top Buyers</b></p>
+                <hr>
+                <div><img src="../../assets/img_avatar.png" class="buyer-avatar">
+                    <div class="dash-name top-left">Darren Sammy</div>
+                </div>
+                <div><img src="../../assets/img_avatar.png" class="buyer-avatar"></div>
+                <div><img src="../../assets/img_avatar.png" class="buyer-avatar"></div>
             </div>
         </div>
     </div>
     <div class="col-md-6 float-right mt-5">
         <div class="card">
-            <div class="card-body ">
-                <p class="card-text"><b>Top Selling Products</b></p>
+            <div class="dash-card">
+                <p class="dash-text"><b>Top Selling Products</b></p>
+                <hr>
+                <div><img src="../../assets/img_avatar.png" class="buyer-avatar"></div>
+                <div><img src="../../assets/img_avatar.png" class="buyer-avatar"></div>
+                <div><img src="../../assets/img_avatar.png" class="buyer-avatar"></div>
             </div>
         </div>
     </div>
