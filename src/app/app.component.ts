@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'E-Commerce-Admin';
+
+  onActivate(event) {
+    window.scroll(0, 0);
+  }
+
 }

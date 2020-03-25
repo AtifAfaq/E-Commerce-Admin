@@ -1,8 +1,6 @@
-
 .card-text {
   position: absolute !important;
 }
-
 
 img {
   border: 1px solid #ddd;
@@ -10,24 +8,32 @@ img {
   padding: 5px;
   width: 100px;
   margin: 0 15px 15px 15px;
+  object-fit: cover;
+}
+
+.product-avatar {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.borderBottom {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #dedede;
 }
 
 img:hover {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
   cursor: pointer;
 }
-.dash-name{
+.dash-name {
   display: inline !important;
 }
-.dash-card{
-  height:420px;
-  background: whitesmoke;
-.dash-text{
-  margin-top: 20px;
-  margin-left: 15px;
-  
-
-}
+.dash-card {
+  .dash-text {
+    margin-top: 20px;
+    margin-left: 15px;
+  }
 }
 .twoside {
   position: absolute !important;

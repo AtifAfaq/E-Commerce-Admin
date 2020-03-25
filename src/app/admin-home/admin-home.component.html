@@ -1,28 +1,41 @@
 <app-navbar></app-navbar>
 
 <div class="row mt-5 p-5">
-    <h2 class="col-md-12">Dashboard</h2>
-    <div class="col-md-3 mt-5">
+    <h2 class="col-md-8">Dashboard</h2>
+    <div class="col-md-4">
+        <div class="form-group">
+            <select class="form-control">
+                <option>Overall</option>
+                <option>Last 7 days</option>
+                <option>Last 15 days</option>
+                <option>Last 30 days</option>
+                <option>Last 3 months</option>
+                <option>Last 6 months</option>
+                <option>Last year</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3 mt-3">
         <div routerLink="/allUsers" class="shadow uniqueItem rounded card-body">
             <p class="card-text mb-0"><b>Users</b></p><span class="float-right"><i class="fa fa-group icon"></i></span>
             <p class="text-show mb-0 mt-4">4565</p>
         </div>
     </div>
-    <div class="col-md-3 mt-5">
+    <div class="col-md-3 mt-3">
         <div routerLink="/allProducts" class="shadow uniqueItem1 rounded card-body">
             <p class="card-text mb-0"><b>Products</b></p><span class="float-right"><i
                     class="fa fa-shopping-bag icon"></i></span>
             <p class="text-show mb-0 mt-4">4565</p>
         </div>
     </div>
-    <div class="col-md-3 mt-5">
+    <div class="col-md-3 mt-3">
         <div routerLink="/allCategories" class="shadow uniqueItem2 rounded card-body">
             <p class="card-text mb-0"><b>Categories</b></p><span class="float-right"><i
                     class="fa fa-truck icon"></i></span>
             <p class="text-show mb-0 mt-4">4565</p>
         </div>
     </div>
-    <div class="col-md-3 mt-5">
+    <div class="col-md-3 mt-3">
         <div class="shadow uniqueItem3 rounded card-body">
             <p class="card-text mb-0"><b>Reviews</b></p><span class="float-right"><i
                     class="fa fa-suitcase icon"></i></span>
@@ -34,25 +47,108 @@
 
     <div class="col-md-6 mt-5 ">
         <div class="card">
-            <div class="dash-card rounded">
+            <div class="dash-card rounded bg-white">
                 <p class="dash-text"><b>Top Buyers</b></p>
                 <hr>
-                <div><img src="../../assets/img_avatar.png" class="buyer-avatar">
-                    <div class="dash-name top-left">Darren Sammy</div>
+
+                <div routerLink="/userDetail" class="row pointer borderBottom">
+                    <div class="col-md-3">
+                        <img src="../../assets/img_avatar.png" class="buyer-avatar">
+                    </div>
+                    <div class="col-md-9 pt-2">
+                        <h5>Darren Sammy</h5>
+                        <p class="mb-2 text-primary">darrensam@yahoo.com</p>
+                        <p class="mb-1 text-success">Total Orders: 40 - Worth ($349.60)</p>
+                    </div>
                 </div>
-                <div><img src="../../assets/img_avatar.png" class="buyer-avatar"></div>
-                <div><img src="../../assets/img_avatar.png" class="buyer-avatar"></div>
+                <div routerLink="/userDetail" class="row pointer borderBottom">
+                    <div class="col-md-3">
+                        <img src="../../assets/img_avatar.png" class="buyer-avatar">
+                    </div>
+                    <div class="col-md-9 pt-2">
+                        <h5>Darren Sammy</h5>
+                        <p class="mb-2 text-primary">darrensam@yahoo.com</p>
+                        <p class="mb-1 text-success">Total Orders: 40 - Worth ($349.60)</p>
+                    </div>
+                </div>
+                <div routerLink="/userDetail" class="row pointer borderBottom">
+                    <div class="col-md-3">
+                        <img src="../../assets/img_avatar.png" class="buyer-avatar">
+                    </div>
+                    <div class="col-md-9 pt-2">
+                        <h5>Darren Sammy</h5>
+                        <p class="mb-2 text-primary">darrensam@yahoo.com</p>
+                        <p class="mb-1 text-success">Total Orders: 40 - Worth ($349.60)</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-md-6 float-right mt-5">
         <div class="card">
-            <div class="dash-card">
+            <div class="dash-card bg-white">
                 <p class="dash-text"><b>Top Selling Products</b></p>
                 <hr>
-                <div><img src="../../assets/img_avatar.png" class="buyer-avatar"></div>
-                <div><img src="../../assets/img_avatar.png" class="buyer-avatar"></div>
-                <div><img src="../../assets/img_avatar.png" class="buyer-avatar"></div>
+                <div routerLink="/productDetail" class="row pointer borderBottom">
+                    <div class="col-md-3">
+                        <img src="/assets/shoe1.jpg" class="buyer-avatar">
+                    </div>
+                    <div class="col-md-9 pt-2">
+                        <h5>Branded and comfortable shoe for men</h5>
+                        <p class="originalPrice gray mb-1">
+                            <del>$60</del> 35% => <span class="text-success bold">$54</span></p>
+                        <p class="rating">
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star gray"></i> (11)
+                            <span class="float-right">
+                                <i class="fa fa-user"></i> John Doe
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div routerLink="/productDetail" class="row pointer borderBottom">
+                    <div class="col-md-3">
+                        <img src="/assets/shoe1.jpg" class="buyer-avatar">
+                    </div>
+                    <div class="col-md-9 pt-2">
+                        <h5>Branded and comfortable shoe for men</h5>
+                        <p class="originalPrice gray mb-1">
+                            <del>$60</del> 35% => <span class="text-success bold">$54</span></p>
+                        <p class="rating">
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star gray"></i> (11)
+                            <span class="float-right">
+                                <i class="fa fa-user"></i> John Doe
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div routerLink="/productDetail" class="row pointer borderBottom">
+                    <div class="col-md-3">
+                        <img src="/assets/shoe1.jpg" class="buyer-avatar">
+                    </div>
+                    <div class="col-md-9 pt-2">
+                        <h5>Branded and comfortable shoe for men</h5>
+                        <p class="originalPrice gray mb-1">
+                            <del>$60</del> 35% => <span class="text-success bold">$54</span></p>
+                        <p class="rating">
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star gray"></i> (11)
+                            <span class="float-right">
+                                <i class="fa fa-user"></i> John Doe
+                            </span>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
