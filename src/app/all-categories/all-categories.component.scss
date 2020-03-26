@@ -1,7 +1,7 @@
 .productsBlock {
     .productCard {
       img {
-        height: 180px;
+        height: 150px;
       }
       .prodTitle {
         overflow: hidden;
@@ -12,4 +12,24 @@
       }
     }
   }
-  
+  .one-line{
+    display: inline;
+  }
+
+  div {
+
+   
+   
+    input[type="file"] {
+      display: none;
+    }
+  }
+  .modal-margin{
+    margin: 20px;
+  }
+
+  .modal-image {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+  }

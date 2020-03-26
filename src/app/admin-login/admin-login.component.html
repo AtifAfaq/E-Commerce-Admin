@@ -1,20 +1,34 @@
-<div class="row  back-banner">
+<app-navbar></app-navbar>
+<div class="loginForm back-banner">
+    <div class="row pt-5">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 mb-5">
+            <div [formGroup]="onLoginForm">
+                <h1 class="text-center mt-5">Login</h1>
+                &nbsp;
+                <div class="input-container">
+                    <i class="fa fa-user icon"></i>
+                    <input [(ngModel)]="email" formControlName="email" class="input-field" type="email"
+                        placeholder="Email Address">
+                </div>
+                <p class="errorMsg"
+                    *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">
+                    Email is required</p>
 
-    <div class="col-md-4"></div>
-    <div class="col-md-4 mt-5 pt-5 text-center">
-        <h1 class="mb-2">Login </h1>
-        <div class="form-group"><label class="float-left"><b>Email</b></label>
-            <input class="form-control"></div>
-
-        <div class="form-group"> <label class="float-left"><b>Password</b></label>
-            <input class="form-control"></div>
-
-
-        <button class="btn btn-primary mt-3 w-100 btn-lg" routerLink="/home">
-            Login
-        </button>
+                <div class="input-container">
+                    <i class="fa fa-key icon"></i>
+                    <input [(ngModel)]="password" formControlName="password" class="input-field" type="password"
+                        placeholder="Password">
+                </div>
+                <p class="errorMsg"
+                    *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')">
+                    Password is required</p>
 
 
+                <button class="btn btn-primary mb-3" (click)="userLogin()"> Submit </button>
+
+            </div>
+            <div class="col-md-4"></div>
+
+        </div>
     </div>
-    <div class="col-md-4"></div>
-</div>
