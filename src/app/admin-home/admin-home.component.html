@@ -18,14 +18,14 @@
     <div class="col-md-3 mt-3">
         <div routerLink="/allUsers" class="shadow uniqueItem rounded card-body">
             <p class="card-text mb-0"><b>Users</b></p><span class="float-right"><i class="fa fa-group icon"></i></span>
-            <p class="text-show mb-0 mt-4">4565</p>
+            <p class="text-show mb-0 mt-4">{{allUsers.length}}</p>
         </div>
     </div>
     <div class="col-md-3 mt-3">
         <div routerLink="/allProducts" class="shadow uniqueItem1 rounded card-body">
             <p class="card-text mb-0"><b>Products</b></p><span class="float-right"><i
                     class="fa fa-shopping-bag icon"></i></span>
-            <p class="text-show mb-0 mt-4">4565</p>
+            <p class="text-show mb-0 mt-4">{{allProducts.length}}</p>
         </div>
     </div>
     <div class="col-md-3 mt-3">
@@ -153,4 +153,11 @@
         </div>
     </div>
 
+</div>
+
+
+<!-- ----------------------------------------- -->
+
+<div *ngIf="loading" class="spinnerContent">
+    <div class="spinner-border text-muted"></div>
 </div>

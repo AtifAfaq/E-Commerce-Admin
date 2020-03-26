@@ -21,45 +21,21 @@
                 <th>Country</th>
                 <th class="text-center">Actions</th>
             </tr>
-            <tr class="text-center">
-                <td>1</td>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>1234567890</td>
-                <td>Paris</td>
-                <td>France</td>
+
+            <tr *ngFor="let user of allUsers; index as i" class="text-center">
+                <td>{{i+1}}</td>
+                <td>{{user.firstName}} {{user.lastName}}</td>
+                <td>{{user.address || 0}}</td>
+                <td>{{user.contact}}</td>
+                <td>{{user.city}}</td>
+                <td>{{user.country}}</td>
                 <td class="text-center">
-                    <i class="fa fa-eye text-primary mx-2" routerLink="/userDetail" aria-hidden="true"></i>
+                    <i class="fa fa-eye text-primary mx-2" (click)="seeProfile(user)" aria-hidden="true"></i>
                     <i class="fa fa-ban text-danger mx-2" aria-hidden="true"> </i>
                     <i class="fa fa-unlock text-success mx-2" aria-hidden="true"></i>
                 </td>
             </tr>
-            <tr class="text-center">
-                <td>2</td>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>1234567890</td>
-                <td>Paris</td>
-                <td>France</td>
-                <td class="text-center">
-                    <i class="fa fa-eye text-primary mx-2" routerLink="/userDetail" aria-hidden="true"></i>
-                    <i class="fa fa-ban text-danger mx-2" aria-hidden="true"> </i>
-                    <i class="fa fa-unlock text-success mx-2" aria-hidden="true"></i>
-                </td>
-            </tr>
-            <tr class="text-center">
-                <td>3</td>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>1234567890</td>
-                <td>Paris</td>
-                <td>France</td>
-                <td class="text-center">
-                    <i class="fa fa-eye text-primary mx-2" routerLink="/userDetail" aria-hidden="true"></i>
-                    <i class="fa fa-ban text-danger mx-2" aria-hidden="true"> </i>
-                    <i class="fa fa-unlock text-success mx-2" aria-hidden="true"></i>
-                </td>
-            </tr>
+
         </table>
 
 

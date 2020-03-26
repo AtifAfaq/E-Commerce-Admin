@@ -2,91 +2,25 @@
 <div class="mainContent">
     <h4 class="mb-0">All Products</h4>
     <div class="row">
-        <div class="col-md-3">
+        <div *ngFor="let p of allProducts" class="col-md-3">
             <div class="productCard">
                 <div routerLink="/productDetail">
-                    <img src="/assets/imgs/antiques.jpg">
-                    <p class="prodTitle mb-0">Shoe
+                    <img [src]="p.productUrls[0]">
+                    <p class="prodTitle mb-0">{{p.productName}}
                     </p>
-                    <h4 class="prodPrice primary mt-0 mb-0">$45</h4>
+                    <h4 class="prodPrice primary mt-0 mb-0">${{p.discountedPrice}}</h4>
                     <p class="originalPrice gray mb-0">
-                        <del>$60</del> 35%</p>
-                    <p class="rating mb-0">
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star gray"></i> (11)
-                    </p>
-                </div>
-                <button (click)="enabled=!enabled" *ngIf="enabled" class="btn btn-success w-100 mt-2">Enable</button>
-                <button (click)="enabled=!enabled" *ngIf="!enabled" class="btn btn-danger w-100 mt-2">Disable</button>
-                <button *ngIf="!enabled" class="btn btn-primary w-100 mt-2">Add to featured products</button>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="productCard">
-                <div routerLink="/productDetail">
-                    <img src="/assets/imgs/appliances.png">
-                    <p class="prodTitle mb-0">Shoe
-                    </p>
-                    <h4 class="prodPrice primary mt-0 mb-0">$45</h4>
-                    <p class="originalPrice gray mb-0">
-                        <del>$60</del> 35%</p>
-                    <p class="rating mb-0">
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star gray"></i> (11)
-                    </p>
-                </div>
-                <button (click)="enabled=!enabled" *ngIf="enabled" class="btn btn-success w-100 mt-2">Enable</button>
-                <button (click)="enabled=!enabled" *ngIf="!enabled" class="btn btn-danger w-100 mt-2">Disable</button>
-                <button *ngIf="!enabled" class="btn btn-primary w-100 mt-2">Add to featured products</button>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="productCard">
-                <div routerLink="/productDetail">
-                    <img src="/assets/imgs/auto.jpg">
-                    <p class="prodTitle mb-0">Shoe
-                    </p>
-                    <h4 class="prodPrice primary mt-0 mb-0">$45</h4>
-                    <p class="originalPrice gray mb-0">
-                        <del>$60</del> 35%</p>
-                    <p class="rating mb-0">
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star gray"></i> (11)
-                    </p>
-                </div>
-                <button (click)="enabled=!enabled" *ngIf="enabled" class="btn btn-success w-100 mt-2">Enable</button>
-                <button (click)="enabled=!enabled" *ngIf="!enabled" class="btn btn-danger w-100 mt-2">Disable</button>
-                <button *ngIf="!enabled" class="btn btn-primary w-100 mt-2">Add to featured products</button>
-            </div>
-        </div>
-
-
-        <div class="col-md-3">
-            <div class="productCard">
-                <div routerLink="/productDetail">
-                    <img src="/assets/imgs/cloths.jpg">
-                    <p class="prodTitle mb-0">Shoe
-                    </p>
-                    <h4 class="prodPrice primary mt-0 mb-0">$45</h4>
-                    <p class="originalPrice gray mb-0">
-                        <del>$60</del> 35%</p>
-                    <p class="rating mb-0">
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star gray"></i> (11)
+                        <del>${{p.originalPrice}}</del> {{p.discount| number : '1.2-2'}}%</p>
+                    <p class="rating">
+                        <i class="fa fa-star" [class.text-warning]="p.avgRating>=1" [class.gray]="!p.avgRating"></i>
+                        <i class="fa fa-star" [class.text-warning]="p.avgRating>=2"
+                            [class.gray]="!p.avgRating || p.avgRating<2"></i>
+                        <i class="fa fa-star" [class.text-warning]="p.avgRating>=3"
+                            [class.gray]="!p.avgRating || p.avgRating<3"></i>
+                        <i class="fa fa-star" [class.text-warning]="p.avgRating>=4"
+                            [class.gray]="!p.avgRating || p.avgRating<4"></i>
+                        <i class="fa fa-star" [class.text-warning]="p.avgRating>=5"
+                            [class.gray]="!p.avgRating || p.avgRating<5"></i> ({{p.totalReview || 0}})
                     </p>
                 </div>
                 <button (click)="enabled=!enabled" *ngIf="enabled" class="btn btn-success w-100 mt-2">Enable</button>

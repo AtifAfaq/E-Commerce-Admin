@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataShiftingService } from './../data-shifting.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-products',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./all-products.component.scss']
 })
 export class AllProductsComponent implements OnInit {
+  allProducts = [];
+  allUsers = [];
+  constructor(public service: DataShiftingService,
+    public router: Router) {
 
-  constructor() { }
+  }
 
   ngOnInit() {
+    this.allProducts = this.service.allProducts;
+    if (this.allProducts.length == 0) {
+      debugger;
+      this.router.navigate(['/home']);
+    }
   }
+
 
 }
