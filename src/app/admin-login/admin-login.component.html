@@ -1,4 +1,3 @@
-<app-navbar></app-navbar>
 <div class="loginForm back-banner">
     <div class="row pt-5">
         <div class="col-md-4"></div>
@@ -24,7 +23,7 @@
                     *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')">
                     Password is required</p>
 
-
+                <p>Reset Password?</p>
                 <button class="btn btn-primary mb-3" (click)="userLogin()"> Submit </button>
 
             </div>
