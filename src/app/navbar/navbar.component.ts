@@ -10,17 +10,25 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   showNavBar = false;
-  constructor(public router: Router) { }
+
+  constructor(public router: Router) {
+    if (localStorage.getItem('userLoggedIn') == 'false') {
+      router.navigate(['/login']);
+    }
+  }
 
   ngOnInit() {
   }
+
   openNavBar() {
     this.showNavBar = true;
-
   }
+
   closeNavBar() {
     this.showNavBar = false;
   }
+
+
   signout() {
     var user = firebase.auth().currentUser;
     if (user) {

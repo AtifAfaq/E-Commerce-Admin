@@ -7,14 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit {
-  user = {};
-  constructor(public service: DataShiftingService,
+
+  user: any = {};
+
+  constructor(
+    public service: DataShiftingService,
     public router: Router) {
-    debugger;
     this.user = this.service.user;
 
-    if (!this.user) {
-      this.router.navigate(['/home'])
+    if (!this.user.firstName) {
+      this.router.navigate(['/home']);
     }
   }
 
