@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   showNavBar = false;
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
   }
@@ -19,6 +21,25 @@ export class NavbarComponent implements OnInit {
   closeNavBar() {
     this.showNavBar = false;
   }
-
+  signout() {
+    var user = firebase.auth().currentUser;
+    if (user) {
+      firebase.auth().signOut()
+        .then(() => {
+          alert("Admin Logged Out!");
+          localStorage.clear();
+          this.router.navigate(['/login']);
+          localStorage.setItem('userLoggedIn', 'false');
+        })
+        .catch((e) => {
+          alert(e.message);
+        })
+    }
+    else {
+      localStorage.clear();
+      localStorage.setItem('userLoggedIn', 'false');
+      this.router.navigate(['/login']);
+    }
+  }
 
 }

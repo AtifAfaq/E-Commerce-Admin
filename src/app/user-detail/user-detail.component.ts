@@ -10,9 +10,10 @@ export class UserDetailComponent implements OnInit {
   user = {};
   constructor(public service: DataShiftingService,
     public router: Router) {
-    this.user = this.service.user;
     debugger;
-    if (this.user == null) {
+    this.user = this.service.user;
+
+    if (!this.user) {
       this.router.navigate(['/home'])
     }
   }
