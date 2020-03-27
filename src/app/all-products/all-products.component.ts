@@ -17,11 +17,15 @@ export class AllProductsComponent implements OnInit {
 
   ngOnInit() {
     this.allProducts = this.service.allProducts;
+    this.service.allProducts = this.allProducts;
     if (this.allProducts.length == 0) {
       debugger;
       this.router.navigate(['/home']);
     }
   }
-
+  productDetail(p) {
+    this.service.product = p;
+    this.router.navigate(['/productDetail']);
+  }
 
 }

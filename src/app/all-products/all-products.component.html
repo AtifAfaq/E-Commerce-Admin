@@ -4,7 +4,7 @@
     <div class="row">
         <div *ngFor="let p of allProducts" class="col-md-3">
             <div class="productCard">
-                <div routerLink="/productDetail">
+                <div (click)="productDetail(p)">
                     <img [src]="p.productUrls[0]">
                     <p class="prodTitle mb-0">{{p.productName}}
                     </p>
