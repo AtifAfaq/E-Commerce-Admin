@@ -8,5 +8,10 @@ export class DataShiftingService {
   allProducts = [];
   allUsers = [];
   product = {};
-  constructor() { }
+  allCategorys = [];
+  allReviews = [];
+
+  constructor() {
+
+  }
 }

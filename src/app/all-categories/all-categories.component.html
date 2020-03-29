@@ -6,7 +6,7 @@
         <button class="float-right btn btn-primary" data-toggle="modal" data-target="#emptycart">Add Category</button>
     </div>
     <div class="row">
-        <div *ngFor="let cat of allCategorys" class="col-md-2 ">
+        <div *ngFor="let cat of allCategorys; index as i" class="col-md-2 ">
             <div class="productCard">
                 <div routerLink="/allProducts">
                     <img class="mb-1" [src]="cat.profileUrl">

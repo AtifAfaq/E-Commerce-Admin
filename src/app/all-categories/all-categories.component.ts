@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { SelectorMatcher } from '@angular/compiler';
+import { DataShiftingService } from './../data-shifting.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-categories',
@@ -13,27 +15,17 @@ export class AllCategoriesComponent implements OnInit {
   category: any = {};
   userImage: any = '';
   newFile: boolean = false;
-  constructor() { }
+  constructor(public service: DataShiftingService,
+    public router: Router) { }
 
   ngOnInit() {
-    this.getallCategorys();
+    this.allCategorys = this.service.allCategorys;
+    console.log(this.allCategorys);
+    if (this.allCategorys.length == 0) {
+      this.router.navigate(['/home']);
+    }
   }
-  getallCategorys() {
-    var self = this;
-    self.loading = true;
-    firebase.database().ref().child('categories')
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key]
-          temp.key = key;
-          self.allCategorys.push(temp)
-        }
-        self.loading = false;
-        console.log(self.allCategorys)
-      })
 
-  }
 
   onChangeFile(event: EventTarget) {
     let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
@@ -49,9 +41,21 @@ export class AllCategoriesComponent implements OnInit {
     }
   }
 
+  manualChecks() {
+    this.allCategorys.forEach(element => {
+      if (element.Name == this.category.Name) {
+        alert("Cateogry name already in use")
+        return false;
+      }
+    });
+    return true;
+  }
+
   addCategory() {
-    this.loading = true;
-    this.uploadImage();
+    if (this.manualChecks()) {
+      this.loading = true;
+      this.uploadImage();
+    }
 
   }
 
@@ -72,7 +76,7 @@ export class AllCategoriesComponent implements OnInit {
               self.updateData();
             })
             .catch((e) => {
-              alert(e.message);
+              console.log(e.message);
               self.loading = false;
             })
         });

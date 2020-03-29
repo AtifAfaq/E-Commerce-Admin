@@ -9,7 +9,9 @@ import { DataShiftingService } from './../data-shifting.service';
 })
 export class AdminHomeComponent implements OnInit {
   allProducts = [];
+  allReviews = [];
   allUsers = [];
+  allCategorys = [];
   loading: boolean = false;
   showNavBar = false;
   constructor(public service: DataShiftingService) { }
@@ -17,6 +19,8 @@ export class AdminHomeComponent implements OnInit {
   ngOnInit() {
     this.getallProducts();
     this.getallUsers();
+    this.getallCategorys();
+    this.getallReviews();
   }
   openNavBar() {
     this.showNavBar = true;
@@ -26,6 +30,34 @@ export class AdminHomeComponent implements OnInit {
     this.showNavBar = false;
   }
 
+  getallReviews() {
+    var self = this;
+    firebase.database().ref().child('reviews')
+      .once('value', (snapshot) => {
+        var data = snapshot.val();
+        for (var key in data) {
+          var temp = data[key]
+          temp.key = key;
+          this.allReviews.push(temp);
+        }
+        console.log(this.allReviews)
+        this.service.allReviews = this.allReviews;
+      })
+  }
+  getallCategorys() {
+    var self = this;
+    firebase.database().ref().child('categories')
+      .once('value', (snapshot) => {
+        var data = snapshot.val();
+        for (var key in data) {
+          var temp = data[key]
+          temp.key = key;
+          this.allCategorys.push(temp);
+        }
+        console.log(this.allCategorys)
+        this.service.allCategorys = this.allCategorys;
+      })
+  }
   getallProducts() {
     var self = this;
     self.loading = true;
@@ -34,6 +66,7 @@ export class AdminHomeComponent implements OnInit {
         var data = snapshot.val();
         for (var key in data) {
           var temp = data[key];
+          temp.key = key;
           self.allProducts.push(temp);
           self.loading = false;
         }
@@ -49,6 +82,7 @@ export class AdminHomeComponent implements OnInit {
         var userData = snapshot.val();
         for (var key in userData) {
           var user = userData[key];
+          user.key = key;
           self.allUsers.push(user)
           self.loading = false;
         }
