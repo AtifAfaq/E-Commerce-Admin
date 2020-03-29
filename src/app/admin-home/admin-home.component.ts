@@ -8,13 +8,17 @@ import { DataShiftingService } from './../data-shifting.service';
   styleUrls: ['./admin-home.component.scss']
 })
 export class AdminHomeComponent implements OnInit {
+
   allProducts = [];
   allReviews = [];
   allUsers = [];
   allCategorys = [];
   loading: boolean = false;
   showNavBar = false;
-  constructor(public service: DataShiftingService) { }
+
+  constructor(
+    public service: DataShiftingService) { }
+
 
   ngOnInit() {
     this.getallProducts();
@@ -22,13 +26,17 @@ export class AdminHomeComponent implements OnInit {
     this.getallCategorys();
     this.getallReviews();
   }
+
+
   openNavBar() {
     this.showNavBar = true;
-
   }
+
+
   closeNavBar() {
     this.showNavBar = false;
   }
+
 
   getallReviews() {
     var self = this;
@@ -38,12 +46,13 @@ export class AdminHomeComponent implements OnInit {
         for (var key in data) {
           var temp = data[key]
           temp.key = key;
-          this.allReviews.push(temp);
+          self.allReviews.push(temp);
         }
-        console.log(this.allReviews)
-        this.service.allReviews = this.allReviews;
+        self.service.allReviews = self.allReviews;
       })
   }
+
+
   getallCategorys() {
     var self = this;
     firebase.database().ref().child('categories')
@@ -52,12 +61,13 @@ export class AdminHomeComponent implements OnInit {
         for (var key in data) {
           var temp = data[key]
           temp.key = key;
-          this.allCategorys.push(temp);
+          self.allCategorys.push(temp);
         }
-        console.log(this.allCategorys)
-        this.service.allCategorys = this.allCategorys;
+        self.service.allCategorys = self.allCategorys;
       })
   }
+
+
   getallProducts() {
     var self = this;
     self.loading = true;
@@ -70,13 +80,14 @@ export class AdminHomeComponent implements OnInit {
           self.allProducts.push(temp);
           self.loading = false;
         }
-        this.service.allProducts = this.allProducts;
+        self.service.allProducts = self.allProducts;
       })
-    console.log(this.allProducts)
   }
+
+
   getallUsers() {
     var self = this;
-    this.loading = true;
+    self.loading = true;
     firebase.database().ref().child('users')
       .once('value', (snapshot) => {
         var userData = snapshot.val();
@@ -86,8 +97,8 @@ export class AdminHomeComponent implements OnInit {
           self.allUsers.push(user)
           self.loading = false;
         }
-        this.service.allUsers = this.allUsers;
+        self.service.allUsers = self.allUsers;
       })
-    console.log(self.allUsers)
   }
+
 }

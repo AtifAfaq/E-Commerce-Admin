@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { SelectorMatcher } from '@angular/compiler';
 import { DataShiftingService } from './../data-shifting.service';
 import { Router } from '@angular/router';
 
@@ -10,20 +9,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./all-categories.component.scss']
 })
 export class AllCategoriesComponent implements OnInit {
+
   loading: boolean = false;
   allCategorys: any = [];
   category: any = {};
   userImage: any = '';
   newFile: boolean = false;
-  constructor(public service: DataShiftingService,
-    public router: Router) { }
+  allProducts: any = [];
+
+  constructor(
+    public service: DataShiftingService,
+    public router: Router) {
+    this.allProducts = service.allProducts;
+  }
+
 
   ngOnInit() {
     this.allCategorys = this.service.allCategorys;
-    console.log(this.allCategorys);
     if (this.allCategorys.length == 0) {
       this.router.navigate(['/home']);
     }
+  }
+
+
+
+  getProductsCount(category) {
+    var count = 0;
+    this.allProducts.forEach(element => {
+      if (element.productCategory == category.Name) {
+        count++;
+      }
+    });
+    return count;
   }
 
 
@@ -41,22 +58,27 @@ export class AllCategoriesComponent implements OnInit {
     }
   }
 
-  manualChecks() {
-    this.allCategorys.forEach(element => {
-      if (element.Name == this.category.Name) {
-        alert("Cateogry name already in use")
-        return false;
-      }
-    });
-    return true;
-  }
-
   addCategory() {
     if (this.manualChecks()) {
       this.loading = true;
       this.uploadImage();
     }
+  }
 
+
+  manualChecks() {
+    var alreadyNameExists = false;
+    this.allCategorys.forEach(element => {
+      if (element.Name.toLowerCase() == this.category.Name.toLowerCase()) {
+        alreadyNameExists = true;
+      }
+    });
+    if (alreadyNameExists) {
+      alert("Cateogry name already in use");
+      return false;
+    } else {
+      return true;
+    }
   }
 
 
@@ -97,5 +119,17 @@ export class AllCategoriesComponent implements OnInit {
         alert(e.message);
       })
   }
+
+
+  changeStatus(status, index) {
+    var self = this;
+    self.allCategorys[index].status = status;
+    var updates = {};
+    updates['/categories/' + self.allCategorys[index].key + "/status"] = status;
+    firebase.database().ref().update(updates).then(() => {
+
+    })
+  }
+
 
 }

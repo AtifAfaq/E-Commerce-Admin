@@ -1,12 +1,15 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { DataShiftingService } from './../data-shifting.service';
 import * as firebase from 'firebase';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
+
   loading = false;
   product: any = {};
   myReview: any = [];
@@ -17,21 +20,27 @@ export class ProductDetailComponent implements OnInit {
   rate5 = 0;
   avgRating: any;
 
-
-  constructor(public zone: NgZone,
+  constructor(
+    public zone: NgZone,
+    public router: Router,
     public service: DataShiftingService) { }
+
 
   ngOnInit() {
     this.product = this.service.product;
-    console.log(this.product);
+    if (!this.product.key) {
+      this.router.navigate(['/home']);
+    }
     this.getMyReviews();
   }
+
 
   getDiscount(product) {
     var disc = ((Number(product.originalPrice) - Number(product.discountedPrice)) / Number(product.originalPrice)) * 100;
     product.discount = disc;
     return disc;
   }
+
 
   getMyReviews() {
     var self = this;
@@ -76,7 +85,6 @@ export class ProductDetailComponent implements OnInit {
 
 
   reviewCount() {
-    debugger
     for (var i = 0; i < this.myReview.length; i++) {
       var rate = this.myReview[i].rating;
       if (rate == 1) {

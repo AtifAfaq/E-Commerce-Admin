@@ -12,14 +12,14 @@
                     <img class="mb-1" [src]="cat.profileUrl">
                     <p class="prodTitle mb-0">{{cat.Name}}
                     </p>
-                    <p class="prodTitle mb-0">Products 45</p>
+                    <p class="prodTitle mb-0">Products {{getProductsCount(cat)}}</p>
                 </div>
-                <button (click)="enabled=!enabled" *ngIf="enabled" class="btn btn-success w-100 mt-2">Enable</button>
-                <button (click)="enabled=!enabled" *ngIf="!enabled" class="btn btn-danger w-100 mt-2">Disable</button>
+                <button (click)="changeStatus('enabled', i)" *ngIf="cat.status=='disabled'"
+                    class="btn btn-success w-100 mt-2">Enable</button>
+                <button (click)="changeStatus('disabled', i)" *ngIf="cat.status=='enabled' || !cat.status"
+                    class="btn btn-danger w-100 mt-2">Disable</button>
             </div>
         </div>
-
-
     </div>
 </div>
 
@@ -60,7 +60,8 @@
                         <button type="button" class="btn btn-danger" data-dismiss="modal">
                             Close
                         </button>
-                        <button (click)="addCategory()" type="button" class="btn btn-success" data-dismiss="modal">
+                        <button [disabled]="!category.profileUrl || !category.Name" (click)="addCategory()"
+                            type="button" class="btn btn-success" data-dismiss="modal">
                             Add Category
                         </button>
                     </div>
