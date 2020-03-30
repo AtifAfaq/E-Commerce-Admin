@@ -61,8 +61,12 @@
                 </p>
 
 
-                <button class="btn btn-success w-100" (click)="AddCart(product)">Add to Featured Products</button>
-                <button class="btn btn-danger w-100 mt-3 mb-4">Disable Product</button>
+                <button class="btn btn-success w-100" *ngIf="!enabled" (click)="addToFeature(p,i)">Add to Featured
+                    Products</button>
+                <button (click)="changeStatus('disabled', i)" *ngIf="p.status=='enabled' || !p.status"
+                    class="btn btn-danger w-100 mt-3 mb-4">Disable Product</button>
+                <button (click)="changeStatus('enabled', i)" *ngIf="p.status=='disabled'"
+                    class="btn btn-danger w-100 mt-3 mb-4">Enable Product</button>
             </div>
         </div>
 

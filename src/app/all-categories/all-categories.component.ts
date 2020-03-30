@@ -16,6 +16,7 @@ export class AllCategoriesComponent implements OnInit {
   userImage: any = '';
   newFile: boolean = false;
   allProducts: any = [];
+  categoriesData: any = [];
 
   constructor(
     public service: DataShiftingService,
@@ -129,6 +130,17 @@ export class AllCategoriesComponent implements OnInit {
     firebase.database().ref().update(updates).then(() => {
 
     })
+  }
+
+  bringCategories(v) {
+    this.allProducts.forEach(product => {
+      if (product.productCategory == v.name) {
+        this.categoriesData.push(product)
+        console.log(this.categoriesData)
+        this.service.categoriesData = this.categoriesData
+        this.router.navigate(['/allProducts'])
+      }
+    });
   }
 
 

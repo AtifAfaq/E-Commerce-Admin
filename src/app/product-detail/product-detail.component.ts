@@ -105,4 +105,30 @@ export class ProductDetailComponent implements OnInit {
     }
     this.avgRating = ((this.rate1) * 1 + (this.rate2) * 2 + (this.rate3) * 3 + (this.rate4) * 4 + (this.rate5) * 5) / this.myReview.length;
   }
+
+  changeStatus(status, index) {
+    var self = this;
+    self.product.status = status;
+    var updates = {};
+    updates['/products/' + self.product.key + "/status"] = status;
+    firebase.database().ref().update(updates).then(() => {
+
+    })
+  }
+
+  addToFeature(product, index) {
+    var postKey = firebase.database().ref().child('categories').push().key;
+    var updates = {};
+    product.status = "Featured Product";
+    updates['/featuredProducts/' + product.key] = product;
+    firebase.database().ref().update(updates)
+      .then(() => {
+        alert("Product added to Featured Product")
+      })
+      .catch((e) => {
+        alert(e.message);
+      })
+  }
+
+
 }

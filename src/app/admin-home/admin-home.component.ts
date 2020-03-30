@@ -17,14 +17,16 @@ export class AdminHomeComponent implements OnInit {
   showNavBar = false;
 
   constructor(
-    public service: DataShiftingService) { }
+    public service: DataShiftingService) {
+    this.allReviews = this.service.allReviews;
+    this.allCategorys = this.service.allCategorys;
+    this.allProducts = this.service.allProducts;
+    this.allUsers = this.service.allUsers;
+  }
 
 
   ngOnInit() {
-    this.getallProducts();
-    this.getallUsers();
-    this.getallCategorys();
-    this.getallReviews();
+
   }
 
 
@@ -38,67 +40,5 @@ export class AdminHomeComponent implements OnInit {
   }
 
 
-  getallReviews() {
-    var self = this;
-    firebase.database().ref().child('reviews')
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key]
-          temp.key = key;
-          self.allReviews.push(temp);
-        }
-        self.service.allReviews = self.allReviews;
-      })
-  }
-
-
-  getallCategorys() {
-    var self = this;
-    firebase.database().ref().child('categories')
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key]
-          temp.key = key;
-          self.allCategorys.push(temp);
-        }
-        self.service.allCategorys = self.allCategorys;
-      })
-  }
-
-
-  getallProducts() {
-    var self = this;
-    self.loading = true;
-    firebase.database().ref().child('products')
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key];
-          temp.key = key;
-          self.allProducts.push(temp);
-          self.loading = false;
-        }
-        self.service.allProducts = self.allProducts;
-      })
-  }
-
-
-  getallUsers() {
-    var self = this;
-    self.loading = true;
-    firebase.database().ref().child('users')
-      .once('value', (snapshot) => {
-        var userData = snapshot.val();
-        for (var key in userData) {
-          var user = userData[key];
-          user.key = key;
-          self.allUsers.push(user)
-          self.loading = false;
-        }
-        self.service.allUsers = self.allUsers;
-      })
-  }
 
 }

@@ -8,7 +8,7 @@
     <div class="row">
         <div *ngFor="let cat of allCategorys; index as i" class="col-md-2 ">
             <div class="productCard">
-                <div routerLink="/allProducts">
+                <div (click)="bringCategories(cat)">
                     <img class="mb-1" [src]="cat.profileUrl">
                     <p class="prodTitle mb-0">{{cat.Name}}
                     </p>
