@@ -10,7 +10,7 @@
         <div *ngIf="showNavBar" id="mySidebar" class="sidebar pt-5">
             <a (click)="closeNavBar()" class="closebtn">&times;</a>
             <a routerLink="/home"><i class="fa fa-home mr-2"></i> Home</a>
-            <a routerLink="/allProducts"><i class="fa fa-cube mr-2"></i> All Products</a>
+            <a (click)="showAllProducts()"><i class="fa fa-cube mr-2"></i> All Products</a>
             <a routerLink="/allCategories"><i class="fa fa-truck mr-2"></i> All Categories</a>
             <a routerLink="/allUsers"> <i class="fa fa-users mr-2" aria-hidden="true"></i> All Users</a>
             <a routerLink="/featuredProducts"><i class="fa fa-shopping-bag mr-2" aria-hidden="true"></i> Featured

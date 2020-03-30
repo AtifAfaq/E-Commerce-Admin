@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataShiftingService {
+
   user = {};
   allProducts = [];
   allUsers = [];
@@ -13,28 +15,39 @@ export class DataShiftingService {
   allReviews = [];
   loading: boolean = false;
   categoriesData: any = [];
+  routeFrom: string;
+
+  public fooSubject = new Subject<any>();
 
   constructor() {
-    this.getallProducts();
-    this.getallUsers();
-    this.getallCategorys();
-    this.getallReviews();
-
-    // if (this.allProducts.length == 0) {
-    //   this.getallProducts();
-    // }
-    // if (this.allReviews.length == 0) {
-    //   this.getallReviews();
-    // }
-    // if (this.allCategorys.length == 0) {
-    //   this.getallCategorys();
-    // }
-    // if (this.allUsers.length == 0) {
-    //   this.getallUsers();
-    // }
+    if (this.allProducts.length == 0) {
+      this.getallProducts();
+    }
+    if (this.allReviews.length == 0) {
+      this.getallReviews();
+    }
+    if (this.allCategorys.length == 0) {
+      this.getallCategorys();
+    }
+    if (this.allUsers.length == 0) {
+      this.getallUsers();
+    }
   }
+
+
+
+  publishSomeData(temp: any) {
+    this.fooSubject.next(temp);
+  }
+
+  getObservable(): Subject<any> {
+    return this.fooSubject;
+  }
+
+
   getallReviews() {
     var self = this;
+    self.allReviews = [];
     firebase.database().ref().child('reviews')
       .once('value', (snapshot) => {
         var data = snapshot.val();
@@ -49,6 +62,7 @@ export class DataShiftingService {
 
   getallCategorys() {
     var self = this;
+    self.allCategorys = [];
     firebase.database().ref().child('categories')
       .once('value', (snapshot) => {
         var data = snapshot.val();
@@ -57,17 +71,16 @@ export class DataShiftingService {
           temp.key = key;
           self.allCategorys.push(temp);
         }
-
       })
   }
 
 
   getallProducts() {
     var self = this;
+    self.allProducts = [];
     self.loading = true;
     firebase.database().ref().child('products')
       .once('value', (snapshot) => {
-        debugger;
         var data = snapshot.val();
         for (var key in data) {
           var temp = data[key];
@@ -75,13 +88,13 @@ export class DataShiftingService {
           self.allProducts.push(temp);
           self.loading = false;
         }
-
       })
   }
 
 
   getallUsers() {
     var self = this;
+    self.allUsers = [];
     self.loading = true;
     firebase.database().ref().child('users')
       .once('value', (snapshot) => {
@@ -92,7 +105,6 @@ export class DataShiftingService {
           self.allUsers.push(user)
           self.loading = false;
         }
-
       })
   }
 

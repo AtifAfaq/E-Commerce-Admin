@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import { DataShiftingService } from '../data-shifting.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,9 @@ export class NavbarComponent implements OnInit {
 
   showNavBar = false;
 
-  constructor(public router: Router) {
+  constructor(
+    public router: Router,
+    public service: DataShiftingService) {
     if (localStorage.getItem('userLoggedIn') == 'false') {
       router.navigate(['/login']);
     }
@@ -26,6 +29,13 @@ export class NavbarComponent implements OnInit {
 
   closeNavBar() {
     this.showNavBar = false;
+  }
+
+
+  showAllProducts() {
+    this.showNavBar = false;
+    this.service.publishSomeData(true);
+    this.router.navigate(['/allProducts']);
   }
 
 

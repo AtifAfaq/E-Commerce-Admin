@@ -132,15 +132,16 @@ export class AllCategoriesComponent implements OnInit {
     })
   }
 
+
   bringCategories(v) {
     this.allProducts.forEach(product => {
-      if (product.productCategory == v.name) {
-        this.categoriesData.push(product)
-        console.log(this.categoriesData)
-        this.service.categoriesData = this.categoriesData
-        this.router.navigate(['/allProducts'])
+      if (product.productCategory == v.Name) {
+        this.categoriesData.push(product);
       }
     });
+    this.service.categoriesData = this.categoriesData;
+    this.service.routeFrom = 'categories';
+    this.router.navigate(['/allProducts']);
   }
 
 

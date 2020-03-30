@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase';
 import { DataShiftingService } from './../data-shifting.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
@@ -17,6 +17,7 @@ export class AdminHomeComponent implements OnInit {
   showNavBar = false;
 
   constructor(
+    public router: Router,
     public service: DataShiftingService) {
     this.allReviews = this.service.allReviews;
     this.allCategorys = this.service.allCategorys;
@@ -27,6 +28,12 @@ export class AdminHomeComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+
+  showAllProducts() {
+    this.service.routeFrom = 'home';
+    this.router.navigate(['/allProducts']);
   }
 
 

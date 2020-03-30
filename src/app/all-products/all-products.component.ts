@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataShiftingService } from './../data-shifting.service';
+import { DataShiftingService } from '../data-shifting.service';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 
@@ -9,33 +9,54 @@ import * as firebase from 'firebase';
   styleUrls: ['./all-products.component.scss']
 })
 export class AllProductsComponent implements OnInit {
-  allProducts = [];
-  allUsers = [];
-  categoriesData: any = [];
-  constructor(public service: DataShiftingService,
-    public router: Router) {
 
+  allProducts = [];
+  eventTriggered: boolean = false;
+
+  constructor(
+    public service: DataShiftingService,
+    public router: Router) {
   }
 
+
   ngOnInit() {
-    this.allProducts = this.service.allProducts;
-    this.service.allProducts = this.allProducts;
-    this.categoriesData = this.service.categoriesData;
-    if (this.allProducts.length == 0) {
-      debugger;
+    this.service.getObservable().subscribe((temp) => {
+      this.eventTriggered = true;
+      this.allProducts = [];
+      this.allProducts = this.service.allProducts;
+      if (this.allProducts.length == 0) {
+        this.router.navigate(['/home']);
+      }
+    });
+    if (this.service.routeFrom == 'home') {
+      this.allProducts = this.service.allProducts;
+      if (this.allProducts.length == 0) {
+        this.router.navigate(['/home']);
+      }
+    } else if (this.service.routeFrom == 'categories') {
+      this.allProducts = this.service.categoriesData;
+      if (this.allProducts.length == 0) {
+        this.router.navigate(['/home']);
+      }
+    }
+    if (!this.eventTriggered && this.service.routeFrom != 'home' && this.service.routeFrom != 'categories') {
       this.router.navigate(['/home']);
     }
   }
+
+
   productDetail(p) {
     this.service.product = p;
     this.router.navigate(['/productDetail']);
   }
+
 
   getDiscount(product) {
     var disc = ((Number(product.originalPrice) - Number(product.discountedPrice)) / Number(product.originalPrice)) * 100;
     product.discount = disc;
     return disc;
   }
+
 
   changeStatus(status, index) {
     var self = this;
@@ -47,11 +68,12 @@ export class AllProductsComponent implements OnInit {
     })
   }
 
-  addToFeature(product, index) {
-    var postKey = firebase.database().ref().child('categories').push().key;
+
+  addToFeature(product) {
     var updates = {};
-    product.status = "Featured Product";
     updates['/featuredProducts/' + product.key] = product;
+    product.featured = true;
+    updates['/products/' + product.key] = product;
     firebase.database().ref().update(updates)
       .then(() => {
         alert("Product added to Featured Product")
