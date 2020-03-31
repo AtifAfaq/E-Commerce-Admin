@@ -116,14 +116,29 @@ export class ProductDetailComponent implements OnInit {
     })
   }
 
-  addToFeature(product, index) {
-    var postKey = firebase.database().ref().child('categories').push().key;
+
+  addToFeature(product) {
     var updates = {};
-    product.status = "Featured Product";
     updates['/featuredProducts/' + product.key] = product;
+    product.featured = true;
+    updates['/products/' + product.key] = product;
     firebase.database().ref().update(updates)
       .then(() => {
         alert("Product added to Featured Product")
+      })
+      .catch((e) => {
+        alert(e.message);
+      })
+  }
+
+  removeFeature(product) {
+    var updates = {};
+    updates['/featuredProducts/' + product.key] = [];
+    product.featured = false;
+    updates['/products/' + product.key] = product;
+    firebase.database().ref().update(updates)
+      .then(() => {
+        alert("Product removed from Featured Product")
       })
       .catch((e) => {
         alert(e.message);

@@ -61,11 +61,14 @@
                 </p>
 
 
-                <button class="btn btn-success w-100" *ngIf="!enabled" (click)="addToFeature(p,i)">Add to Featured
-                    Products</button>
-                <button (click)="changeStatus('disabled', i)" *ngIf="p.status=='enabled' || !p.status"
+                <button class="btn btn-success w-100" *ngIf="!product.featured" (click)="addToFeature(product)">Add to
+                    Featured Products</button>
+                <button class="btn btn-danger w-100" *ngIf="product.featured" (click)="removeFeature(product)">
+                    Remove From Featured</button>
+                <button (click)="changeStatus('disabled', i)"
+                    *ngIf="(product.status && product.status=='enabled') || !product.status"
                     class="btn btn-danger w-100 mt-3 mb-4">Disable Product</button>
-                <button (click)="changeStatus('enabled', i)" *ngIf="p.status=='disabled'"
+                <button (click)="changeStatus('enabled', i)" *ngIf="product.status && product.status=='disabled'"
                     class="btn btn-danger w-100 mt-3 mb-4">Enable Product</button>
             </div>
         </div>
