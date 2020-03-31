@@ -83,5 +83,20 @@ export class AllProductsComponent implements OnInit {
       })
   }
 
+  removeFeature(product) {
+    var updates = {};
+    updates['/featuredProducts/' + product.key] = [];
+    product.featured = false;
+    updates['/products/' + product.key] = product;
+    firebase.database().ref().update(updates)
+      .then(() => {
+        alert("Product removed from Featured Product")
+      })
+      .catch((e) => {
+        alert(e.message);
+      })
+  }
+
+
 
 }
