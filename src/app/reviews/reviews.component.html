@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div *ngFor="let product of allProducts" class="col-md-6 mt-5 pt-5">
+    <div class="card height">
+        <div class="dash-card rounded bg-white">
+            <p class="dash-text"><b>{{product.productName}}</b></p>
+            <hr>
+
+            <div class="row pointer borderBottom ">
+                <div class="col-md-3 text-center">
+                    <img [src]="product.productUrls[0]" class="buyer-avatar">
+                    <p>{{product.brand}}</p>
+                    <p>{{product.productDes}}</p>
+                </div>
+                <div class="col-md-9 height">
+                    <div *ngFor="let review of myReview" class="scroll pt-2">
+                        <div class="review-block-rate">
+                            <button [class.btn-warning]="review.rating>=1" type="button"
+                                [class.btn-grey]="!review.rating" class="btn btn-xs mr-1" aria-label="Left Align"> <i
+                                    class="fa fa-star text-white"></i>
+                            </button>
+                            <button [class.btn-warning]="review.rating>=2" type="button"
+                                [class.btn-grey]="!review.rating || review.rating<2" class="btn btn-xs mr-1"
+                                aria-label="Left Align">
+                                <i class="fa fa-star text-white"></i>
+                            </button>
+                            <button [class.btn-warning]="review.rating>=3" type="button"
+                                [class.btn-grey]="!review.rating || review.rating<3" class="btn btn-xs mr-1"
+                                aria-label="Left Align">
+                                <i class="fa fa-star text-white"></i>
+                            </button>
+                            <button [class.btn-warning]="review.rating>=4" type="button"
+                                [class.btn-grey]="!review.rating || review.rating<4" class="btn btn-xs mr-1"
+                                aria-label="Left Align">
+                                <i class="fa fa-star text-white"></i>
+                            </button>
+                            <button [class.btn-warning]="review.rating>=5" type="button"
+                                [class.btn-grey]="!review.rating || review.rating<5" class="btn btn-xs mr-1"
+                                aria-label="Left Align">
+                                <i class="fa fa-star text-white"></i>
+                            </button>
+                        </div>
+                        <div class="review-block-title"></div>
+                        <div class="review-block-description">{{review.comment}}</div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

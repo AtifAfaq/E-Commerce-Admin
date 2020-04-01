@@ -21,6 +21,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { DataShiftingService } from './data-shifting.service';
 import * as firebase from 'firebase';
 import { FilteredProductsComponent } from './filtered-products/filtered-products.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -55,7 +56,8 @@ firebase.analytics();
     UserDetailComponent,
     OrderDetailComponent,
     ProductDetailComponent,
-    FilteredProductsComponent
+    FilteredProductsComponent,
+    ReviewsComponent
   ],
   imports: [
 

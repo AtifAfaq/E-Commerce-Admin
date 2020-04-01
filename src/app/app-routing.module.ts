@@ -12,6 +12,7 @@ import { AllProductsComponent } from './all-products/all-products.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'userDetail', component: UserDetailComponent },
   { path: 'orderDetail', component: OrderDetailComponent },
   { path: 'productDetail', component: ProductDetailComponent },
+  { path: 'reviews', component: ReviewsComponent },
 
   { path: '', component: AdminLoginComponent }
 ];
