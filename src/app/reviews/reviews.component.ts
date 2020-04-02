@@ -12,22 +12,9 @@ export class ReviewsComponent implements OnInit {
   reviews: any = [];
   allProducts: any = [];
   allUsers: any = [];
+  allReviews: any = [];
   loading: boolean = false;
 
-  allReviews: any = [
-    {
-      productImage: '',
-      productName: '',
-      reviews: [
-        {
-          rating: '',
-          reviews: '',
-          userName: '',
-          userImage: ''
-        }
-      ]
-    }
-  ]
   constructor(public zone: NgZone,
     public service: DataShiftingService) {
     this.allProducts = this.service.allProducts;
@@ -39,6 +26,8 @@ export class ReviewsComponent implements OnInit {
   ngOnInit() {
 
   }
+
+
   getMyReviews() {
     this.allProducts.forEach(product => {
       if (product.totalReview && product.totalReview > 0) {
@@ -57,12 +46,11 @@ export class ReviewsComponent implements OnInit {
             });
             temp.reviews.push(review)
           }
-
         });
         this.allReviews.push(temp)
       }
-      console.log(this.allReviews);
     });
+    console.log(this.allReviews);
   }
 
 }
