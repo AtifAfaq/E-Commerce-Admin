@@ -1,19 +1,19 @@
 <app-navbar></app-navbar>
 <div class="row">
-    <div *ngFor="let product of allProducts" class="col-md-6 mt-5 pt-5">
+    <div *ngFor="let review of reviews" class="col-md-6 mt-5 pt-5">
         <div class="card height">
             <div class="dash-card rounded bg-white">
-                <p class="dash-text"><b>{{product.productName}}</b></p>
+                <p class="dash-text"><b>{{review.productName || null }}</b></p>
                 <hr>
 
                 <div class="row pointer borderBottom ">
                     <div class="col-md-3 text-center">
-                        <img [src]="product.productUrls[0]" class="buyer-avatar">
-                        <p>{{product.brand}}</p>
-                        <p>{{product.productDes}}</p>
+                        <img [src]="review.productImage || null" class="buyer-avatar">
+                        <!-- <p>{{product.brand}}</p>
+                        <p>{{product.productDes}}</p> -->
                     </div>
                     <div class="col-md-9 height">
-                        <div *ngFor="let review of myReview" class="scroll pt-2">
+                        <div *ngFor="let review of reviews.reviews" class="scroll pt-2">
                             <div class="review-block-rate">
                                 <button [class.btn-warning]="review.rating>=1" type="button"
                                     [class.btn-grey]="!review.rating" class="btn btn-xs mr-1" aria-label="Left Align">
@@ -41,7 +41,7 @@
                                 </button>
                             </div>
                             <div class="review-block-title"></div>
-                            <div class="review-block-description">{{review.comment}}</div>
+                            <div class="review-block-description">{{review.comment || null}}</div>
                             <hr>
                         </div>
                     </div>
