@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
-<div class="row">
-    <div *ngFor="let review of allReviews" class="col-md-6 mt-5 pt-5">
-        <div class="card height">
+<div class="row mt-5 pt-5 px-3">
+    <div *ngFor="let review of allReviews" class="col-md-6 mt-4">
+        <div class="card">
             <div class="dash-card rounded bg-white">
                 <p class="dash-text"><b>{{review.productName || null }}</b></p>
                 <hr>
@@ -9,37 +9,49 @@
                 <div class="row pointer borderBottom ">
                     <div class="col-md-3 text-center">
                         <img [src]="review.productImage || null" class="buyer-avatar">
+                        <p class="text-success">${{review.discountedPrice}}</p>
                     </div>
-                    <div class="col-md-9 height">
+                    <div class="col-md-9 card-height">
                         <div *ngFor="let review of review.reviews" class="scroll pt-2">
-                            <div class="review-block-rate">
-                                <button [class.btn-warning]="review.rating>=1" type="button"
-                                    [class.btn-grey]="!review.rating" class="btn btn-xs mr-1" aria-label="Left Align">
-                                    <i class="fa fa-star text-white"></i>
-                                </button>
-                                <button [class.btn-warning]="review.rating>=2" type="button"
-                                    [class.btn-grey]="!review.rating || review.rating<2" class="btn btn-xs mr-1"
-                                    aria-label="Left Align">
-                                    <i class="fa fa-star text-white"></i>
-                                </button>
-                                <button [class.btn-warning]="review.rating>=3" type="button"
-                                    [class.btn-grey]="!review.rating || review.rating<3" class="btn btn-xs mr-1"
-                                    aria-label="Left Align">
-                                    <i class="fa fa-star text-white"></i>
-                                </button>
-                                <button [class.btn-warning]="review.rating>=4" type="button"
-                                    [class.btn-grey]="!review.rating || review.rating<4" class="btn btn-xs mr-1"
-                                    aria-label="Left Align">
-                                    <i class="fa fa-star text-white"></i>
-                                </button>
-                                <button [class.btn-warning]="review.rating>=5" type="button"
-                                    [class.btn-grey]="!review.rating || review.rating<5" class="btn btn-xs mr-1"
-                                    aria-label="Left Align">
-                                    <i class="fa fa-star text-white"></i>
-                                </button>
+                            <div class="row">
+                                <div class="col-md-9 p-0">
+                                    <div class="review-block-rate">
+                                        <button [class.btn-warning]="review.rating>=1" type="button"
+                                            [class.btn-grey]="!review.rating" class="btn btn-xs mr-1"
+                                            aria-label="Left Align">
+                                            <i class="fa fa-star text-white"></i>
+                                        </button>
+                                        <button [class.btn-warning]="review.rating>=2" type="button"
+                                            [class.btn-grey]="!review.rating || review.rating<2" class="btn btn-xs mr-1"
+                                            aria-label="Left Align">
+                                            <i class="fa fa-star text-white"></i>
+                                        </button>
+                                        <button [class.btn-warning]="review.rating>=3" type="button"
+                                            [class.btn-grey]="!review.rating || review.rating<3" class="btn btn-xs mr-1"
+                                            aria-label="Left Align">
+                                            <i class="fa fa-star text-white"></i>
+                                        </button>
+                                        <button [class.btn-warning]="review.rating>=4" type="button"
+                                            [class.btn-grey]="!review.rating || review.rating<4" class="btn btn-xs mr-1"
+                                            aria-label="Left Align">
+                                            <i class="fa fa-star text-white"></i>
+                                        </button>
+                                        <button [class.btn-warning]="review.rating>=5" type="button"
+                                            [class.btn-grey]="!review.rating || review.rating<5" class="btn btn-xs mr-1"
+                                            aria-label="Left Align">
+                                            <i class="fa fa-star text-white"></i>
+                                        </button>
+                                    </div>
+                                    <div class="review-block-description">{{review.comment || null}}</div>
+                                    <div class="review-block-description gray">{{review.timestamp | date: 'fullDate'}}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 text-center p-0">
+                                    <img class="userImg" [src]="review.profileUrl || '/assets/imgs/auto.jpg'">
+                                    <a routerLink="/userDetail" class="mt-0 mb-0 pointer">{{review.userName}}</a>
+                                </div>
                             </div>
-                            <div class="review-block-title"></div>
-                            <div class="review-block-description">{{review.comment || null}}</div>
+
                             <hr>
                         </div>
                     </div>

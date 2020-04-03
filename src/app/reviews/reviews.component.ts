@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import * as firebase from 'firebase';
 import { DataShiftingService } from './../data-shifting.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reviews',
@@ -16,15 +16,21 @@ export class ReviewsComponent implements OnInit {
   loading: boolean = false;
 
   constructor(public zone: NgZone,
+    public router: Router,
     public service: DataShiftingService) {
     this.allProducts = this.service.allProducts;
     this.reviews = this.service.allReviews;
     this.allUsers = this.service.allUsers;
     this.getMyReviews();
+
   }
 
   ngOnInit() {
-
+    setTimeout(() => {
+      if (this.allReviews.length == 0) {
+        this.router.navigate(['/home']);
+      }
+    }, 3000);
   }
 
 
@@ -35,6 +41,7 @@ export class ReviewsComponent implements OnInit {
           reviews: []
         }
         temp.productName = product.productName;
+        temp.discountedPrice = product.discountedPrice;
         temp.productImage = product.productUrls[0];
         this.reviews.forEach(review => {
           if (review.productKey == product.key) {
