@@ -48,13 +48,7 @@ export class AdminHomeComponent implements OnInit {
   closeNavBar() {
     this.showNavBar = false;
   }
-  topBuyer() {
-    for (var i = 0; i < this.allOrders.length; i++) {
-      var userUid = this.allOrders[i].uid;
-
-    }
-
-  }
+  
 
 
 }

@@ -7,20 +7,24 @@ import { Subject } from 'rxjs';
 })
 export class DataShiftingService {
 
-  user = {};
-  allProducts = [];
-  allUsers = [];
-  product = {};
-  allCategorys = [];
-  allReviews = [];
+  user: any = {};
+  allProducts: any = [];
+  allUsers: any = [];
+  product: any = {};
+  allCategorys: any = [];
+  allReviews: any = [];
   loading: boolean = false;
   categoriesData: any = [];
-  allOrders = [];
+  allOrders: any = [];
+  topBuyers: any = [];
   routeFrom: string;
 
   public fooSubject = new Subject<any>();
 
   constructor() {
+    if (this.allUsers.length == 0) {
+      this.getallUsers();
+    }
     if (this.allProducts.length == 0) {
       this.getallProducts();
     }
@@ -29,12 +33,6 @@ export class DataShiftingService {
     }
     if (this.allCategorys.length == 0) {
       this.getallCategorys();
-    }
-    if (this.allUsers.length == 0) {
-      this.getallUsers();
-    }
-    if (this.allOrders.length == 0) {
-      this.getallOrders();
     }
   }
 
@@ -82,7 +80,6 @@ export class DataShiftingService {
   getallProducts() {
     var self = this;
     self.allProducts = [];
-    self.loading = true;
     firebase.database().ref().child('products')
       .once('value', (snapshot) => {
         var data = snapshot.val();
@@ -90,7 +87,6 @@ export class DataShiftingService {
           var temp = data[key];
           temp.key = key;
           self.allProducts.push(temp);
-          self.loading = false;
         }
       })
   }
@@ -99,15 +95,16 @@ export class DataShiftingService {
   getallUsers() {
     var self = this;
     self.allUsers = [];
-    self.loading = true;
     firebase.database().ref().child('users')
       .once('value', (snapshot) => {
         var userData = snapshot.val();
         for (var key in userData) {
           var user = userData[key];
           user.key = key;
-          self.allUsers.push(user)
-          self.loading = false;
+          self.allUsers.push(user);
+        }
+        if (self.allOrders.length == 0) {
+          self.getallOrders();
         }
       })
   }
@@ -124,9 +121,50 @@ export class DataShiftingService {
           var order = orderData[key];
           order.key = key;
           self.allOrders.push(order)
-          self.loading = false;
         }
+        self.getTopBuyers();
       })
+      .catch(() => {
+        self.loading = false;
+      })
+  }
+
+
+  getTopBuyers() {
+    var counts: any = {};
+    this.allOrders.forEach(element => {
+      var x = element.uid;
+      counts[x] = (counts[x] || 0) + 1;
+    });
+
+    var countObjects = [];
+    for (var key in counts) {
+      var obj: any = {};
+      obj.uid = key;
+      obj.count = counts[key];
+      countObjects.push(obj);
+    }
+
+    countObjects.forEach(element => {
+      var temp: any = {
+        totalBill: 0
+      };
+      this.allOrders.forEach(order => {
+        if (element.uid == order.uid) {
+          temp.userName = order.firstName + " " + order.lastName;
+          temp.email = order.email;
+          temp.totalOrders = element.count;
+          temp.uid = element.uid;
+          temp.totalBill = Number(order.totalBill) + Number(temp.totalBill);
+        }
+      });
+      this.topBuyers.push(temp);
+    });
+    this.loading = false;
+    this.topBuyers.sort((a, b) => {
+      return b.totalBill - a.totalBill;
+    });
+    console.log(this.topBuyers);
   }
 
 
