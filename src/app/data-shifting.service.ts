@@ -15,6 +15,7 @@ export class DataShiftingService {
   allReviews = [];
   loading: boolean = false;
   categoriesData: any = [];
+  allOrders = [];
   routeFrom: string;
 
   public fooSubject = new Subject<any>();
@@ -31,6 +32,9 @@ export class DataShiftingService {
     }
     if (this.allUsers.length == 0) {
       this.getallUsers();
+    }
+    if (this.allOrders.length == 0) {
+      this.getallOrders();
     }
   }
 
@@ -107,5 +111,23 @@ export class DataShiftingService {
         }
       })
   }
+
+
+  getallOrders() {
+    var self = this;
+    self.allOrders = [];
+    self.loading = true;
+    firebase.database().ref().child('orders')
+      .once('value', (snapshot) => {
+        var orderData = snapshot.val();
+        for (var key in orderData) {
+          var order = orderData[key];
+          order.key = key;
+          self.allOrders.push(order)
+          self.loading = false;
+        }
+      })
+  }
+
 
 }

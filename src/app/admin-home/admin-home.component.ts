@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AdminHomeComponent implements OnInit {
 
+  allOrders = [];
   allProducts = [];
   allReviews = [];
   allUsers = [];
@@ -23,6 +24,8 @@ export class AdminHomeComponent implements OnInit {
     this.allCategorys = this.service.allCategorys;
     this.allProducts = this.service.allProducts;
     this.allUsers = this.service.allUsers;
+    this.allOrders = this.service.allOrders;
+    console.log("orders", this.allOrders)
   }
 
 
@@ -45,7 +48,14 @@ export class AdminHomeComponent implements OnInit {
   closeNavBar() {
     this.showNavBar = false;
   }
+  topBuyer() {
+    for (var i = 0; i < this.allOrders.length; i++) {
+      var userUid = this.allOrders[i].uid;
 
+    }
+
+  }
 
 
 }
+

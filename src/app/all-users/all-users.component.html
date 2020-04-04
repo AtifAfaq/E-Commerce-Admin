@@ -22,7 +22,7 @@
                 <th class="text-center">Actions</th>
             </tr>
 
-            <tr *ngFor="let user of allUsers; index as i" class="text-center">
+            <tr *ngFor="let user of userArr | search: searchTxt; index as i" class="text-center">
                 <td>{{i+1}}</td>
                 <td>{{user.firstName}} {{user.lastName}}</td>
                 <td>{{user.address || 0}}</td>
