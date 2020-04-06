@@ -2,7 +2,7 @@
 <div class="mx-5 my-5">
     <div class="row mt-5 pt-5 ">
 
-        <h4><i class="fa fa-users"></i> All Users (34)</h4>
+        <h4><i class="fa fa-users"></i> All Users (allUsers.length)</h4>
         <div class="input-group mb-3 ml-auto w-50">
             <input [(ngModel)]="searchTxt" type="text" class="form-control " placeholder="Search here...">
             <div class="input-group-prepend">
@@ -15,17 +15,18 @@
             <tr class="text-center">
                 <th>#</th>
                 <th>Name</th>
-                <th>Addresss</th>
+                <th>Email</th>
                 <th>Contact</th>
                 <th>City</th>
                 <th>Country</th>
                 <th class="text-center">Actions</th>
             </tr>
 
-            <tr *ngFor="let user of userArr | search: searchTxt; index as i" class="text-center">
+            <tr *ngFor="let user of allUsers | paginate: { itemsPerPage: 7, currentPage: p } | search: searchTxt; index as i"
+                class="text-center">
                 <td>{{i+1}}</td>
                 <td>{{user.firstName}} {{user.lastName}}</td>
-                <td>{{user.address || 0}}</td>
+                <td>{{user.email}}</td>
                 <td>{{user.contact}}</td>
                 <td>{{user.city}}</td>
                 <td>{{user.country}}</td>
@@ -35,25 +36,10 @@
                     <i class="fa fa-unlock text-success mx-2" aria-hidden="true"></i>
                 </td>
             </tr>
-
         </table>
 
-
         <div class="w-100">
-            <p class="float-left">Showing 10 of 34</p>
-            <ul class="pagination float-right">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link">1</a></li>
-                <li class="page-item">
-                    <a class="page-link">2</a>
-                </li>
-                <li class="page-item"><a class="page-link">3</a></li>
-                <li class="page-item">
-                    <a class="page-link">Next</a>
-                </li>
-            </ul>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
 
     </div>

@@ -23,6 +23,7 @@ import * as firebase from 'firebase';
 import { FilteredProductsComponent } from './filtered-products/filtered-products.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { SearchPipe } from './search.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -62,7 +63,7 @@ firebase.analytics();
     SearchPipe
   ],
   imports: [
-
+    NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
