@@ -97,17 +97,19 @@ export class DataShiftingService {
   getallUsers() {
     var self = this;
     self.allUsers = [];
+    self.loading = true;
     firebase.database().ref().child('users')
       .once('value', (snapshot) => {
         var userData = snapshot.val();
         for (var key in userData) {
           var user = userData[key];
           user.key = key;
-          self.allUsers.push(user);
+          if (!user.isAdmin) {
+            self.allUsers.push(user);
+          }
         }
         if (self.allOrders.length == 0) {
           self.getallOrders();
-
         }
       })
   }
@@ -164,8 +166,6 @@ export class DataShiftingService {
               temp.profileUrl = user.profileUrl;
             }
           }
-
-
         });
       });
       this.topBuyers.push(temp);
@@ -177,6 +177,7 @@ export class DataShiftingService {
     console.log(this.topBuyers);
     this.getTopProducts();
   }
+
 
   getTopProducts() {
     var counts: any = {};
@@ -197,28 +198,24 @@ export class DataShiftingService {
       this.countListObjects.push(obj);
     }
     this.countListObjects.forEach(prodCount => {
-      var tamp: any = {
-
-      };
+      var tamp: any = {};
       this.allProducts.forEach(prod => {
-        this.allUsers.forEach(user => {
-
-          if (prod.key == prodCount.key) {
-            if (prod.uid == user.uid) {
-              debugger
+        if (prod.key == prodCount.key) {
+          this.allUsers.forEach(user => {
+            if (user.uid == prod.uid) {
               tamp.userName = user.firstName + " " + user.lastName;
+              tamp.profileUrl = prod.productUrls[0];
+              tamp.name = prod.productName;
+              tamp.count = prodCount.count;
+              tamp.uid = prod.uid;
+              tamp.avgRating = prod.avgRating;
+              tamp.discount = prod.discount;
+              tamp.discountedPrice = prod.discountedPrice;
+              tamp.originalPrice = prod.originalPrice;
+              tamp.totalReview = prod.totalReview;
             }
-            tamp.profileUrl = prod.productUrls[0];
-            tamp.name = prod.productName;
-            tamp.count = prodCount.count;
-            tamp.uid = prod.uid;
-            tamp.avgRating = prod.avgRating;
-            tamp.discount = prod.discount;
-            tamp.discountedPrice = prod.discountedPrice;
-            tamp.originalPrice = prod.originalPrice;
-            tamp.totalReview = prod.totalReview;
-          }
-        });
+          });
+        }
       });
       this.topProducts.push(tamp);
     });

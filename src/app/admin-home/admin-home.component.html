@@ -72,7 +72,7 @@
                 <p class="dash-text"><b>Top Selling Products</b></p>
                 <hr>
                 <div *ngFor="let prod of topProducts; index as i">
-                    <div class="row pointer borderBottom" *ngIf="i<4">
+                    <div class="row pointer borderBottom" *ngIf="i<3">
                         <div class="col-md-3">
                             <img [src]="prod.profileUrl" class="buyer-avatar">
                         </div>

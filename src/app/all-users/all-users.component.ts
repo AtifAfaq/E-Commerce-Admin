@@ -8,8 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./all-users.component.scss']
 })
 export class AllUsersComponent implements OnInit {
-  allUsers = [];
-  userArr = [];
+
+  p: number = 1;
+  allUsers: any = [];
+
   constructor(public service: DataShiftingService,
     public router: Router) {
     this.allUsers = this.service.allUsers;
@@ -17,14 +19,7 @@ export class AllUsersComponent implements OnInit {
 
   ngOnInit() {
     this.allUsers = this.service.allUsers;
-    this.allUsers.forEach(user => {
-      if (user.isAdmin == false || !user.isAdmin) {
-        this.userArr.push(user)
-      }
-
-    });
     if (this.allUsers.length == 0) {
-      debugger;
       this.router.navigate(['/home']);
     }
   }
