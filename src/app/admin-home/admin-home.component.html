@@ -79,7 +79,7 @@
                         <div class="col-md-9 pt-2">
                             <h5>{{prod.name || 0}}</h5>
                             <p class="originalPrice gray mb-1">
-                                <del>${{prod.originalPrice || 0}}</del> 35% =>
+                                <del>${{prod.originalPrice || 0}}</del> {{getDiscount(prod)| number : '1.2-2'}}% =>
                                 <span class="text-success bold">${{prod.discountedPrice || 0}}</span>
                             </p>
                             <p class="rating">
