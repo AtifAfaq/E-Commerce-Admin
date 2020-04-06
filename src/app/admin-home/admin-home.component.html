@@ -49,36 +49,20 @@
                 <p class="dash-text"><b>Top Buyers</b></p>
                 <hr>
 
-                <div routerLink="/userDetail" class="row pointer borderBottom">
-                    <div class="col-md-3">
-                        <img src="../../assets/img_avatar.png" class="buyer-avatar">
-                    </div>
-                    <div class="col-md-9 pt-2">
-                        <h5>Darren Sammy</h5>
-                        <p class="mb-2 text-primary">darrensam@yahoo.com</p>
-                        <p class="mb-1 text-success">Total Orders: 40 - Worth ($349.60)</p>
-                    </div>
-                </div>
-                <div routerLink="/userDetail" class="row pointer borderBottom">
-                    <div class="col-md-3">
-                        <img src="../../assets/img_avatar.png" class="buyer-avatar">
-                    </div>
-                    <div class="col-md-9 pt-2">
-                        <h5>Darren Sammy</h5>
-                        <p class="mb-2 text-primary">darrensam@yahoo.com</p>
-                        <p class="mb-1 text-success">Total Orders: 40 - Worth ($349.60)</p>
+                <div *ngFor="let seller of topBuyers; index as i">
+                    <div class="row pointer borderBottom" *ngIf="i<3">
+                        <div class="col-md-3">
+                            <img [src]="seller.profileUrl" class="buyer-avatar">
+                        </div>
+                        <div class="col-md-9 pt-2">
+                            <h5>{{seller.userName}}</h5>
+                            <p class="mb-2 text-primary">{{seller.email}}</p>
+                            <p class="mb-1 text-success">Total Orders: {{seller.totalOrders}} - Worth
+                                (${{seller.totalBill}})</p>
+                        </div>
                     </div>
                 </div>
-                <div routerLink="/userDetail" class="row pointer borderBottom">
-                    <div class="col-md-3">
-                        <img src="../../assets/img_avatar.png" class="buyer-avatar">
-                    </div>
-                    <div class="col-md-9 pt-2">
-                        <h5>Darren Sammy</h5>
-                        <p class="mb-2 text-primary">darrensam@yahoo.com</p>
-                        <p class="mb-1 text-success">Total Orders: 40 - Worth ($349.60)</p>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -87,66 +71,36 @@
             <div class="dash-card bg-white">
                 <p class="dash-text"><b>Top Selling Products</b></p>
                 <hr>
-                <div routerLink="/productDetail" class="row pointer borderBottom">
-                    <div class="col-md-3">
-                        <img src="/assets/shoe1.jpg" class="buyer-avatar">
-                    </div>
-                    <div class="col-md-9 pt-2">
-                        <h5>Branded and comfortable shoe for men</h5>
-                        <p class="originalPrice gray mb-1">
-                            <del>$60</del> 35% => <span class="text-success bold">$54</span></p>
-                        <p class="rating">
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star gray"></i> (11)
-                            <span class="float-right">
-                                <i class="fa fa-user"></i> John Doe
-                            </span>
-                        </p>
-                    </div>
-                </div>
-                <div routerLink="/productDetail" class="row pointer borderBottom">
-                    <div class="col-md-3">
-                        <img src="/assets/shoe1.jpg" class="buyer-avatar">
-                    </div>
-                    <div class="col-md-9 pt-2">
-                        <h5>Branded and comfortable shoe for men</h5>
-                        <p class="originalPrice gray mb-1">
-                            <del>$60</del> 35% => <span class="text-success bold">$54</span></p>
-                        <p class="rating">
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star gray"></i> (11)
-                            <span class="float-right">
-                                <i class="fa fa-user"></i> John Doe
-                            </span>
-                        </p>
+                <div *ngFor="let prod of topProducts; index as i">
+                    <div class="row pointer borderBottom" *ngIf="i<4">
+                        <div class="col-md-3">
+                            <img [src]="prod.profileUrl" class="buyer-avatar">
+                        </div>
+                        <div class="col-md-9 pt-2">
+                            <h5>{{prod.name || 0}}</h5>
+                            <p class="originalPrice gray mb-1">
+                                <del>${{prod.originalPrice || 0}}</del> 35% =>
+                                <span class="text-success bold">${{prod.discountedPrice || 0}}</span>
+                            </p>
+                            <p class="rating">
+                                <i class="fa fa-star" [class.text-warning]="prod.avgRating>=1"
+                                    [class.gray]="!prod.avgRating"></i>
+                                <i class="fa fa-star" [class.text-warning]="prod.avgRating>=2"
+                                    [class.gray]="!prod.avgRating || prod.avgRating<2"></i>
+                                <i class="fa fa-star" [class.text-warning]="prod.avgRating>=3"
+                                    [class.gray]="!prod.avgRating || prod.avgRating<3"></i>
+                                <i class="fa fa-star" [class.text-warning]="prod.avgRating>=4"
+                                    [class.gray]="!prod.avgRating || prod.avgRating<4"></i>
+                                <i class="fa fa-star" [class.text-warning]="prod.avgRating>=5"
+                                    [class.gray]="!prod.avgRating || prod.avgRating<5"></i> ({{prod.totalReview || 0}})
+                                <span class="float-right">
+                                    <i class="fa fa-user"></i> {{prod.userName}}
+                                </span>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div routerLink="/productDetail" class="row pointer borderBottom">
-                    <div class="col-md-3">
-                        <img src="/assets/shoe1.jpg" class="buyer-avatar">
-                    </div>
-                    <div class="col-md-9 pt-2">
-                        <h5>Branded and comfortable shoe for men</h5>
-                        <p class="originalPrice gray mb-1">
-                            <del>$60</del> 35% => <span class="text-success bold">$54</span></p>
-                        <p class="rating">
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star gray"></i> (11)
-                            <span class="float-right">
-                                <i class="fa fa-user"></i> John Doe
-                            </span>
-                        </p>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>

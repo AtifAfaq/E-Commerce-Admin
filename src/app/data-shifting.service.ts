@@ -17,7 +17,9 @@ export class DataShiftingService {
   categoriesData: any = [];
   allOrders: any = [];
   topBuyers: any = [];
+  topProducts: any = [];
   routeFrom: string;
+  countListObjects: any = [];
 
   public fooSubject = new Subject<any>();
 
@@ -105,6 +107,7 @@ export class DataShiftingService {
         }
         if (self.allOrders.length == 0) {
           self.getallOrders();
+
         }
       })
   }
@@ -150,13 +153,20 @@ export class DataShiftingService {
         totalBill: 0
       };
       this.allOrders.forEach(order => {
-        if (element.uid == order.uid) {
-          temp.userName = order.firstName + " " + order.lastName;
-          temp.email = order.email;
-          temp.totalOrders = element.count;
-          temp.uid = element.uid;
-          temp.totalBill = Number(order.totalBill) + Number(temp.totalBill);
-        }
+        this.allUsers.forEach(user => {
+          if (element.uid == order.uid) {
+            temp.userName = order.firstName + " " + order.lastName;
+            temp.email = order.email;
+            temp.totalOrders = element.count;
+            temp.uid = element.uid;
+            temp.totalBill = Number(order.totalBill) + Number(temp.totalBill);
+            if (element.uid == user.uid) {
+              temp.profileUrl = user.profileUrl;
+            }
+          }
+
+
+        });
       });
       this.topBuyers.push(temp);
     });
@@ -165,7 +175,56 @@ export class DataShiftingService {
       return b.totalBill - a.totalBill;
     });
     console.log(this.topBuyers);
+    this.getTopProducts();
   }
 
+  getTopProducts() {
+    var counts: any = {};
+    this.allOrders.forEach(order => {
+      var list: any = [];
+      list = order.myArray;
+      list.forEach(prod => {
+        var x = prod.key;
+        counts[x] = (counts[x] || 0) + 1;
+      });
+
+    });
+    // var countListObjects: any = [];
+    for (var key in counts) {
+      var obj: any = {};
+      obj.key = key;
+      obj.count = counts[key];
+      this.countListObjects.push(obj);
+    }
+    this.countListObjects.forEach(prodCount => {
+      var tamp: any = {
+
+      };
+      this.allProducts.forEach(prod => {
+        this.allUsers.forEach(user => {
+
+          if (prod.key == prodCount.key) {
+            if (prod.uid == user.uid) {
+              debugger
+              tamp.userName = user.firstName + " " + user.lastName;
+            }
+            tamp.profileUrl = prod.productUrls[0];
+            tamp.name = prod.productName;
+            tamp.count = prodCount.count;
+            tamp.uid = prod.uid;
+            tamp.avgRating = prod.avgRating;
+            tamp.discount = prod.discount;
+            tamp.discountedPrice = prod.discountedPrice;
+            tamp.originalPrice = prod.originalPrice;
+            tamp.totalReview = prod.totalReview;
+          }
+        });
+      });
+      this.topProducts.push(tamp);
+    });
+    this.topProducts.sort((a, b) => {
+      return b.count - a.count;
+    });
+  }
 
 }

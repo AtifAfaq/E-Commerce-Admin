@@ -14,6 +14,9 @@ export class AdminHomeComponent implements OnInit {
   allReviews = [];
   allUsers = [];
   allCategorys = [];
+  topBuyers: any = [];
+  countListObjects: any = [];
+  topProducts: any = [];
   loading: boolean = false;
   showNavBar = false;
 
@@ -25,7 +28,10 @@ export class AdminHomeComponent implements OnInit {
     this.allProducts = this.service.allProducts;
     this.allUsers = this.service.allUsers;
     this.allOrders = this.service.allOrders;
-    console.log("orders", this.allOrders)
+    this.topBuyers = this.service.topBuyers;
+    this.countListObjects = this.service.countListObjects;
+    this.topProducts = this.service.topProducts;
+    console.log("topProducts", this.topProducts)
   }
 
 
@@ -48,7 +54,12 @@ export class AdminHomeComponent implements OnInit {
   closeNavBar() {
     this.showNavBar = false;
   }
-  
+  getDiscount(product) {
+    var disc = ((Number(product.originalPrice) - Number(product.discountedPrice)) / Number(product.originalPrice)) * 100;
+    product.discount = disc;
+    return disc;
+  }
+
 
 
 }
