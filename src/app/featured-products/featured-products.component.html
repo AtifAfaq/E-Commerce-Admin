@@ -2,90 +2,35 @@
 <div class="mainContent">
     <h4 class="mb-0">Featured Products</h4>
     <div class="row">
-        <div class="col-md-3">
+        <div *ngFor="let prod of featuredProds ; index as i" class="col-md-3">
             <div class="productCard">
                 <div routerLink="/productDetail">
-                    <img src="/assets/imgs/antiques.jpg">
-                    <p class="prodTitle mb-0">Shoe
+                    <img [src]="prod.productUrls[0]">
+                    <p class="prodTitle mb-0">{{prod.productName}}
                     </p>
-                    <h4 class="prodPrice primary mt-0 mb-0">$45</h4>
+                    <h4 class="prodPrice primary mt-0 mb-0">${{prod.discountedPrice}}</h4>
                     <p class="originalPrice gray mb-0">
-                        <del>$60</del> 35%</p>
-                    <p class="rating mb-0">
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star gray"></i> (11)
-                    </p>
-                </div>
-                <button class="btn btn-danger w-100">Remove from Featured Products</button>
-            </div>
-        </div>
+                        <del>${{prod.originalPrice}}</del> {{getDiscount(prod)| number : '1.2-2'}}% </p>
+                    <p class="rating">
+                        <i class="fa fa-star" [class.text-warning]="prod.avgRating>=1"
+                            [class.gray]="!prod.avgRating"></i>
+                        <i class="fa fa-star" [class.text-warning]="prod.avgRating>=2"
+                            [class.gray]="!prod.avgRating || prod.avgRating<2"></i>
+                        <i class="fa fa-star" [class.text-warning]="prod.avgRating>=3"
+                            [class.gray]="!prod.avgRating || prod.avgRating<3"></i>
+                        <i class="fa fa-star" [class.text-warning]="prod.avgRating>=4"
+                            [class.gray]="!prod.avgRating || prod.avgRating<4"></i>
+                        <i class="fa fa-star" [class.text-warning]="prod.avgRating>=5"
+                            [class.gray]="!prod.avgRating || prod.avgRating<5"></i> ({{prod.totalReview || 0}})
 
-        <div class="col-md-3">
-            <div class="productCard">
-                <div routerLink="/productDetail">
-                    <img src="/assets/imgs/appliances.png">
-                    <p class="prodTitle mb-0">Shoe
-                    </p>
-                    <h4 class="prodPrice primary mt-0 mb-0">$45</h4>
-                    <p class="originalPrice gray mb-0">
-                        <del>$60</del> 35%</p>
-                    <p class="rating mb-0">
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star gray"></i> (11)
                     </p>
                 </div>
-                <button class="btn btn-danger w-100">Remove from Featured Products</button>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="productCard">
-                <div routerLink="/productDetail">
-                    <img src="/assets/imgs/auto.jpg">
-                    <p class="prodTitle mb-0">Shoe
-                    </p>
-                    <h4 class="prodPrice primary mt-0 mb-0">$45</h4>
-                    <p class="originalPrice gray mb-0">
-                        <del>$60</del> 35%</p>
-                    <p class="rating mb-0">
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star gray"></i> (11)
-                    </p>
-                </div>
-                <button class="btn btn-danger w-100">Remove from Featured Products</button>
+                <button (click)="removeFeature(prod,i)" class="btn btn-danger w-100">Remove from Featured
+                    Products</button>
             </div>
         </div>
 
 
-        <div class="col-md-3">
-            <div class="productCard">
-                <div routerLink="/productDetail">
-                    <img src="/assets/imgs/cloths.jpg">
-                    <p class="prodTitle mb-0">Shoe
-                    </p>
-                    <h4 class="prodPrice primary mt-0 mb-0">$45</h4>
-                    <p class="originalPrice gray mb-0">
-                        <del>$60</del> 35%</p>
-                    <p class="rating mb-0">
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star gray"></i> (11)
-                    </p>
-                </div>
-                <button class="btn btn-danger w-100">Remove from Featured Products</button>
-            </div>
-        </div>
 
     </div>
 </div>

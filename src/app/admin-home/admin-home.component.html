@@ -93,7 +93,7 @@
                                     [class.gray]="!prod.avgRating || prod.avgRating<4"></i>
                                 <i class="fa fa-star" [class.text-warning]="prod.avgRating>=5"
                                     [class.gray]="!prod.avgRating || prod.avgRating<5"></i> ({{prod.totalReview || 0}})
-                                <span class="float-right">
+                                <span (click)="userDetail(prod)" class="float-right">
                                     <i class="fa fa-user"></i> {{prod.userName}}
                                 </span>
                             </p>

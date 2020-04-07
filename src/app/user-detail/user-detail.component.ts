@@ -10,10 +10,12 @@ export class UserDetailComponent implements OnInit {
 
   user: any = {};
 
+
   constructor(
     public service: DataShiftingService,
     public router: Router) {
     this.user = this.service.user;
+    this.user = this.service.topProduct;
 
     if (!this.user.firstName) {
       this.router.navigate(['/home']);

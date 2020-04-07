@@ -60,7 +60,11 @@ export class AdminHomeComponent implements OnInit {
     return disc;
   }
 
-
+  userDetail(product) {
+    console.log(product);
+    this.service.topProduct = product;
+    this.router.navigate(['/userDetail'])
+  }
 
 }
 

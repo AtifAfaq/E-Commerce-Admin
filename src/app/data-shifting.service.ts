@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class DataShiftingService {
-
+  topProduct: any = {};
   user: any = {};
   allProducts: any = [];
   allUsers: any = [];
@@ -18,6 +18,7 @@ export class DataShiftingService {
   allOrders: any = [];
   topBuyers: any = [];
   topProducts: any = [];
+  featuredProds: any = [];
   routeFrom: string;
   countListObjects: any = [];
 
@@ -35,6 +36,9 @@ export class DataShiftingService {
     }
     if (this.allCategorys.length == 0) {
       this.getallCategorys();
+    }
+    if (this.featuredProds.length == 0) {
+      this.getallFeaturedProds();
     }
   }
 
@@ -89,6 +93,21 @@ export class DataShiftingService {
           var temp = data[key];
           temp.key = key;
           self.allProducts.push(temp);
+        }
+      })
+  }
+
+  getallFeaturedProds() {
+    var self = this;
+    self.allUsers = [];
+    self.loading = true;
+    firebase.database().ref().child('featuredProducts')
+      .once('value', (snapshot) => {
+        var featureProdData = snapshot.val();
+        for (var key in featureProdData) {
+          var featureProd = featureProdData[key];
+          featureProd.key = key;
+          self.featuredProds.push(featureProd);
         }
       })
   }
