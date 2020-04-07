@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class DataShiftingService {
+
   topProduct: any = {};
   user: any = {};
   allProducts: any = [];
@@ -72,13 +73,10 @@ export class DataShiftingService {
     var self = this;
     self.allCategorys = [];
     firebase.database().ref().child('categories')
-      .once('value', (snapshot) => {
+      .on('child_added', (snapshot) => {
         var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key]
-          temp.key = key;
-          self.allCategorys.push(temp);
-        }
+        data.key = snapshot.key;
+        self.allCategorys.push(data);
       })
   }
 
@@ -222,16 +220,10 @@ export class DataShiftingService {
         if (prod.key == prodCount.key) {
           this.allUsers.forEach(user => {
             if (user.uid == prod.uid) {
+              tamp = prod;
               tamp.userName = user.firstName + " " + user.lastName;
               tamp.profileUrl = prod.productUrls[0];
-              tamp.name = prod.productName;
               tamp.count = prodCount.count;
-              tamp.uid = prod.uid;
-              tamp.avgRating = prod.avgRating;
-              tamp.discount = prod.discount;
-              tamp.discountedPrice = prod.discountedPrice;
-              tamp.originalPrice = prod.originalPrice;
-              tamp.totalReview = prod.totalReview;
             }
           });
         }

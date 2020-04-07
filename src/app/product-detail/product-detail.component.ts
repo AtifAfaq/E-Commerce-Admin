@@ -43,44 +43,19 @@ export class ProductDetailComponent implements OnInit {
 
 
   getMyReviews() {
-    var self = this;
-    self.loading = true;
-    firebase.database().ref().child('reviews')
-      .orderByChild('productKey').equalTo(self.product.key)
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var review = data[key];
-          self.getUserData(review);
-        }
-        self.loading = false;
-        setTimeout(() => {
-          self.reviewCount();
-        }, 2000);
-      })
-      .catch((e) => {
-        self.loading = false;
-        alert(e.message);
-      })
-  }
-
-
-  getUserData(review) {
-    var self = this;
-    firebase.database().ref().child('users')
-      .orderByChild('uid').equalTo(review.uid)
-      .once('value', (snapshot) => {
-        self.zone.run(() => {
-          var data = snapshot.val();
-          for (var key in data) {
-            var user = data[key];
+    this.service.allReviews.forEach(review => {
+      if (review.productKey == this.product.key) {
+        this.service.allUsers.forEach(user => {
+          if (user.uid == review.uid) {
             review.profileUrl = user.profileUrl || null;
-            review.firstName = user.firstName;
-            review.lastName = user.lastName;
-            self.myReview.push(review);
+            this.myReview.push(review);
           }
-        })
-      })
+        });
+      }
+    });
+    setTimeout(() => {
+      this.reviewCount();
+    }, 2000);
   }
 
 

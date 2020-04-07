@@ -31,7 +31,6 @@ export class AdminHomeComponent implements OnInit {
     this.topBuyers = this.service.topBuyers;
     this.countListObjects = this.service.countListObjects;
     this.topProducts = this.service.topProducts;
-    console.log("topProducts", this.topProducts)
   }
 
 
@@ -54,16 +53,18 @@ export class AdminHomeComponent implements OnInit {
   closeNavBar() {
     this.showNavBar = false;
   }
+
+
   getDiscount(product) {
     var disc = ((Number(product.originalPrice) - Number(product.discountedPrice)) / Number(product.originalPrice)) * 100;
     product.discount = disc;
     return disc;
   }
 
-  userDetail(product) {
-    console.log(product);
-    this.service.topProduct = product;
-    this.router.navigate(['/userDetail'])
+
+  productDetail(product) {
+    this.service.product = product;
+    this.router.navigate(['/productDetail']);
   }
 
 }

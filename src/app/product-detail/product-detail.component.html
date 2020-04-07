@@ -255,7 +255,8 @@
                         <div class="review-block">
                             <div class="row" *ngFor="let review of myReview">
                                 <div class="col-sm-3">
-                                    <img [src]="review.profileUrl || 'http://dummyimage.com/60x60/666/ffffff&text=No+Image'"
+                                    <img style="width: 100px;"
+                                        [src]="review.profileUrl || 'http://dummyimage.com/60x60/666/ffffff&text=No+Image'"
                                         class="img-rounded">
                                     <div class="review-block-name text-primary">{{review.firstName}} {{review.lastName}}
                                     </div>
