@@ -17,6 +17,7 @@ export class AdminHomeComponent implements OnInit {
   topBuyers: any = [];
   countListObjects: any = [];
   topProducts: any = [];
+  featuredProds: any = [];
   loading: boolean = false;
   showNavBar = false;
 
@@ -31,6 +32,7 @@ export class AdminHomeComponent implements OnInit {
     this.topBuyers = this.service.topBuyers;
     this.countListObjects = this.service.countListObjects;
     this.topProducts = this.service.topProducts;
+    this.featuredProds = this.service.featuredProds;
   }
 
 
@@ -65,6 +67,11 @@ export class AdminHomeComponent implements OnInit {
   productDetail(product) {
     this.service.product = product;
     this.router.navigate(['/productDetail']);
+  }
+
+  buyerdetail(seller) {
+    this.service.user = seller;
+    this.router.navigate(['/userDetail']);
   }
 
 }

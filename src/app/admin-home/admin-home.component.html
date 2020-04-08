@@ -50,7 +50,7 @@
                 <hr>
 
                 <div *ngFor="let seller of topBuyers; index as i">
-                    <div class="row pointer borderBottom" *ngIf="i<3">
+                    <div (click)="buyerdetail(seller)" class="row pointer borderBottom" *ngIf="i<3">
                         <div class="col-md-3">
                             <img [src]="seller.profileUrl" class="buyer-avatar">
                         </div>

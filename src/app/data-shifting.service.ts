@@ -58,13 +58,11 @@ export class DataShiftingService {
     var self = this;
     self.allReviews = [];
     firebase.database().ref().child('reviews')
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key]
-          temp.key = key;
-          self.allReviews.push(temp);
-        }
+      .on('child_added', (snapshot) => {
+        var temp = snapshot.val();
+        temp.key = snapshot.key;
+        self.allReviews.push(temp);
+
       })
   }
 
@@ -85,13 +83,11 @@ export class DataShiftingService {
     var self = this;
     self.allProducts = [];
     firebase.database().ref().child('products')
-      .once('value', (snapshot) => {
+      .on('child_added', (snapshot) => {
         var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key];
-          temp.key = key;
-          self.allProducts.push(temp);
-        }
+        data.key = snapshot.key;
+        self.allProducts.push(data);
+
       })
   }
 
@@ -100,13 +96,10 @@ export class DataShiftingService {
     self.allUsers = [];
     self.loading = true;
     firebase.database().ref().child('featuredProducts')
-      .once('value', (snapshot) => {
-        var featureProdData = snapshot.val();
-        for (var key in featureProdData) {
-          var featureProd = featureProdData[key];
-          featureProd.key = key;
-          self.featuredProds.push(featureProd);
-        }
+      .on('child_added', (snapshot) => {
+        var featureProd = snapshot.val();
+        featureProd.key = snapshot.key;
+        self.featuredProds.push(featureProd);
       })
   }
 
@@ -116,15 +109,13 @@ export class DataShiftingService {
     self.allUsers = [];
     self.loading = true;
     firebase.database().ref().child('users')
-      .once('value', (snapshot) => {
-        var userData = snapshot.val();
-        for (var key in userData) {
-          var user = userData[key];
-          user.key = key;
-          if (!user.isAdmin) {
-            self.allUsers.push(user);
-          }
+      .on('child_added', (snapshot) => {
+        var user = snapshot.val();
+        user.key = snapshot.key;
+        if (!user.isAdmin) {
+          self.allUsers.push(user);
         }
+
         if (self.allOrders.length == 0) {
           self.getallOrders();
         }
@@ -174,13 +165,13 @@ export class DataShiftingService {
       this.allOrders.forEach(order => {
         this.allUsers.forEach(user => {
           if (element.uid == order.uid) {
-            temp.userName = order.firstName + " " + order.lastName;
             temp.email = order.email;
             temp.totalOrders = element.count;
             temp.uid = element.uid;
             temp.totalBill = Number(order.totalBill) + Number(temp.totalBill);
             if (element.uid == user.uid) {
-              temp.profileUrl = user.profileUrl;
+              temp = user;
+              temp.userName = user.firstName + " " + user.lastName;
             }
           }
         });
@@ -191,7 +182,7 @@ export class DataShiftingService {
     this.topBuyers.sort((a, b) => {
       return b.totalBill - a.totalBill;
     });
-    console.log(this.topBuyers);
+    console.log('topbuyer', this.topBuyers);
     this.getTopProducts();
   }
 
