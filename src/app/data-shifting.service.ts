@@ -109,16 +109,16 @@ export class DataShiftingService {
     self.allUsers = [];
     self.loading = true;
     firebase.database().ref().child('users')
-      .on('child_added', (snapshot) => {
-        var user = snapshot.val();
-        user.key = snapshot.key;
-        if (!user.isAdmin) {
-          self.allUsers.push(user);
+      .once('value', (snapshot) => {
+        var users = snapshot.val();
+        for (var key in users) {
+          var temp = users[key];
+          temp.key = key;
+          if (!temp.isAdmin) {
+            self.allUsers.push(temp);
+          }
         }
-
-        if (self.allOrders.length == 0) {
-          self.getallOrders();
-        }
+        self.getallOrders();
       })
   }
 
@@ -144,8 +144,9 @@ export class DataShiftingService {
 
 
   getTopBuyers() {
+    var self = this;
     var counts: any = {};
-    this.allOrders.forEach(element => {
+    self.allOrders.forEach(element => {
       var x = element.uid;
       counts[x] = (counts[x] || 0) + 1;
     });
@@ -157,30 +158,34 @@ export class DataShiftingService {
       obj.count = counts[key];
       countObjects.push(obj);
     }
-    debugger;
     countObjects.forEach(element => {
       var temp: any = {
         totalBill: 0
       };
-      this.allOrders.forEach(order => {
-        debugger;
+      self.allOrders.forEach(order => {
         if (element.uid == order.uid) {
-          temp.userName = order.firstName + " " + order.lastName;
           temp.email = order.email;
           temp.totalOrders = element.count;
           temp.uid = element.uid;
           temp.totalBill = Number(order.totalBill) + Number(temp.totalBill);
+          self.allUsers.forEach(user => {
+            if (user.uid == element.uid) {
+              temp.firstName = user.firstName;
+              temp.lastName = user.lastName;
+              temp.profileUrl = user.profileUrl || null;
+            }
+          });
         }
       });
 
-      this.topBuyers.push(temp);
+      self.topBuyers.push(temp);
     });
-    this.loading = false;
-    this.topBuyers.sort((a, b) => {
+    self.loading = false;
+    self.topBuyers.sort((a, b) => {
       return b.totalBill - a.totalBill;
     });
-    console.log('topbuyer', this.topBuyers);
-    this.getTopProducts();
+    console.log('topbuyer', self.topBuyers);
+    self.getTopProducts();
   }
 
 
