@@ -157,25 +157,22 @@ export class DataShiftingService {
       obj.count = counts[key];
       countObjects.push(obj);
     }
-
+    debugger;
     countObjects.forEach(element => {
       var temp: any = {
         totalBill: 0
       };
       this.allOrders.forEach(order => {
-        this.allUsers.forEach(user => {
-          if (element.uid == order.uid) {
-            temp.email = order.email;
-            temp.totalOrders = element.count;
-            temp.uid = element.uid;
-            temp.totalBill = Number(order.totalBill) + Number(temp.totalBill);
-            if (element.uid == user.uid) {
-              temp = user;
-              temp.userName = user.firstName + " " + user.lastName;
-            }
-          }
-        });
+        debugger;
+        if (element.uid == order.uid) {
+          temp.userName = order.firstName + " " + order.lastName;
+          temp.email = order.email;
+          temp.totalOrders = element.count;
+          temp.uid = element.uid;
+          temp.totalBill = Number(order.totalBill) + Number(temp.totalBill);
+        }
       });
+
       this.topBuyers.push(temp);
     });
     this.loading = false;
