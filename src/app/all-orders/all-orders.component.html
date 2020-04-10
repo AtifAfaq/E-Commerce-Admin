@@ -3,289 +3,380 @@
 <div class="mainContent">
     <ul class="nav nav-tabs mt-2">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#home">Pending (0)</a>
+            <a class="nav-link active" data-toggle="tab" href="#home">All Orders ({{allOrders.length}})</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#menu1">Accepted (0)</a>
+            <a class="nav-link active" data-toggle="tab" href="#home1">Pending ({{pendingArray.length}})</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#menu2">Shipped (0)</a>
+            <a class="nav-link" data-toggle="tab" href="#menu1">Accepted ({{acceptedArray.length}})</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#menu3">Delivered (0)</a>
+            <a class="nav-link" data-toggle="tab" href="#menu2">Shipped ({{shippedArray.length}})</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#menu4">Cancelled (0)</a>
+            <a class="nav-link" data-toggle="tab" href="#menu3">Delivered ({{deliveredArray.length}})</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu4">Cancelled ({{cancelledArray.length}})</a>
         </li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane mx-5 my-5  active" id="home">
+            <h2 class="text-center my-4">All Orders</h2>
+            <div class="row">
+
+                <h4><i class="fa fa-users"></i> All Orders ({{allOrders.length}})</h4>
+                <div class="input-group mb-3 ml-auto w-50">
+                    <input [(ngModel)]="searchTxt" type="text" class="form-control " placeholder="Search here...">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover bg-white">
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Order ID</th>
+                        <th class="text-center">Seller</th>
+                        <th class="text-center">Buyer</th>
+                        <th class="text-center">Date & Time</th>
+                        <th class="text-center">Product Qty</th>
+                        <th class="text-center">Grand Total
+                            <i *ngIf="!icon" (click)="assending()" class="fas fa-sort-up pointer"></i>
+                            <i *ngIf="icon == true" (click)="decending()" class="fas fa-sort-down pointer"></i>
+                        </th>
+                        <th class="text-center">Details</th>
+                    </tr>
+
+                    <tr *ngFor="let order of allOrders | paginate: { itemsPerPage: 7, currentPage: p } | search: searchTxt; index as i"
+                        class="text-center">
+                        <td class="text-center top-padding">{{i+1}}</td>
+                        <td class="text-center top-padding">{{order.timestamp}}</td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button></td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button>
+                        </td>
+                        <td class="text-center top-padding">{{order.timestamp| date: 'short'}}</td>
+                        <td class="text-center top-padding">{{order.myArray.length}}</td>
+                        <td class="text-center top-padding">{{order.totalBill}}</td>
+                        <td class="text-center"><button class="btn btn-primary"
+                                (click)="orderDetails(order)">Details</button></td>
+                    </tr>
+                </table>
+
+                <div class="w-100">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+
+            </div>
+
+
+        </div>
+        <!-- ____________________________________________________________________ -->
+
+
+        <div class="tab-pane mx-5 my-5  " id="home1">
             <h2 class="text-center my-4">Pending Orders</h2>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="fa fa-search"></i>
-                    </span>
-                </div>
-                <input [(ngModel)]="searchTxt" type="text" class="form-control" placeholder="Search here...">
-            </div>
+            <div class="row">
 
-            <table class="text-center table table-striped bg-white">
-                <thead>
+                <h4><i class="fa fa-users"></i> All Orders ({{pendingArray.length}})</h4>
+                <div class="input-group mb-3 ml-auto w-50">
+                    <input [(ngModel)]="searchTxt" type="text" class="form-control " placeholder="Search here...">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover bg-white">
                     <tr>
+                        <th class="text-center">#</th>
                         <th class="text-center">Order ID</th>
                         <th class="text-center">Seller</th>
                         <th class="text-center">Buyer</th>
                         <th class="text-center">Date & Time</th>
                         <th class="text-center">Product Qty</th>
-                        <th class="text-center">Delivery Fee</th>
                         <th class="text-center">Grand Total
-                            <i *ngIf="!icon" (click)="icon=!icon" class="fas fa-sort-up pointer"></i>
-                            <i *ngIf="icon == true" (click)="icon=!icon" class="fas fa-sort-down pointer"></i>
+                            <i *ngIf="!icon" (click)="assending()" class="fas fa-sort-up pointer"></i>
+                            <i *ngIf="icon == true" (click)="decending()" class="fas fa-sort-down pointer"></i>
                         </th>
                         <th class="text-center">Details</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center top-padding">12345678</td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">Darren
-                                Sammy</button></td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">John Doe</button>
-                        </td>
-                        <td class="text-center top-padding">March 26, 2019</td>
-                        <td class="text-center top-padding">19</td>
-                        <td class="text-center top-padding">1500</td>
-                        <td class="text-center top-padding">26900</td>
-                        <td class="text-center"><button routerLink="/orderDetail"
-                                class="btn btn-primary">Details</button></td>
-                    </tr>
 
-                </tbody>
-            </table>
+                    <tr *ngFor="let order of pendingArray | paginate: { itemsPerPage: 7, currentPage: p } | search: searchTxt; index as i"
+                        class="text-center">
+                        <td class="text-center top-padding">{{i+1}}</td>
+                        <td class="text-center top-padding">{{order.timestamp}}</td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button></td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button>
+                        </td>
+                        <td class="text-center top-padding">{{order.timestamp| date: 'short'}}</td>
+                        <td class="text-center top-padding">{{order.myArray.length}}</td>
+                        <td class="text-center top-padding">{{order.totalBill}}</td>
+                        <td class="text-center"><button class="btn btn-primary"
+                                (click)="orderDetails(order)">Details</button></td>
+                    </tr>
+                </table>
+
+                <div class="w-100">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+
+            </div>
+
+
         </div>
 
-        <div class="tab-pane mx-5 my-5   fade" id="menu1">
+
+        <!-- _____________________________________________________________________________________________________________________ -->
+
+        <div class="tab-pane mx-5 my-5  " id="menu1">
             <h2 class="text-center my-4">Accepted Orders</h2>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="fa fa-search"></i>
-                    </span>
+            <div class="row">
+
+                <h4><i class="fa fa-users"></i> All Orders ({{acceptedArray.length}})</h4>
+                <div class="input-group mb-3 ml-auto w-50">
+                    <input [(ngModel)]="searchTxt" type="text" class="form-control " placeholder="Search here...">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
                 </div>
-                <input [(ngModel)]="searchTxt" type="text" class="form-control" placeholder="Search here...">
-            </div>
-            <table class="text-center table table-striped bg-white">
-                <thead>
+                <table class="table table-bordered table-hover bg-white">
                     <tr>
+                        <th class="text-center">#</th>
                         <th class="text-center">Order ID</th>
                         <th class="text-center">Seller</th>
                         <th class="text-center">Buyer</th>
                         <th class="text-center">Date & Time</th>
                         <th class="text-center">Product Qty</th>
-                        <th class="text-center">Delivery Fee</th>
                         <th class="text-center">Grand Total
-                            <i *ngIf="!icon" (click)="icon=!icon" class="fas fa-sort-up pointer"></i>
-                            <i *ngIf="icon == true" (click)="icon=!icon" class="fas fa-sort-down pointer"></i>
+                            <i *ngIf="!icon" (click)="assending()" class="fas fa-sort-up pointer"></i>
+                            <i *ngIf="icon == true" (click)="decending()" class="fas fa-sort-down pointer"></i>
                         </th>
                         <th class="text-center">Details</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center top-padding">12345678</td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">Darren
-                                Sammy</button></td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">John Doe</button>
-                        </td>
-                        <td class="text-center top-padding">March 26, 2019</td>
-                        <td class="text-center top-padding">19</td>
-                        <td class="text-center top-padding">1500</td>
-                        <td class="text-center top-padding">26900</td>
-                        <td class="text-center"><button class="btn btn-primary">Details</button></td>
-                    </tr>
 
-                </tbody>
-            </table>
+                    <tr *ngFor="let order of acceptedArray | paginate: { itemsPerPage: 7, currentPage: p } | search: searchTxt; index as i"
+                        class="text-center">
+                        <td class="text-center top-padding">{{i+1}}</td>
+                        <td class="text-center top-padding">{{order.timestamp}}</td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button></td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button>
+                        </td>
+                        <td class="text-center top-padding">{{order.timestamp| date: 'short'}}</td>
+                        <td class="text-center top-padding">{{order.myArray.length}}</td>
+                        <td class="text-center top-padding">{{order.totalBill}}</td>
+                        <td class="text-center"><button class="btn btn-primary"
+                                (click)="orderDetails(order)">Details</button></td>
+                    </tr>
+                </table>
+
+                <div class="w-100">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+
+            </div>
+
+
         </div>
 
-        <div class="tab-pane mx-5 my-5   fade" id="menu2">
+
+        <!-- _______________________________________________________________________ -->
+
+        <!-- Tab panes -->
+
+        <div class="tab-pane mx-5 my-5  " id="menu2">
             <h2 class="text-center my-4">Shipped Orders</h2>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="fa fa-search"></i>
-                    </span>
+            <div class="row">
+
+                <h4><i class="fa fa-users"></i> All Orders ({{shippedArray.length}})</h4>
+                <div class="input-group mb-3 ml-auto w-50">
+                    <input [(ngModel)]="searchTxt" type="text" class="form-control " placeholder="Search here...">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
                 </div>
-                <input [(ngModel)]="searchTxt" type="text" class="form-control" placeholder="Search here...">
-            </div>
-            <table class="text-center table table-striped bg-white">
-                <thead>
+                <table class="table table-bordered table-hover bg-white">
                     <tr>
+                        <th class="text-center">#</th>
                         <th class="text-center">Order ID</th>
                         <th class="text-center">Seller</th>
                         <th class="text-center">Buyer</th>
                         <th class="text-center">Date & Time</th>
                         <th class="text-center">Product Qty</th>
-                        <th class="text-center">Delivery Fee</th>
                         <th class="text-center">Grand Total
-                            <i *ngIf="!icon" (click)="icon=!icon" class="fas fa-sort-up pointer"></i>
-                            <i *ngIf="icon == true" (click)="icon=!icon" class="fas fa-sort-down pointer"></i>
+                            <i *ngIf="!icon" (click)="assending()" class="fas fa-sort-up pointer"></i>
+                            <i *ngIf="icon == true" (click)="decending()" class="fas fa-sort-down pointer"></i>
                         </th>
                         <th class="text-center">Details</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center top-padding">12345678</td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">Darren
-                                Sammy</button></td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">John Doe</button>
-                        </td>
-                        <td class="text-center top-padding">March 26, 2019</td>
-                        <td class="text-center top-padding">19</td>
-                        <td class="text-center top-padding">1500</td>
-                        <td class="text-center top-padding">26900</td>
-                        <td class="text-center"><button class="btn btn-primary">Details</button></td>
-                    </tr>
 
-                </tbody>
-            </table>
+                    <tr *ngFor="let order of shippedArray | paginate: { itemsPerPage: 7, currentPage: p } | search: searchTxt; index as i"
+                        class="text-center">
+                        <td class="text-center top-padding">{{i+1}}</td>
+                        <td class="text-center top-padding">{{order.timestamp}}</td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button></td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button>
+                        </td>
+                        <td class="text-center top-padding">{{order.timestamp| date: 'short'}}</td>
+                        <td class="text-center top-padding">{{order.myArray.length}}</td>
+                        <td class="text-center top-padding">{{order.totalBill}}</td>
+                        <td class="text-center"><button class="btn btn-primary"
+                                (click)="orderDetails(order)">Details</button></td>
+                    </tr>
+                </table>
+
+                <div class="w-100">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+
+            </div>
+
+
         </div>
 
-        <div class="tab-pane mx-5 my-5   fade" id="menu3">
+        <!-- Tab panes -->
+
+        <div class="tab-pane mx-5 my-5 " id="menu3">
             <h2 class="text-center my-4">Delivered Orders</h2>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="fa fa-search"></i>
-                    </span>
+            <div class="row">
+
+                <h4><i class="fa fa-users"></i> All Orders ({{deliveredArray.length}})</h4>
+                <div class="input-group mb-3 ml-auto w-50">
+                    <input [(ngModel)]="searchTxt" type="text" class="form-control " placeholder="Search here...">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
                 </div>
-                <input [(ngModel)]="searchTxt" type="text" class="form-control" placeholder="Search here...">
-            </div>
-            <table class="text-center table table-striped bg-white">
-                <thead>
+                <table class="table table-bordered table-hover bg-white">
                     <tr>
+                        <th class="text-center">#</th>
                         <th class="text-center">Order ID</th>
                         <th class="text-center">Seller</th>
                         <th class="text-center">Buyer</th>
                         <th class="text-center">Date & Time</th>
                         <th class="text-center">Product Qty</th>
-                        <th class="text-center">Delivery Fee</th>
                         <th class="text-center">Grand Total
-                            <i *ngIf="!icon" (click)="icon=!icon" class="fas fa-sort-up pointer"></i>
-                            <i *ngIf="icon == true" (click)="icon=!icon" class="fas fa-sort-down pointer"></i>
+                            <i *ngIf="!icon" (click)="assending()" class="fas fa-sort-up pointer"></i>
+                            <i *ngIf="icon == true" (click)="decending()" class="fas fa-sort-down pointer"></i>
                         </th>
                         <th class="text-center">Details</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center top-padding">12345678</td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">Darren
-                                Sammy</button></td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">John Doe</button>
-                        </td>
-                        <td class="text-center top-padding">March 26, 2019</td>
-                        <td class="text-center top-padding">19</td>
-                        <td class="text-center top-padding">1500</td>
-                        <td class="text-center top-padding">26900</td>
-                        <td class="text-center"><button class="btn btn-primary">Details</button></td>
-                    </tr>
 
-                </tbody>
-            </table>
+                    <tr *ngFor="let order of deliveredArray | paginate: { itemsPerPage: 7, currentPage: p } | search: searchTxt; index as i"
+                        class="text-center">
+                        <td class="text-center top-padding">{{i+1}}</td>
+                        <td class="text-center top-padding">{{order.timestamp}}</td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button></td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button>
+                        </td>
+                        <td class="text-center top-padding">{{order.timestamp| date: 'short'}}</td>
+                        <td class="text-center top-padding">{{order.myArray.length}}</td>
+                        <td class="text-center top-padding">{{order.totalBill}}</td>
+                        <td class="text-center"><button class="btn btn-primary"
+                                (click)="orderDetails(order)">Details</button></td>
+                    </tr>
+                </table>
+
+                <div class="w-100">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+
+            </div>
+
+
         </div>
-        <div class="tab-pane mx-5 my-5  " id="menu4">
+
+
+
+        <!-- Tab panes -->
+
+        <div class="tab-pane mx-5 my-5 " id="menu4">
             <h2 class="text-center my-4">Cancelled Orders</h2>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="fa fa-search"></i>
-                    </span>
+            <div class="row">
+
+                <h4><i class="fa fa-users"></i> All Orders ({{cancelledArray.length}})</h4>
+                <div class="input-group mb-3 ml-auto w-50">
+                    <input [(ngModel)]="searchTxt" type="text" class="form-control " placeholder="Search here...">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
                 </div>
-                <input [(ngModel)]="searchTxt" type="text" class="form-control" placeholder="Search here...">
-            </div>
-            <table class="text-center table table-striped bg-white">
-                <thead>
+                <table class="table table-bordered table-hover bg-white">
                     <tr>
+                        <th class="text-center">#</th>
                         <th class="text-center">Order ID</th>
                         <th class="text-center">Seller</th>
                         <th class="text-center">Buyer</th>
                         <th class="text-center">Date & Time</th>
                         <th class="text-center">Product Qty</th>
-                        <th class="text-center">Delivery Fee</th>
                         <th class="text-center">Grand Total
-                            <i *ngIf="!icon" (click)="icon=!icon" class="fas fa-sort-up pointer"></i>
-                            <i *ngIf="icon == true" (click)="icon=!icon" class="fas fa-sort-down pointer"></i>
+                            <i *ngIf="!icon" (click)="assending()" class="fas fa-sort-up pointer"></i>
+                            <i *ngIf="icon == true" (click)="decending()" class="fas fa-sort-down pointer"></i>
                         </th>
                         <th class="text-center">Details</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center top-padding">12345678</td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">Darren
-                                Sammy</button></td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">John Doe</button>
+
+                    <tr *ngFor="let order of cancelledArray | paginate: { itemsPerPage: 7, currentPage: p } | search: searchTxt; index as i"
+                        class="text-center">
+                        <td class="text-center top-padding">{{i+1}}</td>
+                        <td class="text-center top-padding">{{order.timestamp}}</td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button></td>
+                        <td class="text-center"><button class="btn btn-link"
+                                routerLink="/userDetail">{{order.firstName}}
+                                {{order.lastName}}</button>
                         </td>
-                        <td class="text-center top-padding">March 26, 2019</td>
-                        <td class="text-center top-padding">19</td>
-                        <td class="text-center top-padding">1500</td>
-                        <td class="text-center top-padding">26900</td>
-                        <td class="text-center"><button class="btn btn-primary">Details</button></td>
+                        <td class="text-center top-padding">{{order.timestamp| date: 'short'}}</td>
+                        <td class="text-center top-padding">{{order.myArray.length}}</td>
+                        <td class="text-center top-padding">{{order.totalBill}}</td>
+                        <td class="text-center"><button class="btn btn-primary"
+                                (click)="orderDetails(order)">Details</button>
+                        </td>
                     </tr>
+                </table>
 
-                </tbody>
-            </table>
-        </div>
-
-        <div class="tab-pane mx-5 my-5  " id="menu5">
-            <h2 class="text-center my-4">Missing Orders</h2>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="fa fa-search"></i>
-                    </span>
+                <div class="w-100">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
-                <input [(ngModel)]="searchTxt" type="text" class="form-control" placeholder="Search here...">
-            </div>
-            <table class="text-center table table-striped bg-white">
-                <thead>
-                    <tr>
-                        <th class="text-center">Order ID</th>
-                        <th class="text-center">Seller</th>
-                        <th class="text-center">Buyer</th>
-                        <th class="text-center">Date & Time</th>
-                        <th class="text-center">Product Qty</th>
-                        <th class="text-center">Delivery Fee</th>
-                        <th class="text-center">Grand Total
-                            <i *ngIf="!icon" (click)="icon=!icon" class="fas fa-sort-up pointer"></i>
-                            <i *ngIf="icon == true" (click)="icon=!icon" class="fas fa-sort-down pointer"></i>
-                        </th>
-                        <th class="text-center">Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center top-padding">12345678</td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">Darren
-                                Sammy</button></td>
-                        <td class="text-center"><button class="btn btn-link" routerLink="/userDetail">John Doe</button>
-                        </td>
-                        <td class="text-center top-padding">March 26, 2019</td>
-                        <td class="text-center top-padding">19</td>
-                        <td class="text-center top-padding">1500</td>
-                        <td class="text-center top-padding">26900</td>
-                        <td class="text-center"><button class="btn btn-primary">Details</button></td>
-                    </tr>
 
-                </tbody>
-            </table>
+            </div>
+
+
         </div>
+
 
     </div>
-
 </div>
