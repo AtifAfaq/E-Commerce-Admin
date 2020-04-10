@@ -9,7 +9,9 @@ import * as firebase from 'firebase';
   styleUrls: ['./all-orders.component.scss']
 })
 export class AllOrdersComponent implements OnInit {
+
   myProducts: Array<any> = [];
+  p: number = 1;
   icon: boolean = false;
   allOrders: any = [];
   allUsers: any = [];
@@ -20,90 +22,52 @@ export class AllOrdersComponent implements OnInit {
   deliveredArray = [];
   cancelledArray = [];
   loading: boolean = false;
+  listOfOrders: any = [];
 
   constructor(public router: Router, public service: DataShiftingService, public zone: NgZone) {
-
+    this.getAllOrders();
   }
 
   ngOnInit() {
-    this.getallOrders();
 
   }
 
-  getallOrders() {
-    var self = this;
-    self.allOrders = [];
-    self.loading = true;
-    firebase.database().ref().child('orders')
-      .once('value', (snapshot) => {
-        var orderData = snapshot.val();
-        for (var key in orderData) {
-          var order = orderData[key];
-          order.key = key;
-          self.allOrders.push(order)
-        }
-        console.log(this.allOrders)
-        this.getallUsers();
-        this.showPending();
-      })
-      .catch(() => {
-        self.loading = false;
-      })
-  }
 
-
-  getallUsers() {
-    var self = this;
-    self.allUsers = [];
-    self.loading = true;
-    firebase.database().ref().child('users')
-      .once('value', (snapshot) => {
-        var users = snapshot.val();
-        for (var key in users) {
-          var temp = users[key];
-          temp.key = key;
-          if (!temp.isAdmin) {
-            self.allUsers.push(temp);
-          }
-        }
-      })
-    console.log('users', this.allUsers)
-    this.getProdnSeller();
-  }
-
-  getProdnSeller() {
-    var temp: any = {}
+  getAllOrders() {
+    this.allOrders = this.service.allOrders;
+    if (this.allOrders.length == 0) {
+      this.router.navigate(['/home']);
+    }
     this.allOrders.forEach(order => {
+      var sellerIds = [];
+      sameSeller = false;
       order.myArray.forEach(product => {
-        this.allUsers.forEach(user => {
-          if (product.key == user.key) {
-            temp = product;
-            temp.email = user.email;
-            temp.contact = user.contact;
-            temp.firstName = user.firstName;
-            temp.lastName = user.lastName;
-            temp.uid = user.uid;
-          }
-          this.prodnSeller.push(temp);
-          console.log(this.prodnSeller)
-        });
+        sellerIds.push(product.uid);
       });
-
+      var sameSeller = sellerIds.every((val, i, arr) => val === arr[0]);
+      if (!sameSeller) {
+        order.sellerName = 'Multiseller';
+      } else {
+        this.service.allUsers.forEach(user => {
+          if (sellerIds[0] == user.uid) {
+            order.sellerName = user.firstName + " " + user.lastName;
+          }
+        });
+      }
     });
-    console.log(this.prodnSeller)
   }
 
 
   assending() {
     this.icon = true;
-    this.allOrders.sort(function (a, b) {
+    this.allOrders.sort((a, b) => {
       return a.totalBill - b.totalBill;
     })
   }
 
   decending() {
     this.icon = false;
-    this.allOrders.sort(function (a, b) {
+    this.allOrders.sort((a, b) => {
       return b.totalBill - a.totalBill
     })
   }
@@ -113,31 +77,29 @@ export class AllOrdersComponent implements OnInit {
   }
 
 
-  showPending() {
-    for (var i = 0; i < this.allOrders.length; i++) {
-      this.allOrders[i].myArray.forEach(product => {
-        this.zone.run(() => {
-          if (!product.status) {
-            this.pendingArray.push(this.allOrders[i])
-          }
-          if (product.status == "accepted") {
-            this.acceptedArray.push(this.allOrders[i])
-          }
-          if (product.status == "shipped") {
-            this.shippedArray.push(this.allOrders[i])
-          }
-          if (product.status == "delivered") {
-            this.deliveredArray.push(this.allOrders[i])
-          }
-          if (product.status == "cancelled") {
-            this.cancelledArray.push(this.allOrders[i])
-          }
-
-        })
-      })
-    }
-
-    this.loading = false;
-  }
+  // showPending() {
+  //   for (var i = 0; i < this.allOrders.length; i++) {
+  //     this.allOrders[i].myArray.forEach(product => {
+  //       this.zone.run(() => {
+  //         if (!product.status) {
+  //           this.pendingArray.push(this.allOrders[i])
+  //         }
+  //         if (product.status == "accepted") {
+  //           this.acceptedArray.push(this.allOrders[i])
+  //         }
+  //         if (product.status == "shipped") {
+  //           this.shippedArray.push(this.allOrders[i])
+  //         }
+  //         if (product.status == "delivered") {
+  //           this.deliveredArray.push(this.allOrders[i])
+  //         }
+  //         if (product.status == "cancelled") {
+  //           this.cancelledArray.push(this.allOrders[i])
+  //         }
+  //       })
+  //     })
+  //   }
+  //   this.loading = false;
+  // }
 
 }

@@ -1,12 +1,12 @@
 <app-navbar></app-navbar>
 
 <div class="mainContent">
-    <ul class="nav nav-tabs mt-2">
+    <ul class="nav nav-tabs mt-2 mx-5">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#home">All Orders ({{allOrders.length}})</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#home1">Pending ({{pendingArray.length}})</a>
+            <a class="nav-link" data-toggle="tab" href="#home1">Pending ({{pendingArray.length}})</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#menu1">Accepted ({{acceptedArray.length}})</a>
@@ -25,7 +25,6 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane mx-5 my-5  active" id="home">
-            <h2 class="text-center my-4">All Orders</h2>
             <div class="row">
 
                 <h4><i class="fa fa-users"></i> All Orders ({{allOrders.length}})</h4>
@@ -37,7 +36,7 @@
                         </span>
                     </div>
                 </div>
-                <table class="table table-bordered table-hover bg-white">
+                <table *ngIf="allOrders.length" class="table table-bordered table-hover bg-white">
                     <tr>
                         <th class="text-center">#</th>
                         <th class="text-center">Order ID</th>
@@ -52,13 +51,13 @@
                         <th class="text-center">Details</th>
                     </tr>
 
+
                     <tr *ngFor="let order of allOrders | paginate: { itemsPerPage: 7, currentPage: p } | search: searchTxt; index as i"
                         class="text-center">
                         <td class="text-center top-padding">{{i+1}}</td>
                         <td class="text-center top-padding">{{order.timestamp}}</td>
                         <td class="text-center"><button class="btn btn-link"
-                                routerLink="/userDetail">{{order.firstName}}
-                                {{order.lastName}}</button></td>
+                                routerLink="/userDetail">{{order.sellerName}} </button></td>
                         <td class="text-center"><button class="btn btn-link"
                                 routerLink="/userDetail">{{order.firstName}}
                                 {{order.lastName}}</button>
