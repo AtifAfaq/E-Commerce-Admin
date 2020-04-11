@@ -4,7 +4,8 @@ table {
   width: 100%;
 }
 
-td, th {
+td,
+th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
@@ -20,7 +21,19 @@ tr:nth-child(even) {
   padding-left: 15px;
   padding-right: 15px;
 }
-.top-padding{
+.top-padding {
   padding-top: 15px;
 }
 
+.tabBtns {
+  button {
+    width: 150px;
+    border-radius: 30px;
+    margin: 0 10px;
+  }
+  .btn-primary {
+    color: #fff !important;
+    background-color: #0062cc !important;
+    border-color: #005cbf !important;
+  }
+}

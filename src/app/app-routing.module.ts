@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'allProducts', component: AllProductsComponent },
   { path: 'userDetail', component: UserDetailComponent },
-  { path: 'orderDetail', component: OrderDetailComponent },
+  { path: 'orderDetail/:orderKey', component: OrderDetailComponent },
   { path: 'productDetail', component: ProductDetailComponent },
   { path: 'reviews', component: ReviewsComponent },
 

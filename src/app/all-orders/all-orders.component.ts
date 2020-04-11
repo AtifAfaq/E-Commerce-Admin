@@ -1,7 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataShiftingService } from './../data-shifting.service';
-import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-all-orders',
@@ -10,19 +9,9 @@ import * as firebase from 'firebase';
 })
 export class AllOrdersComponent implements OnInit {
 
-  myProducts: Array<any> = [];
-  p: number = 1;
   icon: boolean = false;
   allOrders: any = [];
-  allUsers: any = [];
-  prodnSeller: any = [];
-  pendingArray = [];
-  acceptedArray = [];
-  shippedArray = [];
-  deliveredArray = [];
-  cancelledArray = [];
-  loading: boolean = false;
-  listOfOrders: any = [];
+  currentTab = 'all';
 
   constructor(public router: Router, public service: DataShiftingService, public zone: NgZone) {
     this.getAllOrders();
@@ -35,14 +24,22 @@ export class AllOrdersComponent implements OnInit {
 
   getAllOrders() {
     this.allOrders = this.service.allOrders;
+
+    // this.service.allOrders.forEach(order => {
+    //   this.allOrders.push(Object.assign({}, order));
+    // });
+    // this.allOrders[1] = Object.assign({}, this.service.allOrders[1])
+
     if (this.allOrders.length == 0) {
       this.router.navigate(['/home']);
     }
     this.allOrders.forEach(order => {
+      order.statusArray = [];
       var sellerIds = [];
       sameSeller = false;
       order.myArray.forEach(product => {
         sellerIds.push(product.uid);
+        order.statusArray.push(product.status || 'pending');
       });
       var sameSeller = sellerIds.every((val, i, arr) => val === arr[0]);
       if (!sameSeller) {
@@ -55,6 +52,7 @@ export class AllOrdersComponent implements OnInit {
         });
       }
     });
+    this.decending();
   }
 
 
@@ -72,34 +70,10 @@ export class AllOrdersComponent implements OnInit {
     })
   }
 
-  orderDetails(o) {
-    this.router.navigate(['/orderDetail']);
+
+  orderDetails(order) {
+    this.router.navigate(['/orderDetail/' + order.key]);
   }
 
-
-  // showPending() {
-  //   for (var i = 0; i < this.allOrders.length; i++) {
-  //     this.allOrders[i].myArray.forEach(product => {
-  //       this.zone.run(() => {
-  //         if (!product.status) {
-  //           this.pendingArray.push(this.allOrders[i])
-  //         }
-  //         if (product.status == "accepted") {
-  //           this.acceptedArray.push(this.allOrders[i])
-  //         }
-  //         if (product.status == "shipped") {
-  //           this.shippedArray.push(this.allOrders[i])
-  //         }
-  //         if (product.status == "delivered") {
-  //           this.deliveredArray.push(this.allOrders[i])
-  //         }
-  //         if (product.status == "cancelled") {
-  //           this.cancelledArray.push(this.allOrders[i])
-  //         }
-  //       })
-  //     })
-  //   }
-  //   this.loading = false;
-  // }
 
 }
