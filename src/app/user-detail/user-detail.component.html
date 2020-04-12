@@ -5,13 +5,13 @@
         <div class="col-md-4">
             <div class="productCard">
                 <div>
-                    <img [src]="user.profileUrl || 0">
+                    <img [src]="user.profileUrl || null">
                     <p class="prodTitle bg-lg m-2 ">{{user.firstName}} {{user.lastName}}</p>
                     <p class="prodTitle bg-lg m-2 ">{{user.email}}</p>
                     <p class="prodTitle bg-lg m-2  ">{{user.contact}}</p>
-                    <p class="prodTitle bg-lg m-2 ">Orders</p>
+                    <p class="prodTitle bg-lg m-2" (click)="userOrders()">Orders</p>
                     <p class="prodTitle bg-lg m-2 ">Messages</p>
-                    <p class="prodTitle bg-lg m-2 ">Products</p>
+                    <p class="prodTitle bg-lg m-2" (click)="userProducts()">Products</p>
                 </div>
             </div>
         </div>

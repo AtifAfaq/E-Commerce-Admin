@@ -24,9 +24,9 @@ export class AllProductsComponent implements OnInit {
       this.eventTriggered = true;
       this.allProducts = [];
       this.allProducts = this.service.allProducts;
-      if (this.allProducts.length == 0) {
-        this.router.navigate(['/home']);
-      }
+      // if (this.allProducts.length == 0) {
+      //   this.router.navigate(['/home']);
+      // }
     });
     if (this.service.routeFrom == 'home') {
       this.allProducts = this.service.allProducts;
@@ -39,7 +39,13 @@ export class AllProductsComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     }
-    if (!this.eventTriggered && this.service.routeFrom != 'home' && this.service.routeFrom != 'categories') {
+    else if (this.service.routeFrom == 'userDetail') {
+      this.allProducts = this.service.userProds;
+      if (this.allProducts.length == 0) {
+        this.router.navigate(['/home']);
+      }
+    }
+    if (!this.eventTriggered && this.service.routeFrom != 'home' && this.service.routeFrom != 'categories' && this.service.routeFrom != 'userDetail') {
       this.router.navigate(['/home']);
     }
   }

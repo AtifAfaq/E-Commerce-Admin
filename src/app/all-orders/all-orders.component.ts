@@ -23,7 +23,11 @@ export class AllOrdersComponent implements OnInit {
 
 
   getAllOrders() {
-    this.allOrders = this.service.allOrders;
+    if (this.service.routeFrom == 'userOrder') {
+      this.allOrders = this.service.userOrder;
+    }
+    else { this.allOrders = this.service.allOrders; }
+
 
     // this.service.allOrders.forEach(order => {
     //   this.allOrders.push(Object.assign({}, order));

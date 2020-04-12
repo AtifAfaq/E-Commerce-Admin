@@ -23,7 +23,8 @@ export class DataShiftingService {
   routeFrom: string;
   countListObjects: any = [];
   currentOrder: any = {};
-
+  userProds: any = [];
+  userOrder: any = [];
 
   public fooSubject = new Subject<any>();
 
