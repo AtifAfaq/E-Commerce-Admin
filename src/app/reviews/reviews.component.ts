@@ -14,6 +14,12 @@ export class ReviewsComponent implements OnInit {
   allUsers: any = [];
   allReviews: any = [];
   loading: boolean = false;
+  rate1 = 0;
+  rate2 = 0;
+  rate3 = 0;
+  rate4 = 0;
+  rate5 = 0;
+  avgRating: any;
 
   constructor(public zone: NgZone,
     public router: Router,
@@ -43,6 +49,7 @@ export class ReviewsComponent implements OnInit {
         temp.productName = product.productName;
         temp.discountedPrice = product.discountedPrice;
         temp.productImage = product.productUrls[0];
+        temp.avgRating = product.avgRating;
         this.reviews.forEach(review => {
           if (review.productKey == product.key) {
             this.allUsers.forEach(user => {
@@ -55,9 +62,13 @@ export class ReviewsComponent implements OnInit {
           }
         });
         this.allReviews.push(temp)
+
       }
     });
+
     console.log(this.allReviews);
   }
+
+
 
 }

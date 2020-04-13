@@ -10,6 +10,7 @@
                     <div class="col-md-3 text-center">
                         <img [src]="review.productImage || null" class="buyer-avatar">
                         <p class="text-success">${{review.discountedPrice}}</p>
+                        <p>{{review.avgRating | number: '1.0-0'}} /5</p>
                     </div>
                     <div class="col-md-9 card-height">
                         <div *ngFor="let review of review.reviews" class="scroll pt-2">
