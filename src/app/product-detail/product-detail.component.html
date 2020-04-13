@@ -63,7 +63,7 @@
 
                 <button class="btn btn-success w-100" *ngIf="!product.featured" (click)="addToFeature(product)">Add to
                     Featured Products</button>
-                <button class="btn btn-danger w-100" *ngIf="product.featured" (click)="removeFeature(product)">
+                <button class="btn btn-warning w-100" *ngIf="product.featured" (click)="removeFeature(product)">
                     Remove From Featured</button>
                 <button (click)="changeStatus('disabled', i)"
                     *ngIf="(product.status && product.status=='enabled') || !product.status"
