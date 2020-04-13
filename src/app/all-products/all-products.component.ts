@@ -24,9 +24,6 @@ export class AllProductsComponent implements OnInit {
       this.eventTriggered = true;
       this.allProducts = [];
       this.allProducts = this.service.allProducts;
-      // if (this.allProducts.length == 0) {
-      //   this.router.navigate(['/home']);
-      // }
     });
     if (this.service.routeFrom == 'home') {
       this.allProducts = this.service.allProducts;

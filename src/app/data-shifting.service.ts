@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
+import { Prod } from './data-models/prod';
+import { Product } from './data-models/product';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -9,7 +11,6 @@ export class DataShiftingService {
 
   topProduct: any = {};
   user: any = {};
-  allProducts: any = [];
   allUsers: any = [];
   product: any = {};
   allCategorys: any = [];
@@ -25,6 +26,10 @@ export class DataShiftingService {
   currentOrder: any = {};
   userProds: any = [];
   userOrder: any = [];
+
+  allProducts: Array<Product>;
+
+  // allProduct: Prod = new Prod();
 
   public fooSubject = new Subject<any>();
 
@@ -65,7 +70,6 @@ export class DataShiftingService {
         var temp = snapshot.val();
         temp.key = snapshot.key;
         self.allReviews.push(temp);
-
       })
   }
 
@@ -90,9 +94,9 @@ export class DataShiftingService {
         var data = snapshot.val();
         data.key = snapshot.key;
         self.allProducts.push(data);
-
       })
   }
+
 
   getallFeaturedProds() {
     var self = this;
