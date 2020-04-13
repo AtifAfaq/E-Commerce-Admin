@@ -19,29 +19,40 @@ export class UserDetailComponent implements OnInit {
     public service: DataShiftingService,
     public router: Router) {
     this.user = this.service.user;
-    console.log(this.user)
     if (!this.user.firstName) {
       this.router.navigate(['/home']);
     }
+    this.getUserData();
   }
+
 
   ngOnInit() {
   }
-  userProducts() {
+
+
+  getUserData() {
     this.allProducts = this.service.allProducts;
     this.allProducts.forEach(product => {
-      var prod: any = {}
       if (this.user.uid == product.uid) {
-        prod = product;
-        this.userProds.push(prod);
+        this.userProds.push(product);
       }
     });
     this.service.userProds = this.userProds;
-    console.log(this.userProds);
+
+    this.allOrders = this.service.allOrders;
+    this.allOrders.forEach(order => {
+      if (order.uid == this.user.uid) {
+        this.userOrder.push(order);
+      }
+    });
+    this.service.userOrder = this.userOrder;
+  }
+
+
+  userProducts() {
     this.service.routeFrom = 'userDetail';
     if (this.userProds.length) {
       this.router.navigate(['/allProducts']);
-      return;
     }
     else {
       alert("This user do not have any product")
@@ -50,17 +61,7 @@ export class UserDetailComponent implements OnInit {
 
 
   userOrders() {
-    this.allOrders = this.service.allOrders;
-    debugger;
-    this.allOrders.forEach(order => {
-      var odr: any = {}
-      if (order.uid == this.user.uid) {
-        odr = order;
-        this.userOrder.push(odr);
-      }
-    });
     this.service.routeFrom = 'userOrder';
-    this.service.userOrder = this.userOrder
     if (this.userOrder.length) {
       this.router.navigate(['/allOrders'])
     }
@@ -68,4 +69,5 @@ export class UserDetailComponent implements OnInit {
       alert("This user do not have any order")
     }
   }
+
 }
