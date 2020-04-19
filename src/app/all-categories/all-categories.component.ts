@@ -14,7 +14,7 @@ export class AllCategoriesComponent implements OnInit {
 
   loading: boolean = false;
   allCategorys: Array<Category> = [];
-  category: Category;
+  category: Category = new Category();
   userImage: any = '';
   newFile: boolean = false;
   allProducts: Array<Product> = [];
@@ -24,14 +24,15 @@ export class AllCategoriesComponent implements OnInit {
     public service: DataShiftingService,
     public router: Router) {
     this.allProducts = service.allProducts;
-  }
-
-
-  ngOnInit() {
     this.allCategorys = this.service.allCategorys;
     if (this.allCategorys.length == 0) {
       this.router.navigate(['/home']);
     }
+  }
+
+
+  ngOnInit() {
+
   }
 
 
@@ -115,7 +116,8 @@ export class AllCategoriesComponent implements OnInit {
       .then(() => {
         alert("Category added successfully")
         this.allCategorys.unshift(this.category);
-        // this.category = {};
+        this.category = new Category();
+
         this.loading = false;
       })
       .catch((e) => {
@@ -137,6 +139,7 @@ export class AllCategoriesComponent implements OnInit {
 
   bringCategories(v) {
     this.allProducts.forEach(product => {
+      debugger;
       if (product.productCategory == v.Name) {
         this.categoriesData.push(product);
       }

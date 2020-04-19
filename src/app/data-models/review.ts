@@ -9,4 +9,5 @@ export class Review {
     timestamp: number;
     uid: string;
     profileUrl: string;
+    userName: string;
 }

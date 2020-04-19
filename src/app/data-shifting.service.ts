@@ -5,35 +5,30 @@ import { Subject } from 'rxjs';
 import { Category } from './data-models/category';
 import { Review } from './data-models/review';
 import { User } from './data-models/user';
+import { Order } from './data-models/order';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataShiftingService {
-
-
+  topBuyers: Array<User> = [];
+  routeFrom: string;
+  countListObjects: any = [];
+  userProds: Array<Product> = [];
+  userOrder: Array<Order> = [];
+  featuredProds: Array<Product> = [];
   user: User;
   allUsers: Array<User> = [];
   allReviews: Array<Review> = [];
   loading: boolean = false;
-
-  allOrders: any = [];
-  topBuyers: any = [];
-
-  featuredProds: Array<Product> = [];
-  routeFrom: string;
-  countListObjects: any = [];
-  currentOrder: any = {};
-  userProds: any = [];
-  userOrder: any = [];
-
   categoriesData: Array<Product> = [];
   allCategorys: Array<Category> = [];
   product: Product;
   topProduct: Product;
   topProducts: Array<Product> = [];
   allProducts: Array<Product> = [];
-
+  currentOrder: Order;
+  allOrders: Array<Order> = [];
   // allProduct: Prod = new Prod();
 
   public fooSubject = new Subject<any>();

@@ -19,4 +19,6 @@ export class Product {
     public key: string;
     public warrantyPolicy: string;
     public count: number;
+    public review: boolean;
+    public sellerName: string;
 }

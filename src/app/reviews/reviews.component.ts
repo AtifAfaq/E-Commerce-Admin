@@ -1,6 +1,9 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { DataShiftingService } from './../data-shifting.service';
 import { Router } from '@angular/router';
+import { Review } from '../data-models/review';
+import { Product } from '../data-models/product';
+import { User } from './../data-models/user';
 
 @Component({
   selector: 'app-reviews',
@@ -9,10 +12,10 @@ import { Router } from '@angular/router';
 })
 export class ReviewsComponent implements OnInit {
 
-  reviews: any = [];
-  allProducts: any = [];
-  allUsers: any = [];
-  allReviews: any = [];
+  reviews: Array<Review> = [];
+  allProducts: Array<Product> = [];
+  allUsers: Array<User> = [];
+  allReviews: Array<Review> = [];
   loading: boolean = false;
   rate1 = 0;
   rate2 = 0;

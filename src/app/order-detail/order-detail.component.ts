@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataShiftingService } from '../data-shifting.service';
+import { Order } from './../data-models/order';
 
 @Component({
   selector: 'app-order-detail',
@@ -10,7 +11,7 @@ import { DataShiftingService } from '../data-shifting.service';
 export class OrderDetailComponent implements OnInit {
 
   orderKey: any = '';
-  order: any = {};
+  order: Order;
 
   constructor(
     public route: ActivatedRoute,

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { DataShiftingService } from './../data-shifting.service';
 import { Router } from '@angular/router';
 import { Product } from './../data-models/product';
+import { Category } from './../data-models/category';
+import { Order } from './../data-models/order';
+import { Review } from '../data-models/review';
+import { User } from '../data-models/user';
 
 @Component({
   selector: 'app-admin-home',
@@ -10,20 +14,17 @@ import { Product } from './../data-models/product';
 })
 export class AdminHomeComponent implements OnInit {
 
-  allOrders = [];
-
-  allReviews = [];
-  allUsers = [];
-  allCategorys = [];
-  topBuyers: any = [];
+  allOrders: Array<Order> = [];
+  allReviews: Array<Review> = [];
+  allUsers: Array<User> = [];
+  topBuyers: Array<User> = [];
   countListObjects: any = [];
-
-
   loading: boolean = false;
   showNavBar = false;
   topProducts: Array<Product> = [];
   allProducts: Array<Product> = [];
   featuredProds: Array<Product> = [];
+  allCategorys: Array<Category> = [];
 
   constructor(
     public router: Router,

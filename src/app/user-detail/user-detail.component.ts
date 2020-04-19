@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataShiftingService } from './../data-shifting.service';
 import { Router } from '@angular/router';
+import { User } from './../data-models/user';
+import { Product } from '../data-models/product';
+import { Order } from './../data-models/order';
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
@@ -8,12 +11,12 @@ import { Router } from '@angular/router';
 })
 export class UserDetailComponent implements OnInit {
 
-  user: any = {};
-  allProducts: any = [];
-  userProds: any = [];
-  allOrders: any = [];
-  allUsers: any = [];
-  userOrder: any = [];
+  user: User;
+  allProducts: Array<Product> = [];
+  userProds: Array<Product> = [];
+  allOrders: Array<Order> = [];
+  allUsers: Array<User> = [];
+  userOrder: Array<Order> = [];
 
   constructor(
     public service: DataShiftingService,

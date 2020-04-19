@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataShiftingService } from './../data-shifting.service';
+import { Order } from './../data-models/order';
 
 @Component({
   selector: 'app-all-orders',
@@ -10,7 +11,7 @@ import { DataShiftingService } from './../data-shifting.service';
 export class AllOrdersComponent implements OnInit {
 
   icon: boolean = false;
-  allOrders: any = [];
+  allOrders: Array<Order> = [];
   currentTab = 'all';
 
   constructor(public router: Router, public service: DataShiftingService, public zone: NgZone) {

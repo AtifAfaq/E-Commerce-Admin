@@ -6,4 +6,5 @@ export class User {
     public timestamp: number;
     public uid: string;
     public profileUrl: string;
+    public totalBill: number;
 }
