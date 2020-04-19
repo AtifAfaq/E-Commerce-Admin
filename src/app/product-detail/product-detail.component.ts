@@ -2,6 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { DataShiftingService } from './../data-shifting.service';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import { Product } from './../data-models/product';
+import { Review } from './../data-models/review';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,8 +13,8 @@ import { Router } from '@angular/router';
 export class ProductDetailComponent implements OnInit {
 
   loading = false;
-  product: any = {};
-  myReview: any = [];
+  product: Product;
+  myReview: Array<Review> = [];
   rate1 = 0;
   rate2 = 0;
   rate3 = 0;

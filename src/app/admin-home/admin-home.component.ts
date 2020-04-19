@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataShiftingService } from './../data-shifting.service';
 import { Router } from '@angular/router';
+import { Product } from './../data-models/product';
 
 @Component({
   selector: 'app-admin-home',
@@ -10,16 +11,19 @@ import { Router } from '@angular/router';
 export class AdminHomeComponent implements OnInit {
 
   allOrders = [];
-  allProducts = [];
+
   allReviews = [];
   allUsers = [];
   allCategorys = [];
   topBuyers: any = [];
   countListObjects: any = [];
-  topProducts: any = [];
-  featuredProds: any = [];
+
+
   loading: boolean = false;
   showNavBar = false;
+  topProducts: Array<Product> = [];
+  allProducts: Array<Product> = [];
+  featuredProds: Array<Product> = [];
 
   constructor(
     public router: Router,

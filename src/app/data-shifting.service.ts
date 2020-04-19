@@ -1,33 +1,38 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { Prod } from './data-models/prod';
 import { Product } from './data-models/product';
 import { Subject } from 'rxjs';
+import { Category } from './data-models/category';
+import { Review } from './data-models/review';
+import { User } from './data-models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataShiftingService {
 
-  topProduct: any = {};
-  user: any = {};
-  allUsers: any = [];
-  product: any = {};
-  allCategorys: any = [];
-  allReviews: any = [];
+
+  user: User;
+  allUsers: Array<User> = [];
+  allReviews: Array<Review> = [];
   loading: boolean = false;
-  categoriesData: any = [];
+
   allOrders: any = [];
   topBuyers: any = [];
-  topProducts: any = [];
-  featuredProds: any = [];
+
+  featuredProds: Array<Product> = [];
   routeFrom: string;
   countListObjects: any = [];
   currentOrder: any = {};
   userProds: any = [];
   userOrder: any = [];
 
-  allProducts: Array<Product>;
+  categoriesData: Array<Product> = [];
+  allCategorys: Array<Category> = [];
+  product: Product;
+  topProduct: Product;
+  topProducts: Array<Product> = [];
+  allProducts: Array<Product> = [];
 
   // allProduct: Prod = new Prod();
 
@@ -216,6 +221,7 @@ export class DataShiftingService {
     }
     this.countListObjects.forEach(prodCount => {
       var tamp: any = {};
+
       this.allProducts.forEach(prod => {
         if (prod.key == prodCount.key) {
           this.allUsers.forEach(user => {

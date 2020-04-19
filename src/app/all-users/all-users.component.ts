@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataShiftingService } from './../data-shifting.service';
 import { Router } from '@angular/router';
+import { User } from './../data-models/user';
 
 @Component({
   selector: 'app-all-users',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class AllUsersComponent implements OnInit {
 
   p: number = 1;
-  allUsers: any = [];
+  allUsers: Array<User> = [];
 
   constructor(public service: DataShiftingService,
     public router: Router) {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataShiftingService } from '../data-shifting.service';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
+import { Product } from './../data-models/product';
 
 @Component({
   selector: 'app-all-products',
@@ -10,7 +11,7 @@ import * as firebase from 'firebase';
 })
 export class AllProductsComponent implements OnInit {
 
-  allProducts = [];
+  allProducts: Array<Product> = [];
   eventTriggered: boolean = false;
 
   constructor(

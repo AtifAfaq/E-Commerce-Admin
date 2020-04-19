@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { DataShiftingService } from './../data-shifting.service';
 import { Router } from '@angular/router';
+import { Category } from './../data-models/category';
+import { Product } from './../data-models/product';
 
 @Component({
   selector: 'app-all-categories',
@@ -11,12 +13,12 @@ import { Router } from '@angular/router';
 export class AllCategoriesComponent implements OnInit {
 
   loading: boolean = false;
-  allCategorys: any = [];
-  category: any = {};
+  allCategorys: Array<Category> = [];
+  category: Category;
   userImage: any = '';
   newFile: boolean = false;
-  allProducts: any = [];
-  categoriesData: any = [];
+  allProducts: Array<Product> = [];
+  categoriesData: Array<Product> = [];
 
   constructor(
     public service: DataShiftingService,
@@ -53,7 +55,7 @@ export class AllCategoriesComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
-      this.category.profileUrl = reader.result;
+      this.category.profileUrl = <string>reader.result;
       this.newFile = true;
 
     }
@@ -113,7 +115,7 @@ export class AllCategoriesComponent implements OnInit {
       .then(() => {
         alert("Category added successfully")
         this.allCategorys.unshift(this.category);
-        this.category = {};
+        // this.category = {};
         this.loading = false;
       })
       .catch((e) => {

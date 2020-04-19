@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DataShiftingService } from './../data-shifting.service';
 import * as firebase from 'firebase';
+import { Product } from './../data-models/product';
 @Component({
   selector: 'app-featured-products',
   templateUrl: './featured-products.component.html',
   styleUrls: ['./featured-products.component.scss']
 })
 export class FeaturedProductsComponent implements OnInit {
-  featuredProds: any = [];
+  featuredProds: Array<Product> = [];
   constructor(public service: DataShiftingService) {
     this.featuredProds = this.service.featuredProds;
   }
