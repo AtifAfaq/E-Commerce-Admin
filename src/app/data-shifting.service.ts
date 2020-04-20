@@ -125,6 +125,7 @@ export class DataShiftingService {
             self.allUsers.push(temp);
           }
         }
+        console.log(self.allUsers);
         self.getallOrders();
       })
   }

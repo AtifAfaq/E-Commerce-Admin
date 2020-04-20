@@ -32,8 +32,10 @@
                 <td>{{user.country}}</td>
                 <td class="text-center">
                     <i class="fa fa-eye text-primary mx-2" (click)="seeProfile(user)" aria-hidden="true"></i>
-                    <i class="fa fa-ban text-danger mx-2" aria-hidden="true"> </i>
-                    <i class="fa fa-unlock text-success mx-2" aria-hidden="true"></i>
+                    <i class="fa fa-ban text-danger mx-2" (click)="blockUser(user,'blocked', i)" aria-hidden="true">
+                    </i>
+                    <i class="fa fa-unlock text-success mx-2" (click)="blockUser(user,'unblocked', i)"
+                        aria-hidden="true"></i>
                 </td>
             </tr>
         </table>

@@ -7,4 +7,6 @@ export class User {
     public uid: string;
     public profileUrl: string;
     public totalBill: number;
+    public status: string;
+    public key: string;
 }

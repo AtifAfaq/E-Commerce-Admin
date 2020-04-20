@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataShiftingService } from './../data-shifting.service';
 import { Router } from '@angular/router';
 import { User } from './../data-models/user';
-
+import * as firebase from 'firebase';
 @Component({
   selector: 'app-all-users',
   templateUrl: './all-users.component.html',
@@ -28,6 +28,18 @@ export class AllUsersComponent implements OnInit {
   seeProfile(user) {
     this.service.user = user;
     this.router.navigate(["/userDetail"])
+  }
+
+  blockUser(user, status, index) {
+
+    var self = this;
+    self.allUsers[index].status = status;
+    var updates = {};
+    updates['/users/' + self.allUsers[index].key + "/status"] = status;
+    firebase.database().ref().update(updates).then(() => {
+      alert('User has been ' + status)
+    })
+
   }
 
 }
