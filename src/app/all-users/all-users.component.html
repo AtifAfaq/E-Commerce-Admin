@@ -19,6 +19,7 @@
                 <th>Contact</th>
                 <th>City</th>
                 <th>Country</th>
+                <th>Status</th>
                 <th class="text-center">Actions</th>
             </tr>
 
@@ -30,12 +31,17 @@
                 <td>{{user.contact}}</td>
                 <td>{{user.city}}</td>
                 <td>{{user.country}}</td>
+                <td>
+                    <span *ngIf="!user.status || user.status=='unblocked'" class="text-success">Active</span>
+                    <span *ngIf="user.status=='blocked'" class="text-danger">Blocked</span>
+                </td>
                 <td class="text-center">
                     <i class="fa fa-eye text-primary mx-2" (click)="seeProfile(user)" aria-hidden="true"></i>
-                    <i class="fa fa-ban text-danger mx-2" (click)="blockUser(user,'blocked', i)" aria-hidden="true">
+                    <i *ngIf="!user.status || user.status=='unblocked'" class="fa fa-ban text-danger mx-2"
+                        (click)="blockUser('blocked', i)" aria-hidden="true">
                     </i>
-                    <i class="fa fa-unlock text-success mx-2" (click)="blockUser(user,'unblocked', i)"
-                        aria-hidden="true"></i>
+                    <i *ngIf="user.status=='blocked'" class="fa fa-unlock text-success mx-2"
+                        (click)="blockUser('unblocked', i)" aria-hidden="true"></i>
                 </td>
             </tr>
         </table>

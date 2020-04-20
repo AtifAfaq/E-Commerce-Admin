@@ -30,8 +30,7 @@ export class AllUsersComponent implements OnInit {
     this.router.navigate(["/userDetail"])
   }
 
-  blockUser(user, status, index) {
-
+  blockUser(status, index) {
     var self = this;
     self.allUsers[index].status = status;
     var updates = {};
