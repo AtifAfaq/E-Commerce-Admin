@@ -141,7 +141,9 @@ export class DataShiftingService {
         for (var key in orderData) {
           var order = orderData[key];
           order.key = key;
-          self.allOrders.push(order)
+          if(order.myArray){
+            self.allOrders.push(order);
+          }
         }
         self.getTopBuyers();
       })
@@ -201,7 +203,7 @@ export class DataShiftingService {
     var counts: any = {};
     this.allOrders.forEach(order => {
       var list: any = [];
-      list = order.myArray;
+      list = order.myArray || [];
       list.forEach(prod => {
         var x = prod.key;
         counts[x] = (counts[x] || 0) + 1;

@@ -39,13 +39,15 @@ export class OrderDetailComponent implements OnInit {
 
   getUserName() {
     var allUsers = this.service.allUsers;
-    this.order.myArray.forEach(product => {
-      allUsers.forEach(user => {
-        if (product.uid == user.uid) {
-          product.sellerName = user.firstName + " " + user.lastName;
-        }
+    if (this.order.myArray) {
+      this.order.myArray.forEach(product => {
+        allUsers.forEach(user => {
+          if (product.uid == user.uid) {
+            product.sellerName = user.firstName + " " + user.lastName;
+          }
+        });
       });
-    });
+    }
   }
 
 }

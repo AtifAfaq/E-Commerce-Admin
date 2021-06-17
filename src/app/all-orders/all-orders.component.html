@@ -52,7 +52,7 @@
                         {{order.lastName}}</button>
                 </td>
                 <td class="text-center top-padding">{{order.timestamp| date: 'short'}}</td>
-                <td class="text-center top-padding">{{order.myArray.length}}</td>
+                <td class="text-center top-padding">{{order.myArray?.length || 0}}</td>
                 <td class="text-center top-padding">{{order.totalBill}}</td>
                 <td class="text-center"><button class="btn btn-primary" (click)="orderDetails(order)">Details</button>
                 </td>

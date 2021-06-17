@@ -42,10 +42,12 @@ export class AllOrdersComponent implements OnInit {
       order.statusArray = [];
       var sellerIds = [];
       sameSeller = false;
-      order.myArray.forEach(product => {
-        sellerIds.push(product.uid);
-        order.statusArray.push(product.status || 'pending');
-      });
+      if(order.myArray){
+        order.myArray.forEach(product => {
+          sellerIds.push(product.uid);
+          order.statusArray.push(product.status || 'pending');
+        });
+      }
       var sameSeller = sellerIds.every((val, i, arr) => val === arr[0]);
       if (!sameSeller) {
         order.sellerName = 'Multiseller';
